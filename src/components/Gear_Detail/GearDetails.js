@@ -62,6 +62,9 @@ export class GearDetails extends Component {
                     <Link to='./../Search'>
                         <button onClick={() => this.sendRequest()}> SEND REQUEST </button>
                     </Link>
+                    <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
+                        <button> Back </button>
+                    </Link>
                 </div>
 
 
@@ -70,8 +73,6 @@ export class GearDetails extends Component {
     }
 }
 function mapStateToProps(state) {
-    return {
-        user: state.user
-    }
+    return state
 }
 export default connect(mapStateToProps, { getUserInfo })(GearDetails)

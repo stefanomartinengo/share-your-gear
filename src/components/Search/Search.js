@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from './../../assets/mountain-climbing-by-Vexels.png'
 import { connect } from 'react-redux'
-import { getUserInfo } from './../../ducks/reducer'
+import { getUserInfo, historySearch } from './../../ducks/reducer'
 
 export class Search extends Component {
   constructor() {
-    super()
+    super() //if 401 persists/try adding props to these
 
     this.state = {
       items: [],
@@ -16,16 +16,33 @@ export class Search extends Component {
   }
 
   componentDidMount() {
-    this.props.getUserInfo();
+    this.props.getUserInfo()
+    .then( () => {
+          var array = this.props.location.search.split(/[\?&]+/)
+      
+          axios.get('/search/gear/?category=' + array[1] + '&city=' + array[2] + '&zipcode=' + array[3] + '&userid=' + this.props.user.userid)
+          .then((res) => {
+            this.setState({ items: res.data })
+          })
+
+    })
+
+    
+    
   }
+
+
 
   searchItems() {
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
       .then((res) => {
         this.setState({ items: res.data })
+        console.log(this.refs.city.value,this.refs.select.value,this.refs.zip.value)
+        this.props.historySearch(this.refs.city.value,this.refs.select.value,this.refs.zip.value)
+        this.refs.city.value = ''
+        this.refs.zip.value = ''
       })
-    this.refs.city.value = ''
-    this.refs.zip.value = ''
+
   }
 
   render() {
@@ -88,12 +105,10 @@ export class Search extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    user: state.user
-  }
+  return state
 }
 
-export default connect(mapStateToProps, { getUserInfo })(Search)
+export default connect(mapStateToProps, { getUserInfo, historySearch})(Search)
 
 
 

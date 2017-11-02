@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {getUserInfo} from './../../ducks/reducer'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 export class AddToBag extends Component {
 
@@ -59,7 +60,7 @@ export class AddToBag extends Component {
           <input ref='zipcode' placeholder='zipcode' />
 
         <button onClick={ () => this.handleClick()}> Add To Bag </button>
-
+        <Link to='/bag'> <button> BACK </button></Link>
         </div>
       </div>
     )

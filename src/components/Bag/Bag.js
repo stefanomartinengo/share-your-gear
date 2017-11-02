@@ -10,6 +10,8 @@ export class Bag extends Component {
         <Link to='/bag/add'>
         <button> Add To Bag </button>
         </Link>
+
+        <Link to='/profile'> <button> BACK </button></Link>
       </div>
     )
   }

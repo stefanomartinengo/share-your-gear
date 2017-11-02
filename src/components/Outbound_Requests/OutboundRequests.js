@@ -13,7 +13,6 @@ export class OutboundRequests extends Component {
         this.state = {
             requests: []
         }
-
         this.deleteRequest = this.deleteRequest.bind(this)
     }
 
@@ -29,8 +28,6 @@ export class OutboundRequests extends Component {
     componentDidMount() {
         this.props.getUserInfo();
         this.getRequests();
-       
-
     }
 
   
