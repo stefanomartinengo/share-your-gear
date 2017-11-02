@@ -1,0 +1,40 @@
+.container {
+
+    padding-top: 10px;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to right, #44a08d, #093637);
+}
+
+.header {
+    font-size: 1.75em;
+    margin-bottom: 25px;
+}
+
+.profile-pic  img {
+    margin-bottom: 15px;
+    height: 20%;
+    width: 20%;
+    border-radius: 50%;
+}
+
+.list-items {
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
+    opacity:.8;
+    padding: 13px;
+}
+
+.list-items img {
+    height: 40px;
+    width: 40px;
+}
+
+.requests {
+    position: relative;
+    left: 25%;
+}

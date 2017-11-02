@@ -1,0 +1,35 @@
+.main-container {
+    height: 100vh;
+    background: #44a08d; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #44a08d, #093637); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #44a08d, #093637);
+}
+.list-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
+    padding: 13px;
+}
+
+.list-items img {
+    height: 130px;
+    width: 130px;
+}
+
+.list-subcontainer {
+        position: relative;
+        left: 25%;
+        width: 100%;
+    }
+
+    .approved {
+        color: rgb(8, 52, 8);
+    }
+    .pending {
+        color: yellow;
+    }
+    .denied {
+        color: rgb(170, 66, 40);
+    }

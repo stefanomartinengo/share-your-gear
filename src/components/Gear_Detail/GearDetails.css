@@ -1,0 +1,25 @@
+.product-details-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background: #44a08d; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #44a08d, #093637); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #44a08d, #093637);}
+
+    .product-details-wrapper img {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        width: 15%;
+ 
+    }
+
+    .product-title {
+        margin: 15px;
+        font-size: 1.5em;
+    }
+
+    .details-wrapper {
+        padding: 15px;
+        width: 50%;
+        background:rgba(255,255,255, 0.25);
+    }

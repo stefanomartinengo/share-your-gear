@@ -1,0 +1,46 @@
+.profile-container {
+    width: 100%;
+    height: 100vh;
+    background: #44a08d; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #44a08d, #093637); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #44a08d, #093637);}
+
+.profilepic img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+}
+
+.header {
+    padding-top: 10px;
+    font-size: 1.75em;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container-child {
+    width: 35%;
+}
+
+.button-container button {
+   font-weight: 500;
+    background: linear-gradient(to left, #44a08d, #093637);
+    box-shadow: 0 2 5 black;
+    border: none;
+    margin-bottom: 6%;
+    width: 100%;
+    padding: 15px;
+    border-radius: 3px;
+}
+/* BUTTON STYLES */
+.button-container button:focus {outline:0}
+.button-container button:hover {font-weight: 900}
+
+
+
