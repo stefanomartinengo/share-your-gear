@@ -84,6 +84,17 @@ module.exports = {
         .catch( (response) => res.status(500).send('bleghface'))
     },
 
+    getBorrowerName: (req,res,next) => {
+        const dbInstance = req.app.get('db');
+            console.log('anything? gotdamn')
+        dbInstance.get_borrower_name(req.params.id)
+        .then( (response) => {
+            console.log('fuck the database')
+        res.status(200).send(response)})
+        .catch( (response) => res.status(500).send('bleghface'))    
+
+    },
+    
     addGear: (req,res,next) => {
         console.log(req.body)
         const dbInstance = req.app.get('db');
@@ -91,6 +102,18 @@ module.exports = {
 
         dbInstance.add_bag([item_name, owner_id, image_url, item_description, category, city, zipcode])
         .then( (response) => res.status(200).send(response))
+        .catch( (response) => res.status(500).send('ugh man'))
+    },
+
+    deleteGear: (req,res,next) => {
+        const dbInstance = req.app.get('db');
+        const {owner_id, itemid} = req.body;
+console.log('ownerid:', owner_id, itemid)
+
+        dbInstance.remove_gear([owner_id, itemid])
+        .then( (response) => {
+        console.log('items:?>?', owner_id,itemid)
+        res.status(200).send(response)})
         .catch( (response) => res.status(500).send('ugh man'))
     }
 

@@ -59,7 +59,7 @@ export class GearDetails extends Component {
                         </div>
                         <p> Location: {this.state.itemDetails[0].city}, {this.state.itemDetails[0].zipcode} </p>
                     </div>
-                    <Link to='./../Search'>
+                    <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
                         <button onClick={() => this.sendRequest()}> SEND REQUEST </button>
                     </Link>
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>

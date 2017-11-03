@@ -17,6 +17,7 @@ export class Search extends Component {
 
   componentDidMount() {
     this.props.getUserInfo()
+    
     .then( () => {
           var array = this.props.location.search.split(/[\?&]+/)
       
@@ -26,12 +27,7 @@ export class Search extends Component {
           })
 
     })
-
-    
-    
   }
-
-
 
   searchItems() {
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)

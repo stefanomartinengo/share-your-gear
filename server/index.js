@@ -101,7 +101,13 @@ app.put('/deny', controller.deny)
 
 //viewBag
 app.get('/view/bag/:id', controller.viewBag)
+app.get('/view/name/id:', controller.getBorrowerName)
 app.post('/add/bag', controller.addGear)
+
+app.delete('/delete/gear', controller.deleteGear)
+
+
+
 
 //deleteRequest
 app.delete(`/remove/request`, controller.removeRequest)

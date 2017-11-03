@@ -18,32 +18,31 @@ export class OutboundRequests extends Component {
 
     getRequests() {
         axios.get('/outbound/requests/' + this.props.user.userid)
-        .then((response) => {
-            this.setState({
-                requests: response.data
+            .then((response) => {
+                this.setState({
+                    requests: response.data
+                })
             })
-        })
     }
 
     componentDidMount() {
+
         this.props.getUserInfo();
         this.getRequests();
-    }
-
-  
-
-    deleteRequest(e) {
-        console.log('you get here man?', e)
-        axios.delete(`/remove/request`, {data: {
-            id: this.props.user.userid,
-            itemid: e
-        }}).then( (response) => {
-            this.getRequests()
-        } )
-    
         
     }
 
+    deleteRequest(e) {
+        axios.delete(`/remove/request`, {
+            data: {
+                id: this.props.user.userid,
+                itemid: e
+            }
+        }).then((response) => {
+            this.getRequests()
+        })
+
+    }
 
     render() {
         // var mapRequests = this.state.requests.map( (e, i, arr) => {
@@ -52,13 +51,13 @@ export class OutboundRequests extends Component {
         //     </div>
         // })
 
-        var sentRequests = this.state.requests.map( (e,i,arr) => {
-            if(e.pending === true) {
-                return <div className='list-items pending'key={i} >  {e.item_name} PENDING  <button onClick={ () => this.deleteRequest(e.item_id)}> REMOVE </button> </div>
+        var sentRequests = this.state.requests.map((e, i, arr) => {
+            if (e.pending === true) {
+                return <div className='list-items pending' key={i} >  {e.item_name} PENDING  <button onClick={() => this.deleteRequest(e.item_id)}> CANCEL REQUEST </button> </div>
             } else if (e.approved === true && e.pending === false) {
-                return <div className='list-items approved'key={i}> {e.item_name} APPROVED  <button onClick={ () => this.deleteRequest(e.item_id)}> REMOVE </button> </div>
+                return <div className='list-items approved' key={i}> {e.item_name} APPROVED  <button onClick={() => this.deleteRequest(e.item_id)}> RETURNED </button> </div>
             } else if (e.approved === false && e.pending === false) {
-                return <div className='list-items denied'key={i}> {e.item_name} DENIED <button onClick={ () => this.deleteRequest(e.item_id)}> REMOVE </button></div>
+                return <div className='list-items denied' key={i}> {e.item_name} DENIED <button onClick={() => this.deleteRequest(e.item_id)}> REMOVE </button></div>
             }
         })
         console.log(sentRequests)
@@ -72,8 +71,9 @@ export class OutboundRequests extends Component {
 
                 <div className='list-container'>
                     <div className='list-subcontainer'>
-                     {/* {mapRequests}  */}
-                    {sentRequests}
+                        {/* {mapRequests}  */}
+                        {sentRequests}
+
                     </div>
                 </div>
             </div>
