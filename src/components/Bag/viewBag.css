@@ -1,5 +1,62 @@
-.bag {
+.bag-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin: auto;
-    width: 70%;
+    width: 100%;
+    background: gray;
+}
+
+.bag {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.bag p {
+    margin: 3px;
+    display: flex;
+    padding: 4px 8px;
+    justify-content: space-between;
+    align-items: center;
     border: 1px solid black;
+    width: 25%;
+}
+
+.bag p button {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.bag p button:hover {
+    padding: 10px;
+    font-weight: 800;
+}
+
+.bag img {
+    width: 85px;
+    height: 85px;
+}
+
+.bag img:hover {
+    height: 200px;
+    width: 180px;
+}
+
+.rented {
+    background: green;
+}
+
+@media (max-width: 1000px) {
+    .bag p {width: calc(100% /4);}
+}
+@media (max-width: 760px) {
+    .bag p {width: calc(100% /3.5);}
+}
+
+@media (max-width: 670px) {
+    .bag p {width: calc(100%/2.3)}
 }

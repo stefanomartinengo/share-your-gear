@@ -11,65 +11,57 @@ export class ViewBag extends Component {
 
     this.state = {
       inventory: [],
-      borrowerName: []
+      rentedGear: []
     }
-
   }
 
-  getBag() { 
+  getBag() {
     axios.get(`/view/bag/${this.props.user.userid}`).then((response) => {
-    this.setState({
-      inventory: response.data
+      this.setState({
+        inventory: response.data
+      })
     })
-  })
-}
-
+  }
 
   componentDidMount() {
     this.props.getUserInfo();
-    this.getBag();    
-   
-    
+    this.getBag();
   }
 
   deleteGear(id) {
     console.log(id)
-    axios.delete(`/delete/gear`, { data: {
-      owner_id: this.props.user.userid,
-      itemid: id
-      }}).then( (res) => {
-        this.getBag();
-      })
+    axios.delete(`/delete/gear`, {
+      data: {
+        owner_id: this.props.user.userid,
+        itemid: id
+      }
+    }).then((res) => {
+      this.getBag();
+    })
 
   }
-    getNames() {
-      axios.get(`/view/name/${this.props.user.userid}`).then((response) => {
-        console.log(response.data, 'u get it?')
-        this.setState({
-          borrowerName: response.data
-        })
-      })
-    }
-
 
   render() {
-    
+
     var mapGear = this.state.inventory.map((e, i, arr) => {
-      if(e.rented === true) {
-        return <div> Rented By: {e.borrower_id}</div> //Here- new statement to join and get borrower_id name?
+      if (e.rented === false) {
+        return <p key={i}> {e.item_name} <img src={e.image_url} /> <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       } else {
-        return <div className='bag'> {e.item_name } <button onClick={ () => this.deleteGear(e.itemid)}> delete  </button>
-                      rented: {JSON.stringify(e.rented)}</div>
+        return <p key={i} className='rented'> {e.item_name} <img src={e.image_url} /> <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       }
-    })
-    console.log(this.state.borrowerName)
+    }
+
+    )
+
     console.log(this.state.inventory)
     return (
-      <div className='bag'>
-        {mapGear}
+      <div className='bag-container'>
+
+        <div className='bag'>
+          {mapGear}
+        </div>
+        <p> go back <Link to='/bag'> <button> BACK </button></Link></p>
         <div>
-          <button onClick={ () => this.getNames() }> get it </button>
-          <p> go back <Link to='/bag'> <button> BACK </button></Link></p>
         </div>
       </div>
     )

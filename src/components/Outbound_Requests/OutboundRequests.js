@@ -26,7 +26,6 @@ export class OutboundRequests extends Component {
     }
 
     componentDidMount() {
-
         this.props.getUserInfo();
         this.getRequests();
         
