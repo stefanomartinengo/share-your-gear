@@ -1,13 +1,29 @@
+body {
+    height: 100%;
+    background: #fcfafd;
+}
+
+.view-sac-header {
+    font-size: 1.5em;
+    color:  rgb(16, 71, 16);
+    font-weight: 200;
+    letter-spacing: 4px;
+    padding-top: 15px;
+    height: 50px;
+    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
 .bag-container {
+    height: 100vh;
     padding-top: 10px;
     padding-bottom: 10px;
     margin: auto;
     width: 100%;
-    background: gray;
+    background: #fcfafd;
 }
 
 .bag {
-    height: 100vh;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -17,12 +33,13 @@
 }
 
 .bag p {
-    margin: 3px;
+   margin: 3px;
     display: flex;
     padding: 4px 8px;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid black;
+    border-radius: 5px;
+    border: .75px solid rgba(0, 0, 0, 0.452);
     width: 25%;
 }
 
@@ -41,22 +58,37 @@
     height: 85px;
 }
 
-.bag img:hover {
+.bag img:active {
     height: 200px;
     width: 180px;
 }
 
 .rented {
-    background: green;
+    background: #e8ffea;
+}
+
+.not-rented {
+    background: #ededed
 }
 
 @media (max-width: 1000px) {
     .bag p {width: calc(100% /4);}
 }
+
+@media (max-width: 850px) {
+    .bag p {width: calc(100% /3.8);}
+}
+
 @media (max-width: 760px) {
     .bag p {width: calc(100% /3.5);}
 }
 
 @media (max-width: 670px) {
     .bag p {width: calc(100%/2.3)}
+}
+@media (max-width: 480px) {
+    .bag p {width: calc(100%/2)}
+} 
+@media (max-width: 400px) {
+    .bag p {width: calc(100%/1.7)}
 }

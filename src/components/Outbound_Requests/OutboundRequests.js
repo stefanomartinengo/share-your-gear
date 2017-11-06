@@ -28,7 +28,7 @@ export class OutboundRequests extends Component {
     componentDidMount() {
         this.props.getUserInfo();
         this.getRequests();
-        
+
     }
 
     deleteRequest(e) {
@@ -64,9 +64,8 @@ export class OutboundRequests extends Component {
         console.log(this.props.user.userid)
         return (
             <div className='main-container'>
-                <div className='header'>
-                    <Link to='/profile'><p> Sent Requests </p></Link>
-                </div>
+                <div className='outbound-header'> SENT SAC REQUESTS </div>
+
 
                 <div className='list-container'>
                     <div className='list-subcontainer'>

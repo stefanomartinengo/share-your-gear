@@ -56,14 +56,15 @@ export class Search extends Component {
     return (
 
       <div className='search'>
+        <div className='search-header'>
+          <p>PICK YOUR CATEGORY</p>
+        </div>
         <Link to='/profile'>
           {<img alt='' src={logo} />}
         </Link>
 
 
-        <div className='header'>
-          <p>Pick your Category</p>
-        </div>
+        
 
         <div className='form'>
 

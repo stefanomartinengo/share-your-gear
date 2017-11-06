@@ -45,7 +45,7 @@ export class ViewBag extends Component {
 
     var mapGear = this.state.inventory.map((e, i, arr) => {
       if (e.rented === false) {
-        return <p key={i}> {e.item_name} <img src={e.image_url} /> <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
+        return <p key={i} className='not-rented'> {e.item_name} <img src={e.image_url} /> <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       } else {
         return <p key={i} className='rented'> {e.item_name} <img src={e.image_url} /> <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       }
@@ -56,11 +56,11 @@ export class ViewBag extends Component {
     console.log(this.state.inventory)
     return (
       <div className='bag-container'>
-
+         <div className='view-sac-header'> VIEW YOUR SAC  </div>
         <div className='bag'>
           {mapGear}
         </div>
-        <p> go back <Link to='/bag'> <button> BACK </button></Link></p>
+       
         <div>
         </div>
       </div>

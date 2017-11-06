@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {getUserInfo} from './../../ducks/reducer'
+import { getUserInfo } from './../../ducks/reducer'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import './AddToBag.css'
 
 export class AddToBag extends Component {
 
@@ -21,12 +22,12 @@ export class AddToBag extends Component {
       city: this.refs.city.value,
       zipcode: +this.refs.zipcode.value
     })
-   alert('Your gear has been added to your bag! Thanks for sharing!')
-   this.refs.name.value = ''
-   this.refs.imgurl.value = ''
-   this.refs.description.value = ''
-   this.refs.city.value = ''
-   this.refs.zipcode.value = ''
+    alert('Your gear has been added to your bag! Thanks for sharing!')
+    this.refs.name.value = ''
+    this.refs.imgurl.value = ''
+    this.refs.description.value = ''
+    this.refs.city.value = ''
+    this.refs.zipcode.value = ''
 
   }
 
@@ -34,33 +35,40 @@ export class AddToBag extends Component {
     console.log(this.props.user.userid)
     console.log(this.refs.value)
     return (
-      <div>
-        <h1> Add to your Bag || Share the Gear </h1>
-
+      <div className='container'>
+        <div className='addtosac-header'>
+          <h1> ADD TO YOUR SAC </h1>
+        </div>
         <div>
+          <div classname='input-container'>
+            <div className='input-container-child'>
+              <select ref='select' >
 
-          <select ref='select' >
-            <option value="Climbing">Climbing</option>
-            <option value="Cycling">Cycling</option>
-            <option value="Canyoneering">Canyoneering</option>
-            <option value="Water Sports">Water Sports</option>
-            <option value="Winter Sports">Winter Sports</option>
-            <option value="Hunting">Hunting</option>
-            <option value="Sports">Sports</option>
-          </select>
+                <option>Categories</option>
+                <option value="Climbing">Climbing</option>
+                <option value="Cycling">Cycling</option>
+                <option value="Canyoneering">Canyoneering</option>
+                <option value="Water Sports">Water Sports</option>
+                <option value="Winter Sports">Winter Sports</option>
+                <option value="Hunting">Hunting</option>
+                <option value="Sports">Sports</option>
+              </select>
 
-          <input ref='name' placeholder='item' />
-          <input ref='description' placeholder='item description' />
-
-
-          <input ref='imgurl' placeholder='image url' />
+              <input ref='name' placeholder='item' />
+              <textarea ref='description' placeholder='Item Description'
+                cols="61"></textarea>
 
 
-          <input ref='city' placeholder='city' />
-          <input ref='zipcode' placeholder='zipcode' />
+              <input ref='imgurl' placeholder='image url' />
 
-        <button onClick={ () => this.handleClick()}> Add To Bag </button>
-        <Link to='/bag'> <button> BACK </button></Link>
+
+              <input ref='city' placeholder='city' />
+              <input ref='zipcode' placeholder='zipcode' />
+
+            </div>
+          </div>
+          <button onClick={() => this.handleClick()}> Add To Bag </button>
+          <Link to='/bag'> <button> BACK </button></Link>
         </div>
       </div>
     )
@@ -73,4 +81,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {getUserInfo})(AddToBag)
+export default connect(mapStateToProps, { getUserInfo })(AddToBag)

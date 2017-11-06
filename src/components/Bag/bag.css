@@ -1,0 +1,27 @@
+.container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+    width: 100%;
+    background: #fcfafd;
+}
+
+.bag-header {
+    font-size: 1.5em;
+    color: rgb(16, 71, 16);
+    height: 50px;
+    margin-bottom: 20px;
+    font-weight: 200;
+    letter-spacing: 4px;
+    padding-top: 15px;
+    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
+}
+
+.button-container button {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

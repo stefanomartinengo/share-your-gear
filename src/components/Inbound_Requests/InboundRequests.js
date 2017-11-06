@@ -26,10 +26,8 @@ export class InboundRequests extends Component {
     }
 
     componentDidMount() {
-
         this.props.getUserInfo();
         this.getRequests();
-       
     }
 
     approve(id) {
@@ -51,7 +49,7 @@ export class InboundRequests extends Component {
     render() {
 
         var requestsMap = this.state.requests.map((e, i, arr) => {
-            return <div className='list-items' key={i}>
+            return <div key={i}>
                <img alt='' src={e.image_url} /> {e.item_name} <button onClick={ () => this.approve(e.item_id) }> Yes </button><button onClick={() => this.deny(e.item_id)}> No </button>
             </div>
         })
@@ -59,15 +57,12 @@ export class InboundRequests extends Component {
         console.log(this.state.requests)
         return (
             <div className='container'>
-                <p className='header'> Incoming Requests </p>
+                <div className='incoming-header'> Incoming Requests </div>
                 <div className='profile-pic'>
                     <Link to='/profile'>
                         <img alt='' src={this.props.user.picture} />
                     </Link>
                 </div>
-                <div className='header'>
-                   <p> Incoming Requests </p>
-        </div>
                 <div className='requests'>
                     {requestsMap}
                 </div>
