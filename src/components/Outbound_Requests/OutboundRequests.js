@@ -4,6 +4,7 @@ import { getUserInfo } from './../../ducks/reducer'
 import './OutboundRequests.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Header from './../../Header'
 
 
 export class OutboundRequests extends Component {
@@ -64,7 +65,7 @@ export class OutboundRequests extends Component {
         console.log(this.props.user.userid)
         return (
             <div className='main-container'>
-                <div className='outbound-header'> SENT SAC REQUESTS </div>
+                <Header title='SENT REQUESTS'/>
 
 
                 <div className='list-container'>

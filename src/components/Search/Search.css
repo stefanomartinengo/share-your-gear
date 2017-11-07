@@ -3,12 +3,30 @@
     height: 100vh;
     width:  100%;
     background: #fcfafd;
-    /* background: #44a08d; fallback for old browsers */
-    /* background: -webkit-linear-gradient(to right, #44a08d, #093637); Chrome 10-25, Safari 5.1-6 */
-    
-    /* background: linear-gradient(to right, #44a08d, #093637); */
 }
 
+.search img {
+    width: 25%;
+    height: 43%;
+}
+
+input {
+    outline: none;
+    margin-right: 5px;
+    padding: 3px;
+    border: .5px solid gray;
+    border-radius: 4px;
+}
+.form button {
+    padding: 4px;
+}
+select {
+    outline: none;
+    margin-right: 5px;
+}
+.form {
+    margin-top: 10px;
+}
 .list-container {
     display: flex;
     justify-content: center;
@@ -16,20 +34,12 @@
     margin-top: 15px;
 }
 
-.search-header {
-    font-size: 1.5em;
-    color:  rgb(16, 71, 16);
-    font-weight: 200;
-    letter-spacing: 4px;
-    padding-top: 25px;
-    height: 50px;
-    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2)
-
-}
 .search-list {
     width: 50%;
     padding: 20px;
 }
+
+
 
 .list-gear {
     background: rgba(255, 255, 255, 0.927);

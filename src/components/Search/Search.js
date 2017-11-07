@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import './Search.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import logo from './../../assets/mountain-climbing-by-Vexels.png'
+import logo from './../../assets/-rendition;size=1200;version=0.png'
 import { connect } from 'react-redux'
 import { getUserInfo, historySearch } from './../../ducks/reducer'
+import Header from './../../Header'
+
 
 export class Search extends Component {
   constructor() {
@@ -17,24 +19,24 @@ export class Search extends Component {
 
   componentDidMount() {
     this.props.getUserInfo()
-    
-    .then( () => {
-          var array = this.props.location.search.split(/[\?&]+/)
-      
-          axios.get('/search/gear/?category=' + array[1] + '&city=' + array[2] + '&zipcode=' + array[3] + '&userid=' + this.props.user.userid)
+
+      .then(() => {
+        var array = this.props.location.search.split(/[\?&]+/)
+
+        axios.get('/search/gear/?category=' + array[1] + '&city=' + array[2] + '&zipcode=' + array[3] + '&userid=' + this.props.user.userid)
           .then((res) => {
             this.setState({ items: res.data })
           })
 
-    })
+      })
   }
 
   searchItems() {
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
       .then((res) => {
         this.setState({ items: res.data })
-        console.log(this.refs.city.value,this.refs.select.value,this.refs.zip.value)
-        this.props.historySearch(this.refs.city.value,this.refs.select.value,this.refs.zip.value)
+        console.log(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
+        this.props.historySearch(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
         this.refs.city.value = ''
         this.refs.zip.value = ''
       })
@@ -45,7 +47,7 @@ export class Search extends Component {
     var mapGear = this.state.items.map((e, i, arr) => {
       return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>
-          <img alt='' src={e.image_url} /> {e.item_name}
+          <img alt='' src={e.image_url[0]} /> {e.item_name}
         </Link>
       </div>
 
@@ -54,17 +56,12 @@ export class Search extends Component {
     console.log(this.state.items)
     console.log(this.props.user.userid)
     return (
-
+      
       <div className='search'>
-        <div className='search-header'>
-          <p>PICK YOUR CATEGORY</p>
-        </div>
+        <Header title='SEARCH GEAR'/>
         <Link to='/profile'>
-          {<img alt='' src={logo} />}
+          <img alt='' src={logo} />
         </Link>
-
-
-        
 
         <div className='form'>
 
@@ -105,7 +102,7 @@ function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, { getUserInfo, historySearch})(Search)
+export default connect(mapStateToProps, { getUserInfo, historySearch })(Search)
 
 
 

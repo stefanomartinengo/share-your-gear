@@ -4,8 +4,48 @@ import { getUserInfo } from './../../ducks/reducer'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './AddToBag.css'
+import Dropzone from 'react-dropzone'
+import Header from './../../Header'
+
 
 export class AddToBag extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      image: []
+    }
+  }
+
+
+  handleDrop = files => {
+    // Push all the axios request promise into a single array
+    const uploaders = files.map(file => {
+      // Initial FormData
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tags", `codeinfuse, medium, gist`);
+      formData.append("upload_preset", "d2nofqn5"); // Replace the preset name with your own
+      formData.append("api_key", "869775194634389"); // Replace API key with your own Cloudinary key
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+      
+      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      return axios.post("https://api.cloudinary.com/v1_1/codeinfuse/image/upload", formData, {
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+      }).then(response => {
+        const fileURL = response.data.secure_url
+        this.setState({
+          image: [...this.state.image, fileURL]
+        }) 
+        console.log(response.data)// You should store this URL for future references in your app
+      })
+    });
+  
+    // Once all the files are uploaded 
+    axios.all(uploaders).then(() => {
+      alert('images added');
+      });
+  }
 
 
   componentDidMount() {
@@ -16,7 +56,7 @@ export class AddToBag extends Component {
     axios.post(`/add/bag/`, {
       item_name: this.refs.name.value,
       owner_id: this.props.user.userid,
-      image_url: this.refs.imgurl.value,
+      image_url: this.state.image,
       item_description: this.refs.description.value,
       category: this.refs.select.value,
       city: this.refs.city.value,
@@ -24,7 +64,7 @@ export class AddToBag extends Component {
     })
     alert('Your gear has been added to your bag! Thanks for sharing!')
     this.refs.name.value = ''
-    this.refs.imgurl.value = ''
+    this.state.image = ''
     this.refs.description.value = ''
     this.refs.city.value = ''
     this.refs.zipcode.value = ''
@@ -34,13 +74,12 @@ export class AddToBag extends Component {
   render() {
     console.log(this.props.user.userid)
     console.log(this.refs.value)
+    console.log(this.state.image)
     return (
       <div className='container'>
-        <div className='addtosac-header'>
-          <h1> ADD TO YOUR SAC </h1>
-        </div>
+        <Header title='FILL YOUR SAC'/>
         <div>
-          <div classname='input-container'>
+          <div className='input-container'>
             <div className='input-container-child'>
               <select ref='select' >
 
@@ -53,14 +92,19 @@ export class AddToBag extends Component {
                 <option value="Hunting">Hunting</option>
                 <option value="Sports">Sports</option>
               </select>
-
+              
               <input ref='name' placeholder='item' />
               <textarea ref='description' placeholder='Item Description'
                 cols="61"></textarea>
 
 
-              <input ref='imgurl' placeholder='image url' />
 
+              <Dropzone className='dropzone'
+                onDrop={this.handleDrop}
+                multiple
+                accept="image/*" >
+                <p> UPLOAD PICTURES  HERE</p>
+                </Dropzone>
 
               <input ref='city' placeholder='city' />
               <input ref='zipcode' placeholder='zipcode' />

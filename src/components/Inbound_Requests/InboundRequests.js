@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUserInfo } from './../../ducks/reducer';
 import axios from 'axios'
+import Header from './../../Header'
 
 export class InboundRequests extends Component {
     constructor() {
@@ -57,7 +58,7 @@ export class InboundRequests extends Component {
         console.log(this.state.requests)
         return (
             <div className='container'>
-                <div className='incoming-header'> Incoming Requests </div>
+                <Header title='INCOMING REQUESTS'/>
                 <div className='profile-pic'>
                     <Link to='/profile'>
                         <img alt='' src={this.props.user.picture} />

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { getUserInfo } from './../../ducks/reducer'
+import Header from './../../Header'
 
 import './Profile.css'
 
@@ -19,9 +20,7 @@ class Profile extends Component {
     return (
       <div className='profile-container'>
 
-        <div className='profile-header'>
-          <p> PROFILE </p>
-        </div>
+        <Header title='PROFILE'/>
         <div className="profilepic">
           <img src={this.props.user.picture} alt='' />
         </div>

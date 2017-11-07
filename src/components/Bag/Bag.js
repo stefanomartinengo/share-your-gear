@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './bag.css'
 import { connect } from 'react-redux'
 import { getUserInfo} from './../../ducks/reducer'
+import Header from './../../Header'
 
 export class Bag extends Component {
 
@@ -14,9 +15,7 @@ export class Bag extends Component {
   render() {
     return (
       <div className='container'>
-        <div className='bag-header'>
-          <h1> SAC </h1>
-        </div>
+        <Header title='SNAG MY SAC'/>
          <div className="profilepic">
           <img src={this.props.user.picture} alt='' />
         </div>

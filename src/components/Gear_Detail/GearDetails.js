@@ -10,7 +10,8 @@ export class GearDetails extends Component {
         super()
 
         this.state = {
-            itemDetails: [{}]
+            itemDetails: [{}],
+            images: []
         }
 
     }
@@ -20,7 +21,8 @@ export class GearDetails extends Component {
         axios.get(`/get/details/${this.props.match.params.id}`)
             .then((response) => {
                 this.setState({
-                    itemDetails: response.data
+                    itemDetails: response.data,
+                    images: response.data[0].image_url
                 })
             })
     }
@@ -36,9 +38,14 @@ export class GearDetails extends Component {
     }
 
     render() {
+       var getAllImages = this.state.images.map( (e,i,arr) => {
+            return <img key={i} src={e} />
+        })
+
 
         console.log(this.props.user.userid)
         console.log(this.state.itemDetails)
+        console.log(this.state.images)
 
         return (
             <div className='product-details-wrapper'>
@@ -48,23 +55,25 @@ export class GearDetails extends Component {
                         <div className='product-title'>
                             <h2>{this.state.itemDetails[0].item_name}</h2>
                         </div>
-                        <div>
-                            <img alt='' src={this.state.itemDetails[0].image_url} />
+                        <div className='images-details'>
+                            {getAllImages}
                         </div>
-                        <div>
-                            <p> About the product </p>
+                        <div className='product-details'>
+                            <p> PRODUCT DETAILS </p>
                             <div>
                                 {this.state.itemDetails[0].item_description}
                             </div>
                         </div>
-                        <p> Location: {this.state.itemDetails[0].city}, {this.state.itemDetails[0].zipcode} </p>
+                        <p> LOCATION: {this.state.itemDetails[0].city}, {this.state.itemDetails[0].zipcode} </p>
                     </div>
+                    <div className='buttons'>
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
                         <button onClick={() => this.sendRequest()}> SEND REQUEST </button>
                     </Link>
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
                         <button> Back </button>
                     </Link>
+                    </div>
                 </div>
 
 
