@@ -6,7 +6,7 @@ import logo from './../../assets/-rendition;size=1200;version=0.png'
 import { connect } from 'react-redux'
 import { getUserInfo, historySearch } from './../../ducks/reducer'
 import Header from './../../Header'
-
+import backpack from './../../assets/backpack.png'
 
 export class Search extends Component {
   constructor() {
@@ -60,7 +60,7 @@ export class Search extends Component {
       <div className='search'>
         <Header title='SEARCH GEAR'/>
         <Link to='/profile'>
-          <img alt='' src={logo} />
+          <img alt='' src={backpack} />
         </Link>
 
         <div className='form'>

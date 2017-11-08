@@ -85,12 +85,24 @@ textarea {
 }
   
 .dropzone {
+    display: flex;
     box-shadow: 1px 2px 8px 0 black;
     /* border: .5px dashed black; */
     margin: 25px auto;
     height: 100px;
     width: 150px;
     border-radius: 4px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropzone img {
+    padding-left: 18px;
+    padding-bottom: 12px;
+    margin: auto;
+    height: 80px;
+    width: 80px;
 }
 
 .dropzone:hover {

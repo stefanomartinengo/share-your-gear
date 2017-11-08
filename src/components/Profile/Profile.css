@@ -11,18 +11,6 @@
     border-radius: 50%;
 }
 
-.profile-header {
-    margin-top:7px;
-    font-size: 1.5em;
-    color:  rgb(16, 71, 16);
-    font-weight: 200;
-    letter-spacing: 4px;
-    padding-top: 15px;
-    height: 50px;
-    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
-    margin-bottom: 17px;
-}
-
 .button-container {
     display: flex;
     justify-content: center;
@@ -38,8 +26,8 @@
     font-size: .75em;
     letter-spacing: 5px;
     color: rgb(16, 71, 16);
-   font-weight: 500;
-    background: #093637e9;
+    font-weight: 500;
+    background: #0936374c;
     border: none;
     margin-bottom: 6%;
     width: 30%;

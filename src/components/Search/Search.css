@@ -6,8 +6,8 @@
 }
 
 .search img {
-    width: 25%;
-    height: 43%;
+    width: 34%;
+    height: 50%;
 }
 
 input {
@@ -71,4 +71,33 @@ a {
 .list-gear img:hover {
     height: 150px;
     width: 170px;
+}
+
+@media (max-width: 900px) {
+    .search img {
+        width: 30%;
+        height: 24%;
+    }
+
+    .form {
+        margin: 10px auto;
+        width: 55%;
+    }
+    .form input {
+        margin-top: 10px;
+    }
+}
+@media (max-width: 600px) {
+    .search img {
+        width: 25%;
+        height: 14%;
+    }
+
+    .form {
+        margin: 10px auto;
+        width: 55%;
+    }
+    .form input {
+        margin-top: 10px;
+    }
 }

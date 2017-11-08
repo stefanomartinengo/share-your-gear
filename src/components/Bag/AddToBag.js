@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import './AddToBag.css'
 import Dropzone from 'react-dropzone'
 import Header from './../../Header'
-
+import addImage from './../../assets/addimage.png'
 
 export class AddToBag extends Component {
   constructor() {
@@ -103,7 +103,7 @@ export class AddToBag extends Component {
                 onDrop={this.handleDrop}
                 multiple
                 accept="image/*" >
-                <p> UPLOAD PICTURES  HERE</p>
+                <img src={ addImage } alt=''/>
                 </Dropzone>
 
               <input ref='city' placeholder='city' />

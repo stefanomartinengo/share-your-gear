@@ -9,6 +9,7 @@ import OutboundRequests from './components/Outbound_Requests/OutboundRequests';
 import Bag from './components/Bag/Bag';
 import ViewBag from './components/Bag/ViewBag';
 import AddToBag from './components/Bag/AddToBag';
+import Inbox from './components/Messages/Inbox'
 
 
 export default function Router() {
@@ -25,6 +26,7 @@ export default function Router() {
             <Route path='/bag' component={Bag} exact/>
             <Route path='/bag/view' component={ViewBag} />
             <Route path='/bag/add' component={AddToBag} />
+            <Route path='/inbox' component={Inbox} />
         </Switch>
 
     )

@@ -60,6 +60,8 @@
 
 
     .images-details img:active {
+        transition: ease-in;
+        transition-duration: .25s;
         margin: auto;
         position: absolute;
         padding: 7px;

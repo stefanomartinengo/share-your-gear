@@ -108,13 +108,54 @@ module.exports = {
     deleteGear: (req,res,next) => {
         const dbInstance = req.app.get('db');
         const {owner_id, itemid} = req.body;
-console.log('ownerid:', owner_id, itemid)
 
         dbInstance.remove_gear([owner_id, itemid])
+        .then( (response) => res.status(200).send(response))
+        .catch( (response) => res.status(500).send('ugh man'))
+    },
+
+
+
+    sendMessage: (req, res, next) => {
+        const dbInstance = req.app.get('db')
+        const { senderid, receiverid, message, item, date } = req.body
+
+        dbInstance.send_message([senderid, receiverid, message, item, date])
         .then( (response) => {
-        console.log('items:?>?', owner_id,itemid)
+
         res.status(200).send(response)})
         .catch( (response) => res.status(500).send('ugh man'))
-    }
+    },
 
+    getInbox: (req,res,next) => {
+        const dbInstance = req.app.get('db')
+        const { params } = req
+    
+        dbInstance.get_all_messages(params.id)
+        .then( (response) => {
+
+        res.status(200).send(response)})
+        .catch( (response) => res.status(500).send('ugh man'))
+    },
+
+    deleteMessage: (req,res,next) => {
+        const dbInstance = req.app.get('db')
+
+        dbInstance.remove_message(req.body.id)
+        .then( (response) => {
+
+            res.status(200).send(response)})
+            .catch( (response) => res.status(500).send('ugh man'))
+    },
+
+    markViewed: (req,res,next) => {
+        const dbInstance = req.app.get('db')
+        
+        dbInstance.mark_viewed(req.body.id)
+        .then( (response) => {
+            console.log(response)
+            res.status(200).send(response)})
+            .catch( (response) => res.status(500).send('ugh man'))
+
+    }
 }

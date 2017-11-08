@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import './viewBag.css'
 import Header from './../../Header'
-
+import backpack from './../../assets/backpack.png'
 export class ViewBag extends Component {
   constructor() {
     super()
@@ -46,9 +46,9 @@ export class ViewBag extends Component {
 
     var mapGear = this.state.inventory.map((e, i, arr) => { console.log(e)
       if (e.rented === false) {
-        return <p key={i} className='not-rented'> {e.item_name} <img src={e.image_url[0]} /> <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
+        return <p key={i} className='not-rented'>  <img src={e.image_url[0]} />{e.item_name} <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       } else {
-        return <p key={i} className='rented'> {e.item_name} <img src={e.image_url[0]} /> <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
+        return <p key={i} className='rented'>  <img src={e.image_url[0]} />{e.item_name} <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       }
     }
 
@@ -57,7 +57,7 @@ export class ViewBag extends Component {
     console.log(this.state.inventory)
     return (
       <div className='bag-container'>
-         <Header title='CHECK YOUR SAC'/>
+         <Header title='CHECK YOUR SAC' />
         <div className='bag'>
           {mapGear}
         </div>

@@ -11,10 +11,14 @@ export class GearDetails extends Component {
 
         this.state = {
             itemDetails: [{}],
-            images: []
+            images: [],
+            date: ''
         }
 
     }
+
+
+
 
     componentDidMount() {
         this.props.getUserInfo();
@@ -24,7 +28,33 @@ export class GearDetails extends Component {
                     itemDetails: response.data,
                     images: response.data[0].image_url
                 })
+                
             })
+    }
+
+    sendMessage() {
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;}
+            return i;}
+
+        var dateStamp = new Date();
+        var month = dateStamp.getMonth()
+        var day = dateStamp.getDay()
+        var year = dateStamp.getFullYear()
+        var hour = dateStamp.getHours()
+        var minutes = addZero(dateStamp.getMinutes())
+        var timeStamp = `${month}/${day}/${year} || ${hour}:${minutes}`
+
+        axios.post('/send/message/', {
+            senderid: +this.props.user.userid,
+            receiverid: +this.state.itemDetails[0].owner_id,
+            message: this.refs.message.value,
+            item: this.state.itemDetails[0].item_name,
+            date: timeStamp
+        })
+        alert('message sent')
+        this.refs.message.value = ''
     }
 
     sendRequest() {
@@ -42,11 +72,9 @@ export class GearDetails extends Component {
             return <img key={i} src={e} />
         })
 
-
         console.log(this.props.user.userid)
         console.log(this.state.itemDetails)
         console.log(this.state.images)
-
         return (
             <div className='product-details-wrapper'>
                 <div className='details-wrapper'>
@@ -73,6 +101,9 @@ export class GearDetails extends Component {
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
                         <button> Back </button>
                     </Link>
+                    
+                    <textarea ref='message' placeholder='message here'></textarea>
+                    <button onClick={ () => this.sendMessage() }> Send Message </button>
                     </div>
                 </div>
 

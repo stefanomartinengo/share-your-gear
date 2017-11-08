@@ -85,7 +85,7 @@ app.get('/auth/me', (req, res) => {
   }
 })
 
-//controller end points
+//CONTROLLER AND END POINTS
 
 app.get('/search/gear/', controller.getGear)
 app.get('/ownerrequests/:id', controller.getRequests)
@@ -95,21 +95,25 @@ app.get('/get/details/:id', controller.getItemDetails)
 //send request
 app.post('/send/request/', controller.sendRequest)
 
-//approve deny
+//APPROVE / DENY ------------------------------------------------------------
 app.put('/approve', controller.approve)
 app.put('/deny', controller.deny)
 
-//viewBag
+//VIEWBAG ---------------------------------------------------------------
 app.get('/view/bag/:id', controller.viewBag)
 app.get('/view/name/id:', controller.getBorrowerName)
 app.post('/add/bag', controller.addGear)
-
 app.delete('/delete/gear', controller.deleteGear)
 
 
+// MESSAGE// ------------------------------------------------------------
 
-
-//deleteRequest
+app.get('/get/inbox/:id', controller.getInbox)
+app.post('/send/message/', controller.sendMessage)
+app.put('/mark/read', controller.markViewed)
+app.delete('/delete/message', controller.deleteMessage)
+//DELETE REQUEST ------------------------------------------------------------
 app.delete(`/remove/request`, controller.removeRequest)
+
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));

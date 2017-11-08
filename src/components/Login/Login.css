@@ -19,7 +19,7 @@
     width: 30%;
     padding:30px;
     border-radius: 10px;
-    background: linear-gradient(to left, #589c8ad9, #093637);
+    background: #fcfafd;
     box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
 }
 
@@ -30,7 +30,7 @@
     height:150px;
     background-image: url('./../../assets/-rendition;size=1200;version=0.png');
     background-size: 100% auto;
-    background-position: cover;
+    background-position: fill;
 }
 .login_button{
     /* width:45%; */
