@@ -68,7 +68,7 @@ passport.deserializeUser(function (id, done) {
 
 //endpoints//
 
-app.get('/', passport.authenticate('auth0'))
+app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
   successRedirect: 'http://localhost:3000/#/search',
   failureRedirect: '/'
