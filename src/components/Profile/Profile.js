@@ -38,7 +38,7 @@ class Profile extends Component {
             <Link to='./../Search/Search'>
               <button> SEARCH </button>
             </Link>
-            <a href={'/auth/logout'}><button> LOGOUT </button> </a>
+            <a href={process.env.REACT_APP_LOGOUT}><button> LOGOUT </button> </a>
           </div>
 
         </div>
