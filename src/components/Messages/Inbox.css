@@ -7,7 +7,7 @@
 }
 
 .unread-container {
-    width: 100%;
+    width: 50%;
 }
 
 .unread-container div {
@@ -17,7 +17,7 @@
 
 
 .read-container {
-    width: 100%;
+    width: 50%;
 }
 .read-container div {
     width: 95%;

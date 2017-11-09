@@ -70,13 +70,13 @@ passport.deserializeUser(function (id, done) {
 
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
-  successRedirect: '/#/search',
+  successRedirect: process.env.SUCCESSREDIRECT,
   failureRedirect: '/'
 }))
 
 app.get('/auth/logout', (req, res) => {
   req.logOut(); //built in method that destroys the session
-  res.redirect('/')
+  res.redirect(process.env.LOGOUTREDIRECT)
 })
 
 app.get('/auth/me', (req, res) => {
