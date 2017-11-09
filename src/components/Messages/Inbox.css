@@ -1,26 +1,26 @@
 .inbox-container {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
 }
 
 .unread-container {
-    width: 50%;
+    box-sizing: border-box;
+    width: 30%;
 }
 
 .unread-container div {
-    width: 95%;
     margin:  6px auto;
 }
 
 
-.read-container {
-    width: 50%;
+.read-container {   
+    width: 30%;
 }
 .read-container div {
-    width: 95%;
     margin: 15px auto;
 
 }
@@ -29,6 +29,7 @@
     box-shadow: 1px 1px 29px 2px rgb(138, 136, 136) inset;
     padding: 10px 6px;
     border-radius: 5px;
+    overflow-x: wrap; 
 }
 .item-name {
     padding-top: 3px;
@@ -48,16 +49,13 @@ textarea:focus {
 .date-div {
     font-size: .75em;
     text-shadow: 1px .5px 1px gray;
-    display: block;
     padding: 2px;
 }
 
-.map-container { width: 100%;
-    box-sizing: border-box;
+.map-container { 
 }
 
 .map-container p {
-    text-indent: 2px;
     color: rgba(128, 128, 128, 0);
     text-shadow: 1px 4.5px 5px rgb(107, 106, 106);
 }
