@@ -82,16 +82,21 @@ export class Inbox extends Component {
     render() {
         var mapInbox = this.state.results.map((e, i, arr) => {
             if (e.viewed === false)
-                return <div>
-                    {e.item} {e.senderid} {e.message} {e.date} <button onClick={ () => this.deleteMessage(e.id)}>X</button> 
+                return <div className='map-container'>
+                    <h1>-- Item --</h1> <div className='item-name'>{e.item}</div> <div className='message-div'>{e.message}</div> <div className='date-div'>{e.date}</div> 
+                                                                <div><textarea placeholder='reply here' ref={`message${e.id}`} /></div>
+                                                                <button onClick={ () => this.deleteMessage(e.id)}>X</button> 
                                                                 <button onClick={ () => this.markViewed(e.id) }>Read</button>
-                                                                <button onClick={ () => this.reply(e.id) }>Reply</button> <input ref={`message${e.id}`} />
+                                                                <button onClick={ () => this.reply(e.id) }>Reply</button> 
+                                                                <p> ------------------------------------------------------------------------------------------------ </p>
                 </div>
         })
         var viewed = this.state.results.map((e, i, arr) => {
             if (e.viewed === true) {
                 return <div>
-                    {e.item} {e.senderid} {e.message} {e.date} <button onClick={ () => this.deleteMessage(e.id)}>X</button><button>Reply</button>
+                    <h1>-- Item --</h1>{e.item} {e.senderid}<div className='message-div'> {e.message}</div> <div classNam='date-div'>{e.date} </div> 
+                                                                <button onClick={ () => this.deleteMessage(e.id)}>X</button>
+                                                                <button>Reply</button>
                 </div>
             }
         })
@@ -101,14 +106,14 @@ export class Inbox extends Component {
         return (
             
             <div>
-                <Header />
+                <Header title='Inbox'/>
                 <div className='inbox-container'>
-                <div>
+                <div className='unread-container'>
                     <p> UNREAD MESSAGES</p>
                     {mapInbox}
                 </div>
-                <div>
-                    <p> THESE ARE THE ALREADY READ MESSAGES </p>
+                <div className='read-container'>
+                    <p> READ MESSAGES </p>
                     {viewed}
                 </div>
                 </div>

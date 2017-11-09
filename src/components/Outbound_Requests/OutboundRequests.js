@@ -4,7 +4,9 @@ import { getUserInfo } from './../../ducks/reducer'
 import './OutboundRequests.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Header from './../../Header'
+import Header from './../../Header';
+import StripeCheckout from 'react-stripe-checkout';
+import stripe from './stripeKey'
 
 
 export class OutboundRequests extends Component {
@@ -16,6 +18,15 @@ export class OutboundRequests extends Component {
         }
         this.deleteRequest = this.deleteRequest.bind(this)
     }
+
+
+    onToken = (token) => {
+        token.card = void 0;
+        console.log('token', token);
+        axios.post('http://localhost:3000/api/payment', { token, amount: 100 } ).then(response => {
+          alert('we are in business')
+        });
+      }
 
     getRequests() {
         axios.get('/outbound/requests/' + this.props.user.userid)
@@ -65,6 +76,11 @@ export class OutboundRequests extends Component {
         console.log(this.props.user.userid)
         return (
             <div className='main-container'>
+                <StripeCheckout
+          token={this.onToken}
+          stripeKey={ stripe.pub_key }
+          amount={1000}
+        />
                 <Header title='SENT REQUESTS'/>
 
 

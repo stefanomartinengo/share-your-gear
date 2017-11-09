@@ -1,7 +1,63 @@
 .inbox-container {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
+.unread-container {
+    width: 100%;
+}
+
+.unread-container div {
+    width: 95%;
+    margin:  6px auto;
+}
+
+
+.read-container {
+    width: 100%;
+}
+.read-container div {
+    width: 95%;
+    margin: 15px auto;
+
+}
+
+.message-div {
+    box-shadow: 1px 1px 29px 2px rgb(138, 136, 136) inset;
+    padding: 10px 6px;
+    border-radius: 5px;
+}
+.item-name {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+textarea {
+    width: 115px;
+    height: 40px;
+    background: transparent;
+    box-shadow: 1px 1px 2px 2px gray;
+}
+
+textarea:focus {
+    box-shadow: 1px 1px 2px 2px gray inset;
+}
+
+.date-div {
+    font-size: .75em;
+    text-shadow: 1px .5px 1px gray;
+    display: block;
+    padding: 2px;
+}
+
+.map-container { width: 100%;
+    box-sizing: border-box;
+}
+
+.map-container p {
+    text-indent: 2px;
+    color: rgba(128, 128, 128, 0);
+    text-shadow: 1px 4.5px 5px rgb(107, 106, 106);
 }
