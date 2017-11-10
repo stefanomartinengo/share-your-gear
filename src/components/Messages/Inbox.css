@@ -9,7 +9,7 @@
 
 .unread-container {
     box-sizing: border-box;
-    width: 30%;
+    width: 45%;
 }
 
 .unread-container div {
@@ -18,10 +18,10 @@
 
 
 .read-container {   
-    width: 30%;
+    width: 45%;
 }
 .read-container div {
-    margin: 15px auto;
+    margin: 6px auto;
 
 }
 
@@ -29,7 +29,6 @@
     box-shadow: 1px 1px 29px 2px rgb(138, 136, 136) inset;
     padding: 10px 6px;
     border-radius: 5px;
-    overflow-x: wrap; 
 }
 .item-name {
     padding-top: 3px;
@@ -52,10 +51,21 @@ textarea:focus {
     padding: 2px;
 }
 
-.map-container { 
-}
-
 .map-container p {
+    position: relative;
+    width: 100%;
     color: rgba(128, 128, 128, 0);
     text-shadow: 1px 4.5px 5px rgb(107, 106, 106);
+}
+
+@media (max-width: 500px) {
+    .inbox-container {
+        font-size: .75em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+    }
 }

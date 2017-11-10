@@ -55,11 +55,11 @@ export class OutboundRequests extends Component {
 
         var sentRequests = this.state.requests.map((e, i, arr) => {
             if (e.pending === true) {
-                return <div className='list-items pending' key={i} >  {e.item_name} PENDING  <button onClick={() => this.deleteRequest(e.item_id)}> CANCEL REQUEST </button> </div>
+                return <div className='list-items pending' key={i} >  <div className='pending-circle'>...</div> {e.item_name}  <button onClick={() => this.deleteRequest(e.item_id)}> CANCEL REQUEST </button> </div>
             } else if (e.approved === true && e.pending === false) {
-                return <div className='list-items approved' key={i}> {e.item_name} APPROVED  <button onClick={() => this.deleteRequest(e.item_id)}> RETURNED </button> </div>
+                return <div className='list-items approved' key={i}> <div className='approved-circle'></div> {e.item_name}  <button onClick={() => this.deleteRequest(e.item_id)}> RETURNED </button> </div>
             } else if (e.approved === false && e.pending === false) {
-                return <div className='list-items denied' key={i}> {e.item_name} DENIED <button onClick={() => this.deleteRequest(e.item_id)}> REMOVE </button></div>
+                return <div className='list-items denied' key={i}> <div className='rejected-circle'></div> {e.item_name} <button onClick={() => this.deleteRequest(e.item_id)}> REMOVE </button></div>
             }
         })
         console.log(sentRequests)

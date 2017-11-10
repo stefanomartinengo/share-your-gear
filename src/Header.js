@@ -11,6 +11,7 @@ import EnhancedButton from 'material-ui/internal/EnhancedButton'
 import ContentFilter from 'material-ui/svg-icons/content/filter-list'
 import dropDown from './assets/equal.png'
 import backpack from './assets/backpack.png'
+import Divider from 'material-ui/Divider';
 
 export default class Header extends Component {
   constructor(props) {
@@ -90,6 +91,10 @@ export default class Header extends Component {
               <Link to='/inbox'>
                     <MenuItem value="9" primaryText="Inbox" />
                   </Link>
+                  <Divider />
+                  <a href={process.env.REACT_APP_LOGOUT}>
+                  <MenuItem value="10" primaryText="Logout" />
+                  </a>
             </IconMenu>
 
           </div>

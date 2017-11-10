@@ -93,10 +93,12 @@ export class Inbox extends Component {
         })
         var viewed = this.state.results.map((e, i, arr) => {
             if (e.viewed === true) {
-                return <div>
-                    <h1>-- Item --</h1>{e.item} {e.senderid}<div className='message-div'> {e.message}</div> <div classNam='date-div'>{e.date} </div> 
+                return <div className='map-container'>
+                    <h1>-- Item --</h1> <div className='item-name'>{e.item}</div> <div className='message-div'> {e.message}</div> <div className='date-div'>{e.date} </div> 
+                                                                <div><textarea placeholder='reply here' ref={`message${e.id}`} /></div>
                                                                 <button onClick={ () => this.deleteMessage(e.id)}>X</button>
                                                                 <button>Reply</button>
+                                                                <p> ------------------------------------------------------------------------------------------------ </p>
                 </div>
             }
         })

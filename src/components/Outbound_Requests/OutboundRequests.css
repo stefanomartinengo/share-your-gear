@@ -28,28 +28,62 @@
     background: #093637e9;
 }
 
-
 .list-subcontainer {
         margin: auto;
         width: 100%;
     }
 
     .list-subcontainer div {
+        display: flex;
+        justify-content: space-around;
         margin: 25px auto;
         background: rgba(9,54, 55, .3);
         border-radius: 5px;
     }
-    .approved {
-        color: rgb(8, 52, 8);
+
+    .approved { 
+
     }
 
     .pending {
         background: #093637e9;
-        color: #F4D03F;
+        
+    }
+
+    .pending-circle  {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        height: 50px;
+        width: 50px;
+        border-radius: 50% !important;
+        background: yellow !important;
+    }
+    
+    .approved-circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 50px;
+        border-radius: 50% !important;
+        background: green !important;
+    }
+
+    .rejected-circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        height: 50px;
+        width: 50px;
+        border-radius: 50% !important;
+        background: red !important;
     }
 
     .denied {
-        color: rgb(170, 66, 40);
+        
     }
 
     .list-items button {

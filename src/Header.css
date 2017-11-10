@@ -33,8 +33,18 @@ MenuItem {
     opacity: .5;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     .main-header{
-        width:100%;
+        width: 100%;
+        background: transparent;
+        font-family: 'futura-light';
+        font-size: 1em;
+        font-weight: 800;
+        letter-spacing: 2px;
+    }
+    .main-header img {
+        padding-left: 10px;
+        width: 40px;
+        height: 40px;
     }
 }
