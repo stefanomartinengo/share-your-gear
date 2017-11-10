@@ -28,8 +28,8 @@
     margin: auto;
     width:150px;
     height:150px;
-    background-image: url('./../../assets/-rendition;size=1200;version=0.png');
-    background-size: 100% auto;
+    background-image: url('./../../assets/backpack.png');
+    background-size:  auto 100%;
     background-position: fill;
 }
 .login_button{
