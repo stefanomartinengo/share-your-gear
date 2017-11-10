@@ -20,6 +20,7 @@
 .read-container {   
     width: 45%;
 }
+
 .read-container div {
     margin: 6px auto;
 
@@ -34,6 +35,7 @@
     padding-top: 3px;
     padding-bottom: 3px;
 }
+/* hide */
 textarea {
     width: 115px;
     height: 40px;
@@ -56,6 +58,16 @@ textarea:focus {
     width: 100%;
     color: rgba(128, 128, 128, 0);
     text-shadow: 1px 4.5px 5px rgb(107, 106, 106);
+}
+
+.hide-me {
+    display: none;
+}
+
+.show-me {
+    width: 50%;
+    height: 100px;
+    background: blue;
 }
 
 @media (max-width: 500px) {

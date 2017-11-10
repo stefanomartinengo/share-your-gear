@@ -57,16 +57,20 @@ export class InboundRequests extends Component {
         console.log(this.props.user.userid)
         console.log(this.state.requests)
         return (
+            
             <div className='container'>
                 <Header title='INCOMING REQUESTS'/>
+            {this.props.user.auth_id ? 
                 <div className='profile-pic'>
                     <Link to='/profile'>
                         <img alt='' src={this.props.user.picture} />
                     </Link>
-                </div>
+                
                 <div className='requests'>
-                    {requestsMap}
+                    {requestsMap} 
+                </div> 
                 </div>
+                : <h1> PLEASE SIGN IN TO VIEW YOUR REQUESTS </h1>}
             </div>
         )
     }

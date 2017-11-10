@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const initialState = {
-    user: {},
+    user: {auth_id: 0},
     searched: false,
     city: '',
     category: '',

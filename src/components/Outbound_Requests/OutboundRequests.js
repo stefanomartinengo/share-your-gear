@@ -69,15 +69,16 @@ export class OutboundRequests extends Component {
             <div className='main-container'>
                 
                 <Header title='SENT REQUESTS'/>
-
+                {this.props.user.auth_id ? 
 
                 <div className='list-container'>
                     <div className='list-subcontainer'>
                         {/* {mapRequests}  */}
                         {sentRequests}
-
+                    
                     </div>
                 </div>
+                : <h1> PLEASE SIGN IN TO VIEW YOUR REQUESTS </h1> }
             </div>
         )
     }

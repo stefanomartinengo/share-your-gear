@@ -4,24 +4,32 @@ import { connect } from 'react-redux'
 import { getUserInfo } from './../../ducks/reducer'
 import Header from './../../Header'
 import './Inbox.css'
+import InboxChild from './InboxChild'
 
 export class Inbox extends Component {
     constructor() {
         super()
 
         this.state = {
-            results: []
+            results: [],
+            toggle: false
         }
         this.deleteMessage = this.deleteMessage.bind(this)
         this.getMessages = this.getMessages.bind(this)
-        this.reply=this.reply.bind(this)
+        this.reply = this.reply.bind(this)
+        this.toggleMessage = this.toggleMessage.bind(this)
     }
 
+    toggleMessage(id) {
+        this.setState({
+            toggle: !this.state.toggle
+        })
+    }
 
     markViewed(id) {
         axios.put('/mark/read', {
             id: id
-        }).then( (res) => {
+        }).then((res) => {
             this.getMessages()
         })
     }
@@ -29,8 +37,10 @@ export class Inbox extends Component {
     reply(id) {
         function addZero(i) {
             if (i < 10) {
-                i = "0" + i;}
-            return i;}
+                i = "0" + i;
+            }
+            return i;
+        }
 
         var dateStamp = new Date();
         var month = dateStamp.getMonth()
@@ -40,10 +50,10 @@ export class Inbox extends Component {
         var minutes = addZero(dateStamp.getMinutes())
         var timeStamp = `${month}/${day}/${year}  ||  ${hour}:${minutes}`
 
-                var obj = this.state.results.filter( (e,i,arr) => {
-                    return e.id === id
-                })
-                console.log(obj)
+        var obj = this.state.results.filter((e, i, arr) => {
+            return e.id === id
+        })
+        console.log(obj)
         axios.post('/send/message/', {
             senderid: this.props.user.userid,
             receiverid: obj[0].senderid,
@@ -54,12 +64,13 @@ export class Inbox extends Component {
         alert('message sent')
         this.refs[`message${id}`].value = ''
     }
-    
 
     deleteMessage(id) {
-        axios.delete('/delete/message', {data: {
-            id: id
-        }}).then( (res) => {
+        axios.delete('/delete/message', {
+            data: {
+                id: id
+            }
+        }).then((res) => {
             this.getMessages()
         })
     }
@@ -73,52 +84,52 @@ export class Inbox extends Component {
                 console.log(response.data)
             })
     }
+
     componentDidMount() {
         this.props.getUserInfo()
         this.getMessages()
     }
-    // this.getInbox();
-
     render() {
         var mapInbox = this.state.results.map((e, i, arr) => {
             if (e.viewed === false)
-                return <div className='map-container'>
-                    <h1>-- Item --</h1> <div className='item-name'>{e.item}</div> <div className='message-div'>{e.message}</div> <div className='date-div'>{e.date}</div> 
-                                                                <div><textarea placeholder='reply here' ref={`message${e.id}`} /></div>
-                                                                <button onClick={ () => this.deleteMessage(e.id)}>X</button> 
-                                                                <button onClick={ () => this.markViewed(e.id) }>Read</button>
-                                                                <button onClick={ () => this.reply(e.id) }>Reply</button> 
-                                                                <p> ------------------------------------------------------------------------------------------------ </p>
-                </div>
+                return <InboxChild key={i}
+                    id={e.id}
+                    item={e.item}
+                    date={e.date}
+                    message={e.message}
+                    deleteMessage={this.deleteMessage}
+                    markViewed={this.markViewed}
+                    reply={this.reply} />
+
         })
         var viewed = this.state.results.map((e, i, arr) => {
             if (e.viewed === true) {
-                return <div className='map-container'>
-                    <h1>-- Item --</h1> <div className='item-name'>{e.item}</div> <div className='message-div'> {e.message}</div> <div className='date-div'>{e.date} </div> 
-                                                                <div><textarea placeholder='reply here' ref={`message${e.id}`} /></div>
-                                                                <button onClick={ () => this.deleteMessage(e.id)}>X</button>
-                                                                <button>Reply</button>
-                                                                <p> ------------------------------------------------------------------------------------------------ </p>
-                </div>
+                return <InboxChild key={i}
+                    item={e.item}
+                    date={e.date}
+                    message={e.message}
+                    reply={e.reply}
+                    delete={this.deleteMessage}
+                    id={e.id} />
             }
         })
         console.log(mapInbox)
         console.log(this.state.results)
-        console.log(this.props.user.userid)
+        console.log(this.props.user)
         return (
-            
             <div>
-                <Header title='Inbox'/>
-                <div className='inbox-container'>
-                <div className='unread-container'>
-                    <p> UNREAD MESSAGES</p>
-                    {mapInbox}
-                </div>
-                <div className='read-container'>
-                    <p> READ MESSAGES </p>
-                    {viewed}
-                </div>
-                </div>
+                <Header title='Inbox' />
+                {this.props.user.auth_id ?
+                    <div className='inbox-container'>
+                        <div className='unread-container'>
+                            <p> UNREAD MESSAGES</p>
+                            {mapInbox}
+                        </div>
+                        <div className='read-container'>
+                            <p> READ MESSAGES </p>
+                            {viewed}
+                        </div>
+                    </div> : <h1> PLEASE SIGN IN TO VIEW THIS PAGE </h1>}
             </div>
         )
     }
