@@ -47,38 +47,50 @@ export class OutboundRequests extends Component {
     }
 
     render() {
-        // var mapRequests = this.state.requests.map( (e, i, arr) => {
-        //     return <div className='list-items' key={i}>
-        //         <img alt='' src={e.image_url} /> {e.item_name} Lender: {e.first_name}
-        //     </div>
-        // })
 
         var sentRequests = this.state.requests.map((e, i, arr) => {
+
             if (e.pending === true) {
-                return <div className='list-items pending' key={i} >  <div className='pending-circle'>...</div> {e.item_name}  <button onClick={() => this.deleteRequest(e.item_id)}> CANCEL REQUEST </button> </div>
+                return <div className='list-items pending' key={i} >
+                <div><h1> Pending </h1> </div>
+                    <div>{e.item_name}</div>
+                    <div><button onClick={() => this.deleteRequest(e.item_id)}
+                    > CANCEL REQUEST </button></div>
+                </div>
+
             } else if (e.approved === true && e.pending === false) {
-                return <div className='list-items approved' key={i}> <div className='approved-circle'></div> {e.item_name}  <button onClick={() => this.deleteRequest(e.item_id)}> RETURNED </button> </div>
+                return <div className='list-items approved' key={i}>
+                <div><h1> Approved </h1></div>
+                    <div>{e.item_name}</div> 
+                    <div><button onClick={() => this.deleteRequest(e.item_id)}
+                    > RETURNED </button></div> </div>
+
             } else if (e.approved === false && e.pending === false) {
-                return <div className='list-items denied' key={i}> <div className='rejected-circle'></div> {e.item_name} <button onClick={() => this.deleteRequest(e.item_id)}> REMOVE </button></div>
+                return <div className='list-items denied' key={i}>
+                <div><h1> Denied </h1></div>
+                    <div> {e.item_name}</div>
+                    <button onClick={() => this.deleteRequest(e.item_id)}
+                    > REMOVE </button></div>
             }
         })
         console.log(sentRequests)
         console.log(this.state.requests)
         console.log(this.props.user.userid)
         return (
-            <div className='main-container'>
-                
-                <Header title='SENT REQUESTS'/>
-                {this.props.user.auth_id ? 
-
-                <div className='list-container'>
-                    <div className='list-subcontainer'>
-                        {/* {mapRequests}  */}
-                        {sentRequests}
-                    
-                    </div>
-                </div>
-                : <h1> PLEASE SIGN IN TO VIEW YOUR REQUESTS </h1> }
+            <div>
+                <Header title='SENT REQUESTS' />
+                {this.props.user.auth_id ?
+                <div className='main-container'>
+                    <div className='oprofile'>
+                    <Link to='/profile'>
+                        <img alt='' src={this.props.user.picture} />
+                    </Link>
+                   </div>
+                        <div className='list-subcontainer'>
+                            {sentRequests}
+                        </div>
+  </div>
+                            : <h1> PLEASE SIGN IN TO VIEW YOUR REQUESTS </h1>}
             </div>
         )
     }

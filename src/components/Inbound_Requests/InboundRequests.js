@@ -50,8 +50,11 @@ export class InboundRequests extends Component {
     render() {
 
         var requestsMap = this.state.requests.map((e, i, arr) => {
-            return <div key={i}>
-               <img alt='' src={e.image_url} /> {e.item_name} <button onClick={ () => this.approve(e.item_id) }> Yes </button><button onClick={() => this.deny(e.item_id)}> No </button>
+            return <div key={i} class='mapcontainer'>
+               <img alt='' src={e.image_url} /> <div>{e.item_name} </div>
+               <button onClick={ () => this.approve(e.item_id) }
+               > Yes </button> || <button onClick={() => this.deny(e.item_id)}
+               > No </button>
             </div>
         })
         console.log(this.props.user.userid)

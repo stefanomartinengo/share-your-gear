@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUserInfo } from './../../ducks/reducer'
 import axios from 'axios'
+import Header from './../../Header'
 
 export class GearDetails extends Component {
     constructor() {
@@ -76,7 +77,9 @@ export class GearDetails extends Component {
         console.log(this.state.itemDetails)
         console.log(this.state.images)
         return (
+            <div> <Header title='GEAR DETAILS'/>
             <div className='product-details-wrapper'>
+            
                 <div className='details-wrapper'>
                     <div>
 
@@ -88,25 +91,26 @@ export class GearDetails extends Component {
                         </div>
                         <div className='product-details'>
                             <p> PRODUCT DETAILS </p>
-                            <div>
+                            <div className='description'>
                                 {this.state.itemDetails[0].item_description}
                             </div>
-                        </div>
+                        </div> <div className='location'>
                         <p> LOCATION: {this.state.itemDetails[0].city}, {this.state.itemDetails[0].zipcode} </p>
+                        </div>
                     </div>
                     <div className='buttons'>
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
                         <button onClick={() => this.sendRequest()}> SEND REQUEST </button>
                     </Link>
-                    <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
-                        <button> Back </button>
-                    </Link>
                     
                     <textarea ref='message' placeholder='message here'></textarea>
                     <button onClick={ () => this.sendMessage() }> Send Message </button>
+                    <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
+                        <button> Back </button>
+                    </Link>
                     </div>
                 </div>
-
+                </div>
 
             </div >
         )

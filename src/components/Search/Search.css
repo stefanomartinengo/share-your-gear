@@ -45,13 +45,14 @@ select {
 }
 
 .search-list {
-    width: 50%;
+    width: 35%;
     padding: 20px;
 }
 
+
 .list-gear {
     background: rgba(255, 255, 255, 0.927);
-    padding: 13px;
+    padding: 5px;
     margin: 5px;
     border-radius: 5px;
     box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
@@ -63,8 +64,11 @@ select {
     align-items: center;
 }
 
+.itemname {
+    width: 40%;
+}
 .list-gear:hover {
-    font-weight: 900;
+    font-weight: 800;
 }
 
 a {
@@ -77,11 +81,17 @@ a {
     width: 60px;
 }
 
+.listimage {
+    border-radius: 50%;
+    width: 85px !important;
+    height: 85px !important;
+}
+
 .list-gear img:hover {
     transition: ease-in-out;
-    transition-duration: 1s;
-    height: 150px;
-    width: 170px;
+    transition-duration: .5s;
+    width: 100px !important;
+    height: 100px !important;
 }
 
 @media (min-width: 1500px) {

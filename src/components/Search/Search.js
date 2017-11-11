@@ -47,7 +47,8 @@ export class Search extends Component {
     var mapGear = this.state.items.map((e, i, arr) => {
       return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>
-          <img alt='' src={e.image_url[0]} /> {e.item_name}
+          <img className='listimage' alt='' src={e.image_url[0]} />
+          <div className='itemname'>{e.item_name}</div>
         </Link>
       </div>
 
@@ -56,9 +57,9 @@ export class Search extends Component {
     console.log(this.state.items)
     console.log(this.props.user.userid)
     return (
-      
+
       <div className='search'>
-        <Header title='SEARCH GEAR'/>
+        <Header title='SEARCH GEAR' />
         <Link to='/profile'>
           <img alt='' src={backpack} />
         </Link>
