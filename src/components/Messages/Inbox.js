@@ -5,6 +5,7 @@ import { getUserInfo } from './../../ducks/reducer'
 import Header from './../../Header'
 import './Inbox.css'
 import InboxChild from './InboxChild'
+import { getItBack } from './InboxChild'
 
 export class Inbox extends Component {
     constructor() {
@@ -18,7 +19,10 @@ export class Inbox extends Component {
         this.getMessages = this.getMessages.bind(this)
         this.reply = this.reply.bind(this)
         this.toggleMessage = this.toggleMessage.bind(this)
+        this.markViewed = this.markViewed.bind(this)
     }
+
+    
 
     toggleMessage(id) {
         this.setState({
@@ -30,11 +34,12 @@ export class Inbox extends Component {
         axios.put('/mark/read', {
             id: id
         }).then((res) => {
+            console.log(id)
             this.getMessages()
         })
     }
 
-    reply(id) {
+    reply(id,mess) {
         function addZero(i) {
             if (i < 10) {
                 i = "0" + i;
@@ -53,16 +58,21 @@ export class Inbox extends Component {
         var obj = this.state.results.filter((e, i, arr) => {
             return e.id === id
         })
-        console.log(obj)
+        console.log({
+            senderid: this.props.user.userid,
+            receiverid: obj[0].senderid,
+            message: mess,
+            item: obj[0].item,
+            date: timeStamp
+        })
         axios.post('/send/message/', {
             senderid: this.props.user.userid,
             receiverid: obj[0].senderid,
-            message: this.refs[`message${id}`].value,
+            message: mess,
             item: obj[0].item,
             date: timeStamp
         })
         alert('message sent')
-        this.refs[`message${id}`].value = ''
     }
 
     deleteMessage(id) {
@@ -104,13 +114,13 @@ export class Inbox extends Component {
         })
         var viewed = this.state.results.map((e, i, arr) => {
             if (e.viewed === true) {
-                return <InboxChild key={i}
+                return <InboxChild key={i+200}
+                    id={e.id}
                     item={e.item}
                     date={e.date}
                     message={e.message}
-                    reply={e.reply}
-                    delete={this.deleteMessage}
-                    id={e.id} />
+                    reply={this.reply}
+                    deleteMessage={this.deleteMessage}/>
             }
         })
         console.log(mapInbox)
