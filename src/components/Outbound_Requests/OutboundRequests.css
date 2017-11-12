@@ -4,36 +4,41 @@
 }
 
     .list-items {
+        
+        border-radius: 5px;
+        margin: auto;
+        width: 100%;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 35%;
         box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
-        padding: 13px;
-        margin-bottom: 20px;
+        padding-top: 13px;
+        padding-bottom: 13px;
         color: black;
 }
 
-    .list-items pending {
-        display: flex;
-        justify-content: space-between;
+    .list-items div {
         margin: auto;
+        padding: 10px 13px !important;
 }
-
     .list-subcontainer {
+        border-radius: 5px;
         margin: auto;
-        width: 100%;
+        width: 33%;
+        box-shadow: 0 0 10px 0  gray; 
     }
 
     .list-subcontainer div {
-        display: flex;
-        justify-content: space-between;
-        margin: 25px auto;
-        border-radius: 5px;
+        /* margin: auto; */
     }
 
+    .outitemname {
+        padding: 5px;
+        margin: auto !important;
+        width: 70% !important;
+    }
     .list-items button {
-        background: rgba(230, 130, 100, 0.25);
+        cursor: pointer;
         border: none;
         border-radius: 4px;
         box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.077), 0 6px 6px 0 rgba(0,0,0,0.2);

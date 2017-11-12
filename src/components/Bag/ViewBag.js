@@ -64,7 +64,7 @@ export class ViewBag extends Component {
             <div className='bagitemname'>{e.item_name}</div>
             <div className='descriptionbag'>{e.item_description}</div>
           </div>
-
+          <div className='buffer'></div>
           </div>
 
           <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
