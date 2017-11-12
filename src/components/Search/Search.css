@@ -1,5 +1,5 @@
 .search {
-    color:  rgb(16, 71, 16);;
+    color:  black;
     height: 100vh;
     width:  100%;
     background: #fcfafd;
@@ -73,7 +73,7 @@ select {
 
 a {
     text-decoration: none;
-    color: rgb(16, 71, 16);;
+    color: black;
 }
 
 .list-gear img {

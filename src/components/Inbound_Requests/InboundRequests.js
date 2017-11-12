@@ -53,8 +53,8 @@ export class InboundRequests extends Component {
             return <div key={i} class='mapcontainer'>
                <img alt='' src={e.image_url} /> <div>{e.item_name} </div>
                <button onClick={ () => this.approve(e.item_id) }
-               > Yes </button> || <button onClick={() => this.deny(e.item_id)}
-               > No </button>
+               > Approve </button> || <button onClick={() => this.deny(e.item_id)}
+               > Deny </button>
             </div>
         })
         console.log(this.props.user.userid)

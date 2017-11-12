@@ -18,39 +18,90 @@ body {
     justify-content: center;
     align-items: center;
 }
+.descriptionbag {
+    font-size: .75em;
+    margin-top: 7px;
+    line-height: 15px;
+}
 
-.bag p {
-    margin: 3px;
+.bagitemname {
+    letter-spacing: 3px;
+}
+
+
+.bag p { 
+
+    margin: 3px auto;
     display: flex;
     padding: 4px 8px;
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
     box-shadow: 1px 1px 1px gray;
-    width: 25%;
+    width: 90%;
+    max-height: 50px;
 }
 
-.bag p img {
-    width: 20%;
+.rentedtext {
+    margin: auto 0;
+    width: 90px;
+    overflow-x: auto;
+}
+.rented {
+    width:100%;
+    background: #e8ffea;
+}
+
+.rentcontainer {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rentcontainer img {
+    float: left;
+}
+.center {
+    padding-right: 5px;
+    margin: auto;
+    width: 100% !important;
+    overflow: auto;
+    max-height: 50px;
+}
+
+.center div {
+    width: 65%;
+    margin: auto;
+}
+.bag img {
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .bag p button {
+    cursor: pointer;
+    border: none;
+    font-size: 1.25em;
     padding: 5px;
     border-radius: 5px;
+    background: transparent;
 }
 
-.bag p button:hover {
+/* .bag p button:hover {
     padding: 10px;
     font-weight: 800;
-}
+} */
 
-.bag img {
-    width: 85px;
-    height: 85px;
+/* .bag img {
+    width: 55px;
+    height: 45px;
     transition: ease-in-out 1.5s;
     border-radius: 50%;
     border: 4px solid gray;
-}
+} */
 
 .bag img:active {
     transition: ease-in-out 1s;
@@ -59,15 +110,15 @@ body {
     width: 200px;
 }
 
-.rented {
-    background: #e8ffea;
-}
+
 
 .not-rented {
+    width: 50%;
     background: #ededed
 }
 
-@media (max-width: 1000px) {
+
+/* @media (max-width: 1000px) {
     .bag p {width: calc(100% /4);}
 }
 
@@ -87,4 +138,4 @@ body {
 } 
 @media (max-width: 400px) {
     .bag p {width: calc(100%/1.7)}
-}
+} */

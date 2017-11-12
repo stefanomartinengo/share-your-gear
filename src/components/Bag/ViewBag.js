@@ -44,11 +44,30 @@ export class ViewBag extends Component {
 
   render() {
 
-    var mapGear = this.state.inventory.map((e, i, arr) => { console.log(e)
+    var mapGear = this.state.inventory.map((e, i, arr) => {
+      console.log(e)
       if (e.rented === false) {
-        return <p key={i} className='not-rented'>  <img src={e.image_url[0]} />{e.item_name} <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
+        return <p key={i} className='not-rented'>  <img src={e.image_url[0]} />
+          <div className='center'>
+            <div className='bagitemname'>{e.item_name}</div>
+            <div className='descriptionbag'>{e.item_description}</div>
+          </div>
+          <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       } else {
-        return <p key={i} className='rented'>  <img src={e.image_url[0]} />{e.item_name} <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
+        return <p key={i} className='rented'>  <img src={e.image_url[0]} />
+          
+          <div className='rentcontainer'>
+          
+          <div className='rentedtext'> <p>RENTED</p>  </div>
+
+          <div className='center'>
+            <div className='bagitemname'>{e.item_name}</div>
+            <div className='descriptionbag'>{e.item_description}</div>
+          </div>
+
+          </div>
+
+          <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
       }
     }
 
@@ -57,11 +76,11 @@ export class ViewBag extends Component {
     console.log(this.state.inventory)
     return (
       <div className='bag-container'>
-         <Header title='CHECK YOUR SAC' />
+        <Header title='CHECK YOUR SAC' />
         <div className='bag'>
           {mapGear}
         </div>
-       
+
         <div>
         </div>
       </div>
