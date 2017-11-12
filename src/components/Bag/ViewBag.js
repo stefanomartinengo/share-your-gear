@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import './viewBag.css'
 import Header from './../../Header'
 import backpack from './../../assets/backpack.png'
+import deletex from './../../assets/x vector.png'
 export class ViewBag extends Component {
   constructor() {
     super()
@@ -52,7 +53,7 @@ export class ViewBag extends Component {
             <div className='bagitemname'>{e.item_name}</div>
             <div className='descriptionbag'>{e.item_description}</div>
           </div>
-          <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
+          <button onClick={() => this.deleteGear(e.itemid)}> <img src={deletex}/>  </button></p>
       } else {
         return <p key={i} className='rented'>  <img src={e.image_url[0]} />
           
@@ -67,7 +68,7 @@ export class ViewBag extends Component {
           <div className='buffer'></div>
           </div>
 
-          <button onClick={() => this.deleteGear(e.itemid)}> X  </button></p>
+          <button onClick={() => this.deleteGear(e.itemid)}> <img src={deletex} />  </button></p>
       }
     }
 
