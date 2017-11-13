@@ -14,9 +14,10 @@
     align-items: center;
 }
 .login_box{
-    position: absolute;
-    height: 35%; 
-    width: 30%;
+    /* box-sizing: border-box; */
+    /* position: absolute; */
+    height: 40%; 
+    width: 45%;
     padding:30px;
     border-radius: 10px;
     background: #fcfafd;
@@ -26,6 +27,7 @@
 .logo{
     padding-top: 20px;
     margin: auto;
+    margin-right: 34%;
     width:150px;
     height:150px;
     background-image: url('./../../assets/backpack.png');
@@ -34,25 +36,27 @@
 }
 .login_button{
     /* width:45%; */
-    height:40px;
-    margin-top:40px;
+    height:13%;
+    margin-top:5%;
     color:black;
     font-size:20px;
     border-radius: 6px;
     border:none;
     background:transparent;
-    border: .5px solid rgb(16, 71, 16);;
+    border: .5px solid rgb(16, 71, 16);
     font-family: 'futura-light';
     letter-spacing: 5px;
     outline: none;
 }
+
+
 
 .login_button:hover {
     color: black;
     border: 1px solid black;
 }
 .helo{
-    margin-top:15px;
+    margin-top:25px;
     margin-bottom: 15px;
     font-size:1.5em;
     color:black;
