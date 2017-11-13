@@ -100,3 +100,9 @@
         outline: none;
     }
 }
+@media (max-width: 600px) {
+    .login_button {
+        font-size: .5em;
+        width: 82%;
+    }
+}

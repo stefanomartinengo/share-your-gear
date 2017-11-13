@@ -149,3 +149,31 @@ body {
         margin-top: 7px;
     }
 }
+@media (max-width: 600px) {
+    .center div {
+        width: 66%;
+    }
+    .rentedtext {
+        font-size: .25em;
+        margin: auto 0;
+        width: 37%;;
+    }
+    
+    .buffer {
+        width: 37%;;
+        margin: auto 0;
+    }
+    .bagitemname {
+        font-size: .70em;
+    }
+    .descriptionbag {
+        font-size: .4em;
+        margin-top: 7px;
+    }
+    .bag img {
+        
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+}
