@@ -113,6 +113,29 @@ textarea {
     padding-top: 40px;
 }
 
+@media (max-width: 700px) {
+    .input-container-child {
+        margin: auto;
+        margin-bottom: 20px;
+        width:80%;
+    }
+    
+    .input-container-child input:nth-child(3) {
+        height: 80px;
+    }
+    
+    .input-container-child input:nth-child(6) {
+        width: 20%;
+    }
+    
+    .input-container-child input:nth-child(5) {
+        width: 30%;
+    }
+    .input-container-child input:nth-child(2) {
+        width: 40%;
+    }
+}
+
 
 
 

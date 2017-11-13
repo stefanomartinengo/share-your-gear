@@ -64,3 +64,39 @@
     font-family: 'futura-light';
     letter-spacing: 5px;
 }
+
+@media (max-width: 700px) {
+    .logo {
+        padding-top: 20px;
+        margin: auto;
+        margin-right: 34%;
+        width:80px;
+        height:75px;
+        background-image: url('./../../assets/backpack.png');
+        background-size:  auto 100%;
+        background-position: fill;
+    }
+    .helo{
+        margin-top:25px;
+        margin-bottom: 15px;
+        font-size:.75em;
+        color:black;
+        font-weight: 900;
+        font-family: 'futura-light';
+        letter-spacing: 5px;
+    }
+    .login_button{
+        width:75%;
+        height:11%;
+        margin-top:5%;
+        color:black;
+        font-size:.60em;
+        border-radius: 6px;
+        border:none;
+        background:transparent;
+        border: .5px solid rgb(16, 71, 16);
+        font-family: 'futura-light';
+        letter-spacing: 5px;
+        outline: none;
+    }
+}

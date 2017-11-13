@@ -124,24 +124,28 @@ body {
 }
 
 
-/* @media (max-width: 1000px) {
-    .bag p {width: calc(100% /4);}
-}
 
-@media (max-width: 850px) {
-    .bag p {width: calc(100% /3.8);}
-}
 
-@media (max-width: 760px) {
-    .bag p {width: calc(100% /3.5);}
+@media (max-width: 700px) {
+    .center div {
+        width: 60%;
+    }
+    .rentedtext {
+        font-size: .5em;
+        margin: auto 0;
+        width: 70px;
+        overflow-x: auto;
+    }
+    
+    .buffer {
+        width: 70px;
+        margin: auto 0;
+    }
+    .bagitemname {
+        font-size: .75em;
+    }
+    .descriptionbag {
+        font-size: .5em;
+        margin-top: 7px;
+    }
 }
-
-@media (max-width: 670px) {
-    .bag p {width: calc(100%/2.3)}
-}
-@media (max-width: 480px) {
-    .bag p {width: calc(100%/2)}
-} 
-@media (max-width: 400px) {
-    .bag p {width: calc(100%/1.7)}
-} */

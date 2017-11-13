@@ -42,5 +42,9 @@
 .button-container button:focus {outline:0}
 .button-container button:hover {font-weight: 900;}
 
-
+@media (max-width: 700px) {
+    .button-container-child {
+        width: 60%;
+    }
+}
 
