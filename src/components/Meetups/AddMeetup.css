@@ -1,0 +1,21 @@
+.main-div-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.main-div-container input {
+    margin: 10px;
+    width: 75%;
+}
+
+.main-div-container button {
+    font-weight: 800;
+    color: black;
+    margin: 10px;
+    width: 75%;
+    padding: 15px;
+    background: rgb(160, 105, 211);
+}
