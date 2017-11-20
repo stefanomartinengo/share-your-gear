@@ -85,9 +85,11 @@ export class addMeetup extends Component {
                 <Header title='Add Trip'/>
             <div >
             <TextField
+                ref="title"
                 hintText="Adventure Name"
                 /><br />
             <TextField
+                ref="coordinator"
                 hintText="Adventure Coordinator"
                 /><br />
                 
@@ -107,11 +109,18 @@ export class addMeetup extends Component {
           />
 
         <TextField
+                ref="description"
                 hintText="Adventure Details"
                 /><br />
 
             <TextField
+                ref="gear"
                 hintText="Needed Gear"
+                /><br />
+            <TextField
+                ref="people"
+                type="number"
+                hintText="Needed Sac Snaggers"
                 /><br />
 
             <Dropzone className='dropzone'
