@@ -156,9 +156,9 @@ module.exports = {
     },
     addAdventure: (req,res,next) => {
         const dbInstance = req.app.get('db')
-        const { coordinator, title, duration, description, gear, people, images} = req.body
+        const { coordinator, title, duration, description, gear, people, images, coordinator_id} = req.body
         
-        dbInstance.add_meetup([coordinator, title, duration, description, gear, people, images])
+        dbInstance.add_meetup([coordinator, title, duration, description, gear, people, images, coordinator_id])
         .then( (response) => {
             console.log(response)
             res.status(200).send(response)} )

@@ -13,8 +13,12 @@ import addImage from './../../assets/addimage.png';
 export class addMeetup extends Component {
     constructor() {
         super() 
-        const startDate = new Date();
+        const startDate = new Date()
         const endDate = new Date();
+        console.log(startDate)
+        
+
+
         startDate.setFullYear(startDate.getFullYear() - 1);
         startDate.setHours(0, 0, 0, 0);
         endDate.setFullYear(endDate.getFullYear() + 1);
@@ -25,13 +29,17 @@ export class addMeetup extends Component {
             endDate: endDate,
             autoOk: false,
             disableYearSelection: false,
-            image: []
+            image: [],
+            valueCoordinator: '',
+            valueTitle: '',
+            valueDescription: '',
+            valueGear: '',
+            valuePeople: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     ComponentDidMount() {
         this.props.getUserInfo();
-        console.log('REFS', this.refs.value)
     }
 
     handleDrop = files => {
@@ -81,21 +89,60 @@ export class addMeetup extends Component {
     }
 
     handleDate(event, date){
-        this.setState({startDate: this.state.startDate, endDate: this.state.endDate})
-      }
+        this.setState({
+            startDate: this.state.startDate, 
+            endDate: this.state.endDate
+        })
+    }
+        formatDate(date){
 
+        return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+      }
+        handleCoordinator = (event) => {
+            this.setState({
+                valueCoordinator: event.target.value
+            })
+        }
+        handleTitle = (event) => {
+            this.setState({
+            valueTitle: event.target.value,
+            });
+        };
+        handlePeople = (event) => {
+            this.setState({
+            valuePeople: event.target.value
+            })
+        };
+        handleGear = (event) => {
+            this.setState({
+                valueGear: event.target.value
+            })
+        };
+        handleDescription = (event) => {
+            this.setState({
+                valueDescription: event.target.value
+            })
+        }
     handleSubmit() {
         axios.post('/adventure/add', { 
             coordinator: this.refs.coordinator.getValue(),
             title: this.refs.title.getValue(),
-            duration: `${this.state.startDate} - ${this.state.endDate}`,
+            duration: `START: ${this.state.startDate} - ENDDATE: ${this.state.endDate}`,
             description: this.refs.description.getValue(),
             gear: this.refs.gear.getValue(),
             people: +this.refs.people.getValue(),
-            images: this.state.image
+            images: this.state.image,
+            coordinator_id: this.props.user.userid
 
          })
-         alert('your fuckin events been FUCKIN added')
+         alert('your trip has been added')
+         this.setState({
+         valueTitle: '',
+         valueCoordinator: '',
+         valueDescription: '',
+         valueGear: '',
+         valuePeople: ''
+        })
     }
 
     render() {
@@ -107,15 +154,20 @@ export class addMeetup extends Component {
                 <Header title='Add Trip'/>
             <div >
             <TextField
+                onChange={this.handleTitle}
+                value={this.state.valueTitle}
                 ref="title"
                 hintText="Adventure Name"
                 /><br />
             <TextField
+                onChange={this.handleCoordinator}
+                value={this.state.valueCoordinator}
                 ref="coordinator"
                 hintText="Adventure Coordinator"
                 /><br />
                 
         <DatePicker
+            formatDate={this.formatDate}
             onChange={this.handleDate} 
             value ={this.state.startDate}
             onChange={this.handleChangeMinDate}
@@ -125,6 +177,7 @@ export class addMeetup extends Component {
             disableYearSelection={this.state.disableYearSelection}
           />
         <DatePicker 
+            formatDate={this.formatDate}
             onChange={this.handleDate} 
             value ={this.state.endDate}
             onChange={this.handleChangeMaxDate}
@@ -135,15 +188,21 @@ export class addMeetup extends Component {
           />
 
         <TextField
+        onChange={this.handleDescription}
+            value={this.state.valueDescription}
                 ref="description"
                 hintText="Adventure Details"
                 /><br />
 
             <TextField
+            onChange={this.handleGear}
+                value={this.state.valueGear}
                 ref="gear"
                 hintText="Needed Gear"
                 /><br />
             <TextField
+                value={this.state.valuePeople}
+                onChange={this.handlePeople}
                 ref="people"
                 type="number"
                 hintText="Needed Sac Snaggers"
