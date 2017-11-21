@@ -14,6 +14,7 @@ export class Search extends Component {
 
     this.state = {
       items: [],
+      toggle: false
     }
   }
 
@@ -27,9 +28,9 @@ export class Search extends Component {
           .then((res) => {
             this.setState({ items: res.data })
           })
-
       })
   }
+
 
   searchItems() {
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
@@ -39,8 +40,10 @@ export class Search extends Component {
         this.props.historySearch(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
         this.refs.city.value = ''
         this.refs.zip.value = ''
+       
       })
-
+      this.state.toggle = true
+      console.log(this.state.toggle)
   }
 
   render() {
@@ -63,9 +66,9 @@ export class Search extends Component {
         <Link to='/profile'>
           <img alt='' src={backpack} />
         </Link>
-
+        
         <div className='form'>
-
+          
           <select ref='select' >
             <option value="Climbing">Climbing</option>
             <option value="Cycling">Cycling</option>
@@ -84,13 +87,22 @@ export class Search extends Component {
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
-
+            
         </div>
 
         <div className='list-container'>
+      
+        
+        {this.state.items.length > 0 ?
           <div className='search-list'>
+
             {mapGear}
+            
           </div>
+          : null }
+          {this.state.toggle && this.state.items.length < 1 ? 
+           
+           <div className="search-list"> No results for this category. Please try a new search </div>  : null }
         </div>
 
 
