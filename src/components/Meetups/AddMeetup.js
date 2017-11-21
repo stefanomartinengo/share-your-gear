@@ -6,9 +6,9 @@ import Header from './../../Header';
 import DatePicker from 'material-ui/DatePicker';
 import Toggle from 'material-ui/Toggle';
 import TextField from 'material-ui/TextField';
-import Dropzone from 'react-dropzone'
-import axios from 'axios'
-import addImage from './../../assets/addimage.png'
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
+import addImage from './../../assets/addimage.png';
 
 export class addMeetup extends Component {
     constructor() {
@@ -25,10 +25,13 @@ export class addMeetup extends Component {
             endDate: endDate,
             autoOk: false,
             disableYearSelection: false,
+            image: []
         };
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     ComponentDidMount() {
         this.props.getUserInfo();
+        console.log('REFS', this.refs.value)
     }
 
     handleDrop = files => {
@@ -77,9 +80,28 @@ export class addMeetup extends Component {
         })
     }
 
+    handleDate(event, date){
+        this.setState({startDate: this.state.startDate, endDate: this.state.endDate})
+      }
+
+    handleSubmit() {
+        axios.post('/adventure/add', { 
+            coordinator: this.refs.coordinator.getValue(),
+            title: this.refs.title.getValue(),
+            duration: `${this.state.startDate} - ${this.state.endDate}`,
+            description: this.refs.description.getValue(),
+            gear: this.refs.gear.getValue(),
+            people: +this.refs.people.getValue(),
+            images: this.state.image
+
+         })
+         alert('your fuckin events been FUCKIN added')
+    }
+
     render() {
         console.log(this.props.user.userid)
         console.log(this.state)
+        
         return (
             <div>
                 <Header title='Add Trip'/>
@@ -94,6 +116,8 @@ export class addMeetup extends Component {
                 /><br />
                 
         <DatePicker
+            onChange={this.handleDate} 
+            value ={this.state.startDate}
             onChange={this.handleChangeMinDate}
             autoOk={this.state.autoOk}
             floatingLabelText="Start Date"
@@ -101,6 +125,8 @@ export class addMeetup extends Component {
             disableYearSelection={this.state.disableYearSelection}
           />
         <DatePicker 
+            onChange={this.handleDate} 
+            value ={this.state.endDate}
             onChange={this.handleChangeMaxDate}
             autoOk={this.state.autoOk}
             floatingLabelText="End Date"
@@ -123,14 +149,15 @@ export class addMeetup extends Component {
                 hintText="Needed Sac Snaggers"
                 /><br />
 
-            <Dropzone className='dropzone'
+            <Dropzone 
+                className='dropzone'
                 onDrop={this.handleDrop}
                 multiple
                 accept="image/*" >
                 <img src={ addImage } alt=''/>
                 </Dropzone>
 
-                <button> add meetup </button>
+                <button onClick={ () => this.handleSubmit()}> add meetup </button>
             </div>
       </div>
  

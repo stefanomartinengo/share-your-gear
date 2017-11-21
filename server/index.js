@@ -117,7 +117,9 @@ app.delete('/delete/message', controller.deleteMessage)
 //DELETE REQUEST ------------------------------------------------------------
 app.delete(`/remove/request`, controller.removeRequest)
 
-// STRIPE
+// ADVENTURES
+
+app.post('/adventure/add', controller.addAdventure)
 
 
 // Only if you are using Browser history instead of hash

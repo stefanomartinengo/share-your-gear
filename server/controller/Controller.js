@@ -92,7 +92,6 @@ module.exports = {
             console.log('fuck the database')
         res.status(200).send(response)})
         .catch( (response) => res.status(500).send('bleghface'))    
-
     },
     
     addGear: (req,res,next) => {
@@ -113,8 +112,6 @@ module.exports = {
         .then( (response) => res.status(200).send(response))
         .catch( (response) => res.status(500).send('ugh man'))
     },
-
-
 
     sendMessage: (req, res, next) => {
         const dbInstance = req.app.get('db')
@@ -156,6 +153,15 @@ module.exports = {
             console.log(response)
             res.status(200).send(response)})
             .catch( (response) => res.status(500).send('ugh man'))
-
+    },
+    addAdventure: (req,res,next) => {
+        const dbInstance = req.app.get('db')
+        const { coordinator, title, duration, description, gear, people, images} = req.body
+        
+        dbInstance.add_meetup([coordinator, title, duration, description, gear, people, images])
+        .then( (response) => {
+            console.log(response)
+            res.status(200).send(response)} )
+            .catch( (response) => res.status(500).send('ugh man'))
     }
 }
