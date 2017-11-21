@@ -72,8 +72,11 @@ export class InboundRequests extends Component {
                 <div className='requests'>
                     {requestsMap} 
                 </div> 
+                {this.state.requests.length < 1 ? <h1> YOU HAVE NO REQUESTS </h1> : null}
                 </div>
+                
                 : <h1> PLEASE <Link to='/'> SIGN IN </Link> TO VIEW YOUR REQUESTS </h1>}
+                
             </div>
         )
     }
