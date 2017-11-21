@@ -16,9 +16,9 @@ export class addMeetup extends Component {
         const endDate = new Date();
 
 
-        startDate.setFullYear(startDate.getFullYear() - 1);
+        startDate.setFullYear(startDate.getFullYear());
         startDate.setHours(0, 0, 0, 0);
-        endDate.setFullYear(endDate.getFullYear() + 1);
+        endDate.setFullYear(endDate.getFullYear());
         endDate.setHours(0, 0, 0, 0);
     
         this.state = {
