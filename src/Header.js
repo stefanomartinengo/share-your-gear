@@ -92,7 +92,7 @@ export default class Header extends Component {
                     <MenuItem value="9" primaryText="Inbox" />
                   </Link>
                   <Link to='/meetup/add'>
-                    <MenuItem value = '11' primaryText='add meetup'/>
+                    <MenuItem value = '11' primaryText='Add Trip'/>
                   </Link>
                   <Divider />
                   <a href={process.env.REACT_APP_LOGOUT}>
