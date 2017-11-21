@@ -15,7 +15,7 @@ export class Bag extends Component {
   render() {
     return (
       <div className='container'>
-        <Header title='SNAG MY SAC'/>
+        <Header title='SAC'/>
          <div className="profilepic">
           <img src={this.props.user.picture} alt='' />
         </div>
@@ -23,10 +23,10 @@ export class Bag extends Component {
 
           <div className='button-container-child'>
           <Link to='/bag/view'>
-              <button> VIEW BAG </button>
+              <button> VIEW YOUR SAC </button>
             </Link>
             <Link to='bag/add'>
-              <button> ADD TO BAG </button>
+              <button> ADD TO YOUR SAC </button>
             </Link>
 
           <Link to='/profile'> <button> BACK </button></Link>

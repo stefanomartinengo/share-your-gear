@@ -10,6 +10,8 @@ export class GearDetails extends Component {
     constructor() {
         super()
 
+        const currentDate = new Date()
+
         this.state = {
             itemDetails: [{}],
             images: [],
@@ -34,19 +36,20 @@ export class GearDetails extends Component {
     }
 
     sendMessage() {
+
         function addZero(i) {
             if (i < 10) {
                 i = "0" + i;}
             return i;}
 
-        var dateStamp = new Date();
-        var month = dateStamp.getMonth()
-        var day = dateStamp.getDay()
-        var year = dateStamp.getFullYear()
-        var hour = dateStamp.getHours()
-        var minutes = addZero(dateStamp.getMinutes())
-        var timeStamp = `${month}/${day}/${year} || ${hour}:${minutes}`
-
+        let dateStamp = new Date();
+        let month = dateStamp.getMonth()
+        let day = dateStamp.getDay()
+        let year = dateStamp.getFullYear()
+        let hour = dateStamp.getHours()
+        let minutes = addZero(dateStamp.getMinutes())
+        let timeStamp = `${month}/${day}/${year} || ${hour}:${minutes}`
+                    console.log(timeStamp)
         axios.post('/send/message/', {
             senderid: +this.props.user.userid,
             receiverid: +this.state.itemDetails[0].owner_id,
@@ -54,7 +57,7 @@ export class GearDetails extends Component {
             item: this.state.itemDetails[0].item_name,
             date: timeStamp
         })
-        alert('message sent')
+        alert('Message Sent')
         this.refs.message.value = ''
     }
 

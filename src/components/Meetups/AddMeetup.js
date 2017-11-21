@@ -4,7 +4,6 @@ import {getUserInfo} from './../../ducks/reducer';
 import './AddMeetup.css';
 import Header from './../../Header';
 import DatePicker from 'material-ui/DatePicker';
-import Toggle from 'material-ui/Toggle';
 import TextField from 'material-ui/TextField';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
@@ -15,8 +14,6 @@ export class addMeetup extends Component {
         super() 
         const startDate = new Date()
         const endDate = new Date();
-        console.log(startDate)
-        
 
 
         startDate.setFullYear(startDate.getFullYear() - 1);
@@ -25,6 +22,8 @@ export class addMeetup extends Component {
         endDate.setHours(0, 0, 0, 0);
     
         this.state = {
+            formattedStartDate: '',
+            formattedEndDate: '',
             startDate: startDate,
             endDate: endDate,
             autoOk: false,
@@ -40,6 +39,7 @@ export class addMeetup extends Component {
     }
     ComponentDidMount() {
         this.props.getUserInfo();
+        
     }
 
     handleDrop = files => {
@@ -71,14 +71,27 @@ export class addMeetup extends Component {
           });
       }
     handleChangeMinDate = (event, date) => {
-        this.setState({
+        var adateStamp = date;
+        var amonth = (adateStamp.getMonth() + 1)
+        var aday = adateStamp.getDate()
+        var ayear = adateStamp.getFullYear()
+        var atimeStamp = `${amonth}/${aday}/${ayear}`
+        console.log(atimeStamp)
+       this.setState({
             startDate: date,
-        });
+            formattedStartDate: atimeStamp
+        })
     };
 
     handleChangeMaxDate = (event, date) => {
+        var adateStamp = date
+        var amonth = (adateStamp.getMonth() + 1)
+        var aday = adateStamp.getDate()
+        var ayear = adateStamp.getFullYear()
+        var atimeStamp = `${amonth}/${aday}/${ayear}`
         this.setState({
             endDate: date,
+            formattedEndDate: atimeStamp
         });
     };
 
@@ -90,12 +103,11 @@ export class addMeetup extends Component {
 
     handleDate(event, date){
         this.setState({
-            startDate: this.state.startDate, 
-            endDate: this.state.endDate
+            startDate: this.state.formattedStartDate, 
+            endDate: this.state.formattedEndDate
         })
     }
         formatDate(date){
-
         return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
       }
         handleCoordinator = (event) => {
@@ -127,7 +139,7 @@ export class addMeetup extends Component {
         axios.post('/adventure/add', { 
             coordinator: this.refs.coordinator.getValue(),
             title: this.refs.title.getValue(),
-            duration: `START: ${this.state.startDate} - ENDDATE: ${this.state.endDate}`,
+            duration: `From: ${this.state.formattedStartDate} -- Till: ${this.state.formattedEndDate}`,
             description: this.refs.description.getValue(),
             gear: this.refs.gear.getValue(),
             people: +this.refs.people.getValue(),
@@ -141,7 +153,9 @@ export class addMeetup extends Component {
          valueCoordinator: '',
          valueDescription: '',
          valueGear: '',
-         valuePeople: ''
+         valuePeople: '',
+         startDate: this.state.startDate,
+         endDate: this.state.endDate
         })
     }
 

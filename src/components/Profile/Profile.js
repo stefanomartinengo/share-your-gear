@@ -27,13 +27,13 @@ class Profile extends Component {
         <div className='button-container'>
           <div className='button-container-child'>
           <Link to='/bag'>
-              <button> BAG </button>
+              <button> SAC </button>
             </Link>
             <Link to='outbound/requests'>
-              <button> SENT REQUESTS </button>
+              <button> MADE REQUESTS </button>
             </Link>
             <Link to='inbound/requests'>
-              <button> INCOMING REQUESTS </button>
+              <button> RECEIVED REQUESTS </button>
             </Link>
             <Link to='./../Search/Search'>
               <button> SEARCH </button>

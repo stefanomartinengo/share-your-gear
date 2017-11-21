@@ -7,9 +7,6 @@ import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-
 
 ReactDOM.render(
     <MuiThemeProvider>

@@ -77,7 +77,7 @@ export class ViewBag extends Component {
     console.log(this.state.inventory)
     return (
       <div className='bag-container'>
-        <Header title='CHECK YOUR SAC' />
+        <Header title='VIEW YOUR SAC' />
         <div className='bag'>
           {mapGear}
         </div>
