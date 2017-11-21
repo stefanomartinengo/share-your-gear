@@ -37,7 +37,7 @@ export class ViewBag extends Component {
         owner_id: this.props.user.userid,
         itemid: id
       }
-    }).then((res) => {
+    }, alert('Item Deleted')).then((res) => {
       this.getBag();
     })
 
@@ -78,6 +78,7 @@ export class ViewBag extends Component {
     return (
       <div className='bag-container'>
         <Header title='VIEW YOUR SAC' />
+        {!this.props.user.userid ? <h1> Please <Link to='/'>sign in </Link> to view your sac </h1> : null }
         <div className='bag'>
           {mapGear}
         </div>

@@ -93,7 +93,7 @@ export class OutboundRequests extends Component {
                             {sentRequests}
                         </div>
   </div>
-                            : <h1> PLEASE SIGN IN TO VIEW YOUR REQUESTS </h1>}
+                            : <h1> PLEASE <Link to='/'> SIGN IN </Link> TO VIEW YOUR REQUESTS </h1>}
             </div>
         )
     }
