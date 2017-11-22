@@ -134,6 +134,14 @@ module.exports = {
         .catch( (response) => res.status(500).send('ugh man'))
     },
 
+    getSentMessages: (req,res,next) => {
+        const dbInstance = req.app.get('db')
+
+        dbInstance.sent_messages(req.params.id)
+        .then( (response) => res.status(200).send(response))
+        .catch( (response) => res.status(500).send('crap'))
+    },
+
     getInbox: (req,res,next) => {
         const dbInstance = req.app.get('db')
         const { params } = req

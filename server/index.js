@@ -115,6 +115,7 @@ app.get('/get/inbox/:id', controller.getInbox)
 app.post('/send/message/', controller.sendMessage)
 app.put('/mark/read', controller.markViewed)
 app.delete('/delete/message', controller.deleteMessage)
+app.get('/sent/messages/:id', controller.getSentMessages)
 //DELETE REQUEST ------------------------------------------------------------
 app.delete(`/remove/request`, controller.removeRequest)
 

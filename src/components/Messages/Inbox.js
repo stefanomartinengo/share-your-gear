@@ -5,6 +5,7 @@ import { getUserInfo } from './../../ducks/reducer'
 import Header from './../../Header'
 import './Inbox.css'
 import InboxChild from './InboxChild'
+import OutboxChild from './OutboxChild'
 import { getItBack } from './InboxChild'
 
 export class Inbox extends Component {
@@ -13,13 +14,15 @@ export class Inbox extends Component {
 
         this.state = {
             results: [],
+            sentMessages: [],
             toggle: false
         }
         this.deleteMessage = this.deleteMessage.bind(this)
         this.getMessages = this.getMessages.bind(this)
+        this.getSentMessages = this.getSentMessages.bind(this)
         this.reply = this.reply.bind(this)
         this.toggleMessage = this.toggleMessage.bind(this)
-        this.markViewed = this.markViewed.bind(this)
+        // this.markViewed = this.markViewed.bind(this)
     }
 
     
@@ -30,14 +33,14 @@ export class Inbox extends Component {
         })
     }
 
-    markViewed(id) {
-        axios.put('/mark/read', {
-            id: id
-        }).then((res) => {
-            console.log(id)
-            this.getMessages()
-        })
-    }
+    // markViewed(id) {
+    //     axios.put('/mark/read', {
+    //         id: id
+    //     }).then((res) => {
+    //         console.log(id)
+    //         this.getMessages()
+    //     })
+    // }
 
     reply(id,mess) {
         function addZero(i) {
@@ -71,8 +74,10 @@ export class Inbox extends Component {
             message: mess,
             item: obj[0].item,
             date: timeStamp
-        })
+        }).then( () => {
         alert('message sent')
+        this.getSentMessages()
+    })
     }
 
     deleteMessage(id) {
@@ -81,7 +86,8 @@ export class Inbox extends Component {
                 id: id
             }
         }).then((res) => {
-            this.getMessages()
+            this.getMessages();
+            this.getSentMessages();
         })
     }
 
@@ -95,13 +101,21 @@ export class Inbox extends Component {
             })
     }
 
+    getSentMessages() {
+        axios.get('/sent/messages/' + this.props.user.userid)
+        .then( (response) => {
+            this.setState({
+                sentMessages: response.data
+            })
+        })
+    }
     componentDidMount() {
-        this.props.getUserInfo()
-        this.getMessages()
+        this.props.getUserInfo();
+        this.getMessages();
+        this.getSentMessages();
     }
     render() {
         var mapInbox = this.state.results.map((e, i, arr) => {
-            if (e.viewed === false)
                 return <InboxChild key={i}
                     id={e.id}
                     item={e.item}
@@ -112,32 +126,42 @@ export class Inbox extends Component {
                     reply={this.reply} />
 
         })
-        var viewed = this.state.results.map((e, i, arr) => {
-            if (e.viewed === true) {
-                return <InboxChild key={i+200}
+        var sent = this.state.sentMessages.map( (e,i,arr) => {
+            return <OutboxChild key = {i}
                     id={e.id}
                     item={e.item}
                     date={e.date}
                     message={e.message}
-                    reply={this.reply}
-                    deleteMessage={this.deleteMessage}/>
-            }
+                    deleteMessage={this.deleteMessage}
+                    />
         })
+        // var viewed = this.state.results.map((e, i, arr) => {
+        //     if (e.viewed === true) {
+        //         return <InboxChild key={i+200}
+        //             id={e.id}
+        //             item={e.item}
+        //             date={e.date}
+        //             message={e.message}
+        //             reply={this.reply}
+        //             deleteMessage={this.deleteMessage}/>
+        //     }
+        // })
         console.log(mapInbox)
         console.log(this.state.results)
         console.log(this.props.user)
+        console.log(this.state.sentMessages)
         return (
             <div>
                 <Header title='Inbox' />
                 {this.props.user.auth_id ?
                     <div className='inbox-container'>
                         <div className='unread-container'>
-                            <p> UNREAD MESSAGES</p>
+                            <p> INBOX </p>
                             {mapInbox}
                         </div>
                         <div className='read-container'>
-                            <p> READ MESSAGES </p>
-                            {viewed}
+                            <p> OUTBOX </p>
+                            {sent}
                         </div>
                     </div> : <h1> PLEASE SIGN IN TO VIEW THIS PAGE </h1>}
             </div>
