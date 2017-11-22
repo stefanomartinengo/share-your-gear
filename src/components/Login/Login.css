@@ -27,12 +27,11 @@
 .logo{
     padding-top: 20px;
     margin: auto;
-    margin-right: 34%;
     width:150px;
     height:150px;
     background-image: url('./../../assets/backpack.png');
     background-size:  auto 100%;
-    background-position: fill;
+    /* background-position: fill; */
 }
 .login_button{
     /* width:45%; */
@@ -65,16 +64,18 @@
     letter-spacing: 5px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 740px) {
+    
     .logo {
         padding-top: 20px;
-        margin: auto;
-        margin-right: 34%;
-        width:80px;
+        margin-right: 350px;
+        width: 80px;
         height:75px;
         background-image: url('./../../assets/backpack.png');
         background-size:  auto 100%;
         background-position: fill;
+        background-repeat: none;
+        background-clip: border-box;
     }
     .helo{
         margin-top:25px;
@@ -100,9 +101,17 @@
         outline: none;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .login_button {
         font-size: .5em;
         width: 82%;
+    }
+    .logo {
+        padding-top: 20px;
+        margin-right: 20px;
+        width:60px;
+        height:50px;
+        background-image: url('./../../assets/backpack.png');
+        background-size:  auto 100%;
     }
 }
