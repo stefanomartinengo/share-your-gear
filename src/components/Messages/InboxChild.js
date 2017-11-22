@@ -36,7 +36,6 @@ setMessage() {
                                 <div className={!this.state.toggle ? 'hide-me' : ''}>
                                 <div><textarea placeholder='reply here' ref='messageref' /></div>
                                 <button onClick={ () => this.props.deleteMessage(this.props.id)}>X</button> 
-                                <button onClick={ () => this.props.markViewed(this.props.id) }>Read</button>
                                 <button 
                                 onClick={ () => {this.props.reply(this.props.id, this.refs.messageref.value); this.setMessage()}}
 
