@@ -14,7 +14,8 @@ export class Search extends Component {
 
     this.state = {
       items: [],
-      toggle: false
+      toggle: false,
+      getMoreToggle: false
     }
   }
 
@@ -29,6 +30,7 @@ export class Search extends Component {
             this.setState({ items: res.data })
           })
       })
+      
   }
 
 
@@ -44,6 +46,16 @@ export class Search extends Component {
       })
       this.state.toggle = true
       console.log(this.state.toggle)
+      this.state.getMoreToggle = false
+  }
+
+  getMore() {
+    axios.get('/get/more/?category=' + this.refs.select.value + '&userid=' + this.props.user.userid)
+    .then( (res)  => {
+      this.setState({ items: res.data })
+    })
+    this.state.getMoreToggle = true;
+    
   }
 
   render() {
@@ -58,6 +70,7 @@ export class Search extends Component {
     })
     //Render map function to get all the items to render below
     console.log(this.state.items)
+    console.log(this.state)
     console.log(this.props.user.userid)
     return (
 
@@ -97,8 +110,10 @@ export class Search extends Component {
           <div className='search-list'>
 
             {mapGear}
-            
-          </div>
+            {!this.state.getMoreToggle ? 
+            <h1> Can't find what you're looking for? <button onClick={ () => this.getMore() }>Click here</button> to expand search </h1>
+          : null }
+            </div>
           : null }
           {this.state.toggle && this.state.items.length < 1 ? 
            

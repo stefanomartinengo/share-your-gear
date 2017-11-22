@@ -90,6 +90,7 @@ app.get('/auth/me', (req, res) => {
 //CONTROLLER AND END POINTS
 
 app.get('/search/gear/', controller.getGear)
+app.get('/get/more/', controller.expandSearch)
 app.get('/ownerrequests/:id', controller.getRequests)
 app.get('/outbound/requests/:id', controller.getOutgoingRequests) //ougoing requests
 app.get('/get/details/:id', controller.getItemDetails)

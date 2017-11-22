@@ -9,6 +9,16 @@ module.exports = {
     .catch( (response) => res.status(500).send('blegh'))
     },
 
+    expandSearch: (req,res,next) => {
+        const dbInstance = req.app.get('db')
+        const { category, userid } = req.query;
+
+        dbInstance.expand_search([category, userid])
+        .then(  (response) => res.status(200).send(response))
+        .catch( (response) => res.status(500).send('blegh'))
+        
+    },
+
     getRequests: (req, res, next) => {
         const dbInstance = req.app.get('db');
         const { params } = req;
