@@ -105,7 +105,7 @@ export class GearDetails extends Component {
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
                         <button onClick={() => this.sendRequest()}> SEND REQUEST </button>
                     </Link>
-                    
+                        <button> SEND FRIEND REQUEST </button>
                     <textarea ref='message' placeholder='message here'></textarea>
                     <button onClick={ () => this.sendMessage() }> Send Message </button>
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>

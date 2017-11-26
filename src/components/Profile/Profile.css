@@ -5,6 +5,47 @@
     font-family: 'futura-light';
 }
 
+.list-dos {
+    width: 100%;
+}
+
+.thingswedo {
+    line-height: 17px;
+    font-size: .85em;
+    width: 100%;
+}
+.user-info div {
+    margin-bottom: 15px;
+}
+.thingstodo {
+    margin: auto;
+    display: flex;
+}
+
+.thingstodo h1 {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+.thingstodo div {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.name {
+    font-size: 1.50em;
+}
+.noaboutme {
+    margin-bottom: 10px;
+    font-size: .75em;
+    font-style: italic;
+    color: gray;
+    font-weight: 500;
+}
+.aboutme {
+    margin-bottom: 10px;
+    font-size: .75em;
+}
 .profilepic img {
     margin-bottom: 15px;
     margin-top: 15px;

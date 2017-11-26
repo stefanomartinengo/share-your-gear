@@ -7,6 +7,8 @@ import './Inbox.css'
 import InboxChild from './InboxChild'
 import OutboxChild from './OutboxChild'
 import { getItBack } from './InboxChild'
+import inbox from './../../assets/inbox.png'
+import outbox from './../../assets/outbox.png'
 
 export class Inbox extends Component {
     constructor() {
@@ -15,7 +17,9 @@ export class Inbox extends Component {
         this.state = {
             results: [],
             sentMessages: [],
-            toggle: false
+            toggle: false,
+            inboxToggle: true,
+            outboxToggle: false
         }
         this.deleteMessage = this.deleteMessage.bind(this)
         this.getMessages = this.getMessages.bind(this)
@@ -26,6 +30,19 @@ export class Inbox extends Component {
     }
 
     
+    toggleInbox() {
+        this.setState({
+            inboxToggle: true
+        })
+    }
+
+    toggleOutbox() {
+        this.setState({
+                outboxToggle: true,
+                inboxToggle: false
+            })
+    }
+
 
     toggleMessage(id) {
         this.setState({
@@ -150,19 +167,25 @@ export class Inbox extends Component {
         console.log(this.state.results)
         console.log(this.props.user)
         console.log(this.state.sentMessages)
+        console.log(this.state)
         return (
             <div>
                 <Header title='Inbox' />
+                <img className="messageimg"src={inbox} onClick={() => this.toggleInbox()} /> 
+                <img className="messageimg" src={outbox} onClick={() => this.toggleOutbox()}/> 
+        
                 {this.props.user.auth_id ?
                     <div className='inbox-container'>
+                                {this.state.inboxToggle ?
                         <div className='unread-container'>
                             <p> INBOX </p>
                             {mapInbox}
                         </div>
+                        :
                         <div className='read-container'>
                             <p> OUTBOX </p>
                             {sent}
-                        </div>
+                    </div> }
                     </div> : <h1> PLEASE SIGN IN TO VIEW THIS PAGE </h1>}
             </div>
         )
