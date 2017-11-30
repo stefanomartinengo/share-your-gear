@@ -15,8 +15,10 @@ class Profile extends Component {
 
     this.state = {
       wannado: [],
-      can_do: []
+      can_do: [],
+      pageToggle: false
     }
+    this.editPageToggle = this.editPageToggle.bind(this)
   }
 
 
@@ -29,10 +31,14 @@ class Profile extends Component {
     });
   }
 
+  editPageToggle() {
+    this.setState({ pageToggle: !this.state.pageToggle })
+
+  }
 
   render() {
     var can_do = this.state.can_do.map((e, i, arr) => {
-      return <input disabled={this.state.pageToggle ? false : true} className="thingswedo" key={i} value={e} /> 
+      return <input disabled={this.state.pageToggle ? true : false} className="thingswedo" key={i} value={e} /> 
   })
     var wannado = this.state.wannado.map((e, i, arr) => {
       return <input className="thingswedo" key={i} value={e} />
@@ -68,6 +74,7 @@ class Profile extends Component {
                   {wannado}
                   </div>
                   </div>
+                  <button className='uh' onClick={() => { this.editPageToggle() }}> Edit Page </button>
                 </div>
                 
           </div>
