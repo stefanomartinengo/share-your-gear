@@ -32,7 +32,7 @@ class Profile extends Component {
 
   render() {
     var can_do = this.state.can_do.map((e, i, arr) => {
-      return <input className="thingswedo" key={i} value={e} />
+      return <input disabled={this.state.pageToggle ? false : true} className="thingswedo" key={i} value={e} /> 
   })
     var wannado = this.state.wannado.map((e, i, arr) => {
       return <input className="thingswedo" key={i} value={e} />
