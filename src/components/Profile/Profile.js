@@ -28,6 +28,9 @@ class Profile extends Component {
         wannado: this.props.user.outdoorwannados,
         can_do: this.props.user.outdoordos
       })
+      this.refs.first_name.value = this.props.user.first_name
+      this.refs.last_name.value = this.props.user.last_name
+      this.refs.aboutme.value = this.props.user.aboutme
     });
   }
 
@@ -38,10 +41,10 @@ class Profile extends Component {
 
   render() {
     var can_do = this.state.can_do.map((e, i, arr) => {
-      return <input disabled={this.state.pageToggle ? true : false} className="thingswedo" key={i} value={e} /> 
+      return <input disabled={this.state.pageToggle ? false : true} className="thingswedo" key={i} value={e} /> 
   })
     var wannado = this.state.wannado.map((e, i, arr) => {
-      return <input className="thingswedo" key={i} value={e} />
+      return <input disabled={this.state.pageToggle ? false : true} className="thingswedo" key={i} value={e} />
   })
   console.log(this.state)
     return (
@@ -54,15 +57,15 @@ class Profile extends Component {
         <div className='button-container'>
           <div className='button-container-child'>
         <div className="user-info">
-                <div>
-                  <h1 className='name'> {this.props.user.first_name} {this.props.user.last_name} </h1>
+                <div className='nameprofile'>
+                <input disabled={this.state.pageToggle ? false : true} ref='first_name' /> 
+                <input ref='last_name' disabled={this.state.pageToggle ? false : true} />
                 </div>
                 <h1> About the User </h1>
-                { this.props.user.aboutme ?
                 <div className="aboutme">
-                  {this.props.user.aboutme}
+                  <input className='name' disabled={this.state.pageToggle ? false : true} ref='aboutme' />
                 </div>
-                : <p className="noaboutme"> this user has no about me set up </p> }
+                
                 <div className="thingstodo">
                   <div> <h1> Things I do: </h1>
                   <div className="list-dos">
