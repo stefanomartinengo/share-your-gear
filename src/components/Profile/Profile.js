@@ -31,7 +31,7 @@ class Profile extends Component {
       this.refs.first_name.value = this.props.user.first_name
       this.refs.last_name.value = this.props.user.last_name
       this.refs.aboutme.value = this.props.user.aboutme
-    });
+    })
   }
 
   editPageToggle() {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getUserInfo } from './../../ducks/reducer'
 import axios from 'axios'
 import Header from './../../Header'
+import DatePicker from 'material-ui/DatePicker';
 
 export class GearDetails extends Component {
     constructor() {
