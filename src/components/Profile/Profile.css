@@ -10,6 +10,9 @@
 }
 
 .thingswedo {
+    margin: auto;
+    border: none;
+    background: transparent;
     line-height: 17px;
     font-size: .85em;
     width: 100%;

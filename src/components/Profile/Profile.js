@@ -32,10 +32,10 @@ class Profile extends Component {
 
   render() {
     var can_do = this.state.can_do.map((e, i, arr) => {
-      return <p className="thingswedo" key={i}> - {e} </p>
+      return <input className="thingswedo" key={i} value={e} />
   })
     var wannado = this.state.wannado.map((e, i, arr) => {
-      return <p className="thingswedo" key={i}> - {e} </p>
+      return <input className="thingswedo" key={i} value={e} />
   })
   console.log(this.state)
     return (
