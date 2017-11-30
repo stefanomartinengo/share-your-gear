@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { getUserInfo } from './../../ducks/reducer'
 import axios from 'axios'
 import Header from './../../Header'
-import DatePicker from 'material-ui/DatePicker';
 
 export class GearDetails extends Component {
     constructor() {
@@ -18,7 +17,7 @@ export class GearDetails extends Component {
             images: [],
             date: ''
         }
-
+        this.sendRequest = this.sendRequest.bind(this)
     }
 
 
@@ -50,33 +49,45 @@ export class GearDetails extends Component {
         let hour = dateStamp.getHours()
         let minutes = addZero(dateStamp.getMinutes())
         let timeStamp = `${month}/${day}/${year} || ${hour}:${minutes}`
-                    console.log(timeStamp)
-        axios.post('/send/message/', {
-            senderid: +this.props.user.userid,
-            receiverid: +this.state.itemDetails[0].owner_id,
-            message: this.refs.message.value,
-            item: this.state.itemDetails[0].item_name,
-            date: timeStamp
-        })
-        alert('Message Sent')
-        this.refs.message.value = ''
-    }
+        if(this.refs.message.value.length > 0) {
+            axios.post('/send/message/', {
+                senderid: +this.props.user.userid,
+                receiverid: +this.state.itemDetails[0].owner_id,
+                message: this.refs.message.value,
+                item: this.state.itemDetails[0].item_name,
+                date: timeStamp
+            })
+            alert('Message Sent')
+            this.refs.message.value = ''
+        } else {
+            alert('Please include message')
+        }
+        }
 
     sendRequest() {
-        axios.post(`/send/request/`, {
-            item_id: this.state.itemDetails[0].itemid,
-            owner_id: this.state.itemDetails[0].owner_id,
-            borrower_id: this.props.user.userid,
-            approved: false,
-            pending: true
-        })
-    }
+        if(this.refs.message.value.length > 0) {
+            axios.post(`/send/request/`, {
+                  item_id: this.state.itemDetails[0].itemid,
+                  owner_id: this.state.itemDetails[0].owner_id,
+                  borrower_id: this.props.user.userid,
+                  approved: false,
+                  pending: true,
+                  request_message: this.refs.message.value
+          }).then( () => {
+          alert('Request Sent');
+          this.refs.message.value = ''
+      })
+      } else {
+          return alert('Please send a message with your Request')
+
+      }
+  }
 
     render() {
        var getAllImages = this.state.images.map( (e,i,arr) => {
             return <img key={i} src={e} />
         })
-
+        console.log(this.state.testForMessage)
         console.log(this.props.user.userid)
         console.log(this.state.itemDetails)
         console.log(this.state.images)
@@ -103,11 +114,11 @@ export class GearDetails extends Component {
                         </div>
                     </div>
                     <div className='buttons'>
-                    <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
+                    {/* <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}> */}
                         <button onClick={() => this.sendRequest()}> SEND REQUEST </button>
-                    </Link>
-                        <button> SEND FRIEND REQUEST </button>
+                    {/* </Link> */}
                     <textarea ref='message' placeholder='message here'></textarea>
+                        <button> View users Profile </button>
                     <button onClick={ () => this.sendMessage() }> Send Message </button>
                     <Link to={`/search?${this.props.category}&${this.props.city}&${this.props.zipcode}`}>
                         <button> Back </button>
