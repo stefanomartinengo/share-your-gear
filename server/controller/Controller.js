@@ -51,12 +51,11 @@ module.exports = {
 
     sendRequest: (req,res,next) => {
         const dbInstance = req.app.get('db');
-
         dbInstance.request([
             req.body.item_id,req.body.owner_id,req.body.borrower_id
-            ,req.body.approved,req.body.pending])
+            ,req.body.approved,req.body.pending, req.body.request_message])
         .then( (response) => res.status(200).send(response))
-        .catch( (response) => res.status(500).send('flupper'))
+        .catch( (response) => console.log(response))
     },
 
     approve: (req,res,next) => {

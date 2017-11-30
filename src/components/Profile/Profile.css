@@ -15,7 +15,12 @@
     width: 100%;
 }
 .user-info div {
-    margin-bottom: 15px;
+    /* width: 100%; */
+    margin: auto;
+}
+
+.user-info input {
+    margin: auto;
 }
 .thingstodo {
     margin: auto;
@@ -31,10 +36,29 @@
     margin-right: auto;
     margin-left: auto;
 }
+.nameprofile {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* margin: auto; */
+    width: 100%;
+}
+
+.nameprofile input {
+    display: flex;
+    justify-content: space-around;
+    /* width: 100%; */
+    font-size: 1.25em;
+    background: transparent;
+    border: gray;
+}
 
 .name {
-    font-size: 1.50em;
+    background: transparent;
+    border: transparent;
 }
+
+
 .noaboutme {
     margin-bottom: 10px;
     font-size: .75em;
@@ -55,14 +79,15 @@
 }
 
 .button-container {
-    
+    margin: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
-.button-container-child {
-    width: 35%;
+.button-container-child div{
+    margin: auto;
+    width: 100%;
 }
 
 

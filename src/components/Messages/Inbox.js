@@ -171,7 +171,7 @@ export class Inbox extends Component {
         return (
             <div>
                 <Header title='Inbox' />
-                <img className="messageimg"src={inbox} onClick={() => this.toggleInbox()} /> 
+                <img className="messageimg" src={inbox} onClick={() => this.toggleInbox()} /> 
                 <img className="messageimg" src={outbox} onClick={() => this.toggleOutbox()}/> 
         
                 {this.props.user.auth_id ?
