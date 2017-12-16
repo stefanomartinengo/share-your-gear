@@ -24,7 +24,6 @@ export class GearDetails extends Component {
 
 
     componentDidMount() {
-        this.props.getUserInfo();
         axios.get(`/get/details/${this.props.match.params.id}`)
             .then((response) => {
                 this.setState({
@@ -36,7 +35,6 @@ export class GearDetails extends Component {
     }
 
     sendMessage() {
-
         function addZero(i) {
             if (i < 10) {
                 i = "0" + i;}
@@ -82,8 +80,8 @@ export class GearDetails extends Component {
 
       }
   }
-
-    render() {
+  render() {
+        console.log(Navigator.geolocation)
        var getAllImages = this.state.images.map( (e,i,arr) => {
             return <img key={i} src={e} />
         })
@@ -93,6 +91,7 @@ export class GearDetails extends Component {
         console.log(this.state.images)
         return (
             <div> <Header title='GEAR DETAILS'/>
+            {/* <button onClick={()=>{this.getLocation()}}> get Location</button> */}
             <div className='product-details-wrapper'>
             
                 <div className='details-wrapper'>

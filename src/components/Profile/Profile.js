@@ -40,6 +40,7 @@ class Profile extends Component {
   }
 
   render() {
+    console.log(this.user)
     var can_do = this.state.can_do.map((e, i, arr) => {
       return <input disabled={this.state.pageToggle ? false : true} className="thingswedo" key={i} value={e} /> 
   })

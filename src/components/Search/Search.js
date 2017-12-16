@@ -4,33 +4,37 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from './../../assets/-rendition;size=1200;version=0.png'
 import { connect } from 'react-redux'
-import { getUserInfo, historySearch } from './../../ducks/reducer'
+import { getUserInfo, searchGeoCenter, historySearch } from './../../ducks/reducer'
 import Header from './../../Header'
 import backpack from './../../assets/backpack.png'
 
+
 export class Search extends Component {
   constructor() {
-    super() //if 401 persists/try adding props to these
+    super()
 
     this.state = {
       items: [],
       toggle: false,
-      getMoreToggle: false
+      getMoreToggle: false,
+      start: {},
+      currentLocation: {lat: 0, lng: 0}
     }
+
   }
-
+ 
   componentDidMount() {
-    this.props.getUserInfo()
+    this.props.searchGeoCenter();
 
+    this.props.getUserInfo()
       .then(() => {
         var array = this.props.location.search.split(/[\?&]+/)
-
         axios.get('/search/gear/?category=' + array[1] + '&city=' + array[2] + '&zipcode=' + array[3] + '&userid=' + this.props.user.userid)
           .then((res) => {
             this.setState({ items: res.data })
           })
       })
-      
+
   }
 
 
@@ -38,27 +42,28 @@ export class Search extends Component {
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
       .then((res) => {
         this.setState({ items: res.data })
-        console.log(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
         this.props.historySearch(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
         this.refs.city.value = ''
         this.refs.zip.value = ''
-       
       })
-      this.state.toggle = true
-      console.log(this.state.toggle)
-      this.state.getMoreToggle = false
+    this.state.toggle = true
+    this.state.getMoreToggle = false
   }
 
   getMore() {
     axios.get('/get/more/?category=' + this.refs.select.value + '&userid=' + this.props.user.userid)
-    .then( (res)  => {
-      this.setState({ items: res.data })
-    })
+      .then((res) => {
+        this.setState({ items: res.data })
+      })
     this.state.getMoreToggle = true;
-    
+
   }
 
+
+
+
   render() {
+    console.log(this.state)
     var mapGear = this.state.items.map((e, i, arr) => {
       return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>
@@ -66,22 +71,16 @@ export class Search extends Component {
           <div className='itemname'>{e.item_name}</div>
         </Link>
       </div>
-
     })
-    //Render map function to get all the items to render below
-    console.log(this.state.items)
-    console.log(this.state)
-    console.log(this.props.user.userid)
     return (
-
       <div className='search'>
         <Header title='SEARCH GEAR' />
         <Link to='/profile'>
           <img alt='' src={backpack} />
         </Link>
-        
+
         <div className='form'>
-          
+
           <select ref='select' >
             <option value="Climbing">Climbing</option>
             <option value="Cycling">Cycling</option>
@@ -100,37 +99,39 @@ export class Search extends Component {
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
-            
+          <div>
+            Radius
+          <select ref='radius' >
+            <option value="10">10</option>
+            <option value="25">25</option>
+          </select>
+          </div>
         </div>
 
         <div className='list-container'>
-      
-        
-        {this.state.items.length > 0 ?
-          <div className='search-list'>
-
-            {mapGear}
-            {!this.state.getMoreToggle ? 
-            <h1> Can't find what you're looking for? <button onClick={ () => this.getMore() }>Click here</button> to expand search </h1>
-          : null }
+          {this.state.items.length > 0 ?
+            <div className='search-list'>
+              {mapGear}
+              {!this.state.getMoreToggle ?
+                <h1> Can't find what you're looking for? <button onClick={() => this.getMore()}>Click here</button> to expand search </h1>
+                : null}
             </div>
-          : null }
-          {this.state.toggle && this.state.items.length < 1 ? 
-           
-           <div className="search-list"> No results for this category. Please try a new search </div>  : null }
+            : null}
+          {this.state.toggle && this.state.items.length < 1 ?
+
+            <div className="search-list"> No results for this category. Please try a new search </div> : null}
         </div>
-
-
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
+  console.log('mapstatetoprops', state)
   return state
 }
 
-export default connect(mapStateToProps, { getUserInfo, historySearch })(Search)
+export default connect(mapStateToProps, { getUserInfo, searchGeoCenter, historySearch })(Search)
 
 
 

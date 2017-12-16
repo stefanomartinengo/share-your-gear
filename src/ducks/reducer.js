@@ -1,15 +1,19 @@
 import axios from 'axios';
+import {applyMiddleware} from 'redux'
 
 const initialState = {
-    user: {auth_id: 0},
+    user: { auth_id: 0 },
     searched: false,
     city: '',
     category: '',
-    zipcode: 0
+    zipcode: 0,
+    center: {}
 }
 
 const GET_USER_INFO = 'GET_USER_INFO';
-const SEARCH_RESULTS ='SEARCH_RESULTS';
+const SEARCH_RESULTS = 'SEARCH_RESULTS';
+const GET_LOCATION = 'GET_LOCATION';
+const SEARCH_GEO_CENTER = 'SEARCH_GEO_CENTER';
 
 
 export function getUserInfo() {
@@ -19,8 +23,18 @@ export function getUserInfo() {
     }
 }
 
+export function searchGeoCenter() {
+    return dispatch => {
+    const center = navigator.geolocation.getCurrentPosition( (position) => {
+    dispatch({
+        type: SEARCH_GEO_CENTER,
+        payload: position
+    })}, error => {
+    console.log(error)
+    })
+}}
 
-export function historySearch(city, category, zipcode){
+export function historySearch(city, category, zipcode) {
     console.log(city, category, zipcode)
     return {
         type: SEARCH_RESULTS,
@@ -42,21 +56,24 @@ export function historySearch(city, category, zipcode){
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER_INFO + '_FULFILLED':
-            return Object.assign( {}, state, { user: action.payload.data } )
-        // case GET_PRODUCT_DETAILS:
-        //     return Object.assign( {}, state, {itemid}) 
+            return Object.assign({}, state, { user: action.payload.data })
+
+            
         case SEARCH_RESULTS:
-            return Object.assign( {}, 
-                state, 
-                { 
+            return Object.assign({},
+                state,
+                {
                     city: action.payload.city,
                     category: action.payload.category,
                     zipcode: action.payload.zipcode
 
-                } 
+                }
             )
-    
-        default:
+
+            case SEARCH_GEO_CENTER:
+            return Object.assign({}, state, {center: action.payload})
+            
+            default:
             return state;
-    }
+        }
 }
