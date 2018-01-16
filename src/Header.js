@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import './Header.css';
-import logo from './assets/-rendition;size=1200;version=0.png';
 import { Link } from 'react-router-dom';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import EnhancedButton from 'material-ui/internal/EnhancedButton'
-import ContentFilter from 'material-ui/svg-icons/content/filter-list'
 import dropDown from './assets/equal.png'
 import backpack from './assets/backpack.png'
 import Divider from 'material-ui/Divider';
@@ -56,7 +52,7 @@ export default class Header extends Component {
                       targetOrigin={{ horizontal: 'left', vertical: 'top' }}
               className='icon' iconButtonElement={<IconButton
                 disableTouchRipple={true}
-              > <img className='dropdownimg' src={dropDown} /> </IconButton>}
+              > <img className='dropdownimg' src={dropDown} alt=''/> </IconButton>}
               onChange={this.handleChangeSingle}
               onExited={this.handleChangeSingle}
               value={this.state.valueSingle}

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {applyMiddleware} from 'redux'
 
 const initialState = {
     user: { auth_id: 0 },
@@ -12,7 +11,6 @@ const initialState = {
 
 const GET_USER_INFO = 'GET_USER_INFO';
 const SEARCH_RESULTS = 'SEARCH_RESULTS';
-const GET_LOCATION = 'GET_LOCATION';
 const SEARCH_GEO_CENTER = 'SEARCH_GEO_CENTER';
 
 
@@ -25,12 +23,12 @@ export function getUserInfo() {
 
 export function searchGeoCenter() {
     return dispatch => {
-    const center = navigator.geolocation.getCurrentPosition( (position) => {
+    var center = navigator.geolocation.getCurrentPosition( (position) => {
     dispatch({
         type: SEARCH_GEO_CENTER,
         payload: position
     })}, error => {
-    console.log(error)
+    alert(error)
     })
 }}
 

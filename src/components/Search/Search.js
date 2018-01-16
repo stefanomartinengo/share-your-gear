@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import './Search.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import logo from './../../assets/-rendition;size=1200;version=0.png'
 import { connect } from 'react-redux'
 import { getUserInfo, searchGeoCenter, historySearch } from './../../ducks/reducer'
 import Header from './../../Header'
 import backpack from './../../assets/backpack.png'
 import * as turf from '@turf/turf'
+import * as geocoder from 'geocoder'
 
 export class Search extends Component {
   constructor() {
@@ -37,10 +37,10 @@ export class Search extends Component {
     circleFunction(radius) {
       var center = turf.point([this.props.center.coords.longitude, this.props.center.coords.latitude]);
       var gears = turf.points([ [-111.3, 41.221], [-111.6, 40.3] ])
+      var options = {steps: 30, units: 'miles', properties: {foo: 'bar'}};
       var circle = turf.circle(center, this.refs.radius.value, options);
-var options = {steps: 30, units: 'miles', properties: {foo: 'bar'}};
-var points = turf.point([this.props.center.coords.latitude, this.props.center.coords.longitude])
-var fuck = turf.pointsWithinPolygon(gears, circle)
+      // var points = turf.point([this.props.center.coords.latitude, this.props.center.coords.longitude])
+      var fuck = turf.pointsWithinPolygon(gears, circle)
 console.log('within', fuck)
   }
 
@@ -52,8 +52,10 @@ console.log('within', fuck)
         this.refs.city.value = ''
         this.refs.zip.value = ''
       })
-    this.state.toggle = true
-    this.state.getMoreToggle = false
+    this.setState({
+      toggle: true,
+      getMoreToggle: false
+    })
   }
 
   getMore() {
@@ -61,35 +63,15 @@ console.log('within', fuck)
       .then((res) => {
         this.setState({ items: res.data })
       })
-    this.state.getMoreToggle = true;
-
+    this.setState({
+      getMoreToggle: true
+    })
   }
 
 
 
 
   render() {
-  //   var points = turf.points([
-  //     [1,1],
-  //     [5,5],
-  //     [7,7],
-  //     [11,11],
-  //     [6,8],
-  //     [6,6],
-  //     [6, 7]
-  // ]);
-  
-  // var searchWithin = turf.polygon([[
-  //     [1,1],
-  //     [5,5],
-  //     [10,10],
-  //     [5,5],
-  //     [1,1],
-
-  // ]])
-  
-  // console.log(turf.pointsWithinPolygon(points, searchWithin));
-    console.log(this.props)
     var mapGear = this.state.items.map((e, i, arr) => {
       return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>

@@ -24,8 +24,6 @@ setMessage() {
     }
 
   render() {
-      console.log(this.state)
-      console.log(this.state.message)
     return (
       <div>
           <div className='map-container'>

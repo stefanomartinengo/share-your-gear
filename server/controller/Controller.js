@@ -1,4 +1,5 @@
 
+
 module.exports = {
     getGear: (req, res, next) => {
         const dbInstance = req.app.get('db');
@@ -78,10 +79,8 @@ module.exports = {
     removeRequest: (req,res,next) => {
         const dbInstance = req.app.get('db')
         const { id, itemid } = req.body
-        console.log('is it getting to controller: ', id, itemid)
         dbInstance.remove_denied_request([id, itemid])
         .then( (response) => {
-            console.log('updated database')
         res.status(200).send(response)})
         .catch( (response) => res.status(500).send('flupper')) 
     },
@@ -96,22 +95,20 @@ module.exports = {
 
     getBorrowerName: (req,res,next) => {
         const dbInstance = req.app.get('db');
-            console.log('anything? gotdamn')
         dbInstance.get_borrower_name(req.params.id)
         .then( (response) => {
-            console.log('fuck the database')
         res.status(200).send(response)})
         .catch( (response) => res.status(500).send('bleghface'))    
     },
     
     addGear: (req,res,next) => {
-        console.log(req.body)
         const dbInstance = req.app.get('db');
-        const { item_name, owner_id, image_url, item_description, category, city, zipcode } = req.body;
-
-        dbInstance.add_bag([item_name, owner_id, image_url, item_description, category, city, zipcode])
-        .then( (response) => res.status(200).send(response))
-        .catch( (response) => res.status(500).send('ugh man'))
+        const { item_name, owner_id, image_url, item_description, category, city, zipcode, lat, lng } = req.body;
+        dbInstance.add_bag([item_name, owner_id, image_url, item_description, category, city, zipcode, lat, lng])
+        .then( (response) => {
+            console.log('controller', response)
+        res.status(200).send(response)})
+        .catch( (error) => res.status(500).send(error))
     },
 
     deleteGear: (req,res,next) => {
@@ -168,7 +165,6 @@ module.exports = {
         
         dbInstance.mark_viewed(req.body.id)
         .then( (response) => {
-            console.log(response)
             res.status(200).send(response)})
             .catch( (response) => res.status(500).send('ugh man'))
     },
@@ -178,7 +174,6 @@ module.exports = {
         
         dbInstance.add_meetup([coordinator, title, duration, description, gear, people, images, coordinator_id])
         .then( (response) => {
-            console.log(response)
             res.status(200).send(response)} )
             .catch( (response) => res.status(500).send('ugh man'))
     }

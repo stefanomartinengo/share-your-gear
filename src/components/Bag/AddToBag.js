@@ -17,7 +17,6 @@ export class AddToBag extends Component {
     }
   }
 
-
   handleDrop = files => {
     // Push all the axios request promise into a single array
     const uploaders = files.map(file => {
@@ -47,34 +46,39 @@ export class AddToBag extends Component {
       });
   }
 
-
   componentDidMount() {
     this.props.getUserInfo();
   }
 
   handleClick() {
-    axios.post(`/add/bag/`, {
-      item_name: this.refs.name.value,
-      owner_id: this.props.user.userid,
-      image_url: this.state.image,
-      item_description: this.refs.description.value,
-      category: this.refs.select.value,
-      city: this.refs.city.value,
-      zipcode: +this.refs.zipcode.value
+    var zipCode = this.refs.zipcode.value;
+    
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyDmaSW_P8wv7cqs0dKmbGBsGGzSiEZRrN4')
+    .then( (response) => {
+          return response.data.results[0].geometry.location
+        }).then( (response) => { 
+           axios.post(`/add/bag`, {
+          item_name: this.refs.name.value,
+          owner_id: this.props.user.userid,
+          image_url: this.state.image,
+          item_description: this.refs.description.value,
+          category: this.refs.select.value,
+          city: this.refs.city.value,
+          zipcode: +zipCode,
+          lat: +response.lat,
+          lng: +response.lng
     })
+  }).then( () => {
     alert('Your gear has been added to your bag! Thanks for sharing!')
     this.refs.name.value = ''
-    this.state.image = ''
+    this.setState({image: ''})
     this.refs.description.value = ''
     this.refs.city.value = ''
     this.refs.zipcode.value = ''
-
+  })
   }
 
   render() {
-    console.log(this.props.user.userid)
-    console.log(this.refs.value)
-    console.log(this.state.image)
     return (
       <div className='container'>
         <Header title='FILL YOUR SAC'/>

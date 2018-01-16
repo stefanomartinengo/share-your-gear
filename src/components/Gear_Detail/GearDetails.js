@@ -9,9 +9,6 @@ import Header from './../../Header'
 export class GearDetails extends Component {
     constructor() {
         super()
-
-        const currentDate = new Date()
-
         this.state = {
             itemDetails: [{}],
             images: [],
@@ -20,9 +17,6 @@ export class GearDetails extends Component {
         this.sendRequest = this.sendRequest.bind(this)
     }
 
-
-
-
     componentDidMount() {
         axios.get(`/get/details/${this.props.match.params.id}`)
             .then((response) => {
@@ -30,7 +24,6 @@ export class GearDetails extends Component {
                     itemDetails: response.data,
                     images: response.data[0].image_url
                 })
-                
             })
     }
 
@@ -81,9 +74,8 @@ export class GearDetails extends Component {
       }
   }
   render() {
-        console.log(Navigator.geolocation)
        var getAllImages = this.state.images.map( (e,i,arr) => {
-            return <img key={i} src={e} />
+            return <img key={i} src={e} alt='imgs'/>
         })
         console.log(this.state.testForMessage)
         console.log(this.props.user.userid)
