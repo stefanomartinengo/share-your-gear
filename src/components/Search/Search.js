@@ -20,7 +20,6 @@ export class Search extends Component {
       start: {},
       currentLocation: {lat: 0, lng: 0}
     }
-
   }
  
   componentDidMount() {
@@ -34,28 +33,18 @@ export class Search extends Component {
           })
       })
     }
-    circleFunction(radius) {
-      var center = turf.point([this.props.center.coords.longitude, this.props.center.coords.latitude]);
-      var gears = turf.points([ [-111.3, 41.221], [-111.6, 40.3] ])
-      var options = {steps: 30, units: 'miles', properties: {foo: 'bar'}};
-      var circle = turf.circle(center, this.refs.radius.value, options);
-      // var points = turf.point([this.props.center.coords.latitude, this.props.center.coords.longitude])
-      var fuck = turf.pointsWithinPolygon(gears, circle)
-console.log('within', fuck)
-  }
 
   searchItems() {
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
       .then((res) => {
-        this.setState({ items: res.data })
+        this.setState({ items: res.data, 
+                        toggle: true,
+                        getMoreToggle: false })
         this.props.historySearch(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
         this.refs.city.value = ''
         this.refs.zip.value = ''
       })
-    this.setState({
-      toggle: true,
-      getMoreToggle: false
-    })
+      
   }
 
   getMore() {
@@ -68,17 +57,21 @@ console.log('within', fuck)
     })
   }
 
-
-
-
   render() {
+    console.log(this.state.itemPoints)
     var mapGear = this.state.items.map((e, i, arr) => {
+      var center = turf.point([this.props.center.coords.longitude, this.props.center.coords.latitude]);
+      var points = turf.points([ [e.lng, e.lat] ])
+      var options = {steps: this.refs.radius.value, units: 'miles'};
+      var radius = turf.circle(center, this.refs.radius.value);
+        if(turf.pointsWithinPolygon(points, radius).features[0]) {
       return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>
           <img className='listimage' alt='' src={e.image_url[0]} />
           <div className='itemname'>{e.item_name}</div>
         </Link>
       </div>
+        }
     })
     return (
       <div className='search'>
@@ -111,6 +104,7 @@ console.log('within', fuck)
           <div>
             Radius
           <select ref='radius' >
+            <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
           </select>
@@ -136,11 +130,8 @@ console.log('within', fuck)
 }
 
 function mapStateToProps(state) {
-  console.log('mapstatetoprops', state)
   return state
 }
 
 export default connect(mapStateToProps, { getUserInfo, searchGeoCenter, historySearch })(Search)
-
-
 

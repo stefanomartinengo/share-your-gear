@@ -74,7 +74,7 @@ export default class Header extends Component {
               {/* NESTED MENU */}
               <Link to='inbound/requests'>
                 {/* NESTED MENU */}
-                <MenuItem onClick={this.value = '5'} value='6' primaryText="Requests" menuItems={[
+                <MenuItem value='6' primaryText="Requests" menuItems={[
                   <Link to='/inbound/requests'>
                     <MenuItem primaryText="Received Requests" value="7" />
                   </Link>,
