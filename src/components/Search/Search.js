@@ -58,12 +58,12 @@ export class Search extends Component {
   }
 
   render() {
-    console.log(this.state.itemPoints)
     var mapGear = this.state.items.map((e, i, arr) => {
       var center = turf.point([this.props.center.coords.longitude, this.props.center.coords.latitude]);
       var points = turf.points([ [e.lng, e.lat] ])
-      var options = {steps: this.refs.radius.value, units: 'miles'};
-      var radius = turf.circle(center, this.refs.radius.value);
+      console.log(this.refs.radius.value)
+      var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
+      var radius = turf.circle(center, this.refs.radius.value, options);
         if(turf.pointsWithinPolygon(points, radius).features[0]) {
       return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>
