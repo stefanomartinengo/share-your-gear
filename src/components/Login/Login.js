@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import './Login.css';
 
 
-export class Login extends Component {
-  render() {
+export function Login() {
     return (
       <main className='main_background'>
         <div className='box_position'>
@@ -17,7 +16,7 @@ export class Login extends Component {
         </div>
       </main>
     )
-  }
+  
 }
 
 export default Login

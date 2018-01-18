@@ -22,7 +22,7 @@ export class Search extends Component {
     }
   }
  
-  componentDidMount() {
+  componentWillMount() {
     this.props.searchGeoCenter();
     this.props.getUserInfo()
       .then(() => {
@@ -61,7 +61,6 @@ export class Search extends Component {
     var mapGear = this.state.items.map((e, i, arr) => {
       var center = turf.point([this.props.center.coords.longitude, this.props.center.coords.latitude]);
       var points = turf.points([ [e.lng, e.lat] ])
-      console.log(this.refs.radius.value)
       var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
       var radius = turf.circle(center, this.refs.radius.value, options);
         if(turf.pointsWithinPolygon(points, radius).features[0]) {
@@ -100,13 +99,12 @@ export class Search extends Component {
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
-          <button onClick={() => this.circleFunction()}> Search </button>
-          <div>
+          <div className='radius'>
             Radius
           <select ref='radius' >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
+            <option value="5">5 mi</option>
+            <option value="10">10 mi</option>
+            <option value="25">25 mi</option>
           </select>
           </div>
         </div>

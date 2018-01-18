@@ -31,12 +31,17 @@ input:focus {
 select {
     outline: none;
     margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 4px;
 }
 
 .form {
     margin-top: 10px;
 }
-
+.form div {
+    padding-right: 5px;
+    font-size: .75em;
+}
 .list-container {
     display: flex;
     justify-content: center;
