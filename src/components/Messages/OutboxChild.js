@@ -18,7 +18,6 @@ export class OutboxChild extends Component {
     }
 
   render() {
-      console.log('toggle:', this.state.toggleSent)
     return (
         <div className='map-container'>
                     <h1>-- Item --</h1> <div className='item-name'>{this.props.item}</div> 

@@ -9,9 +9,6 @@ import Header from './../../Header'
 export class GearDetails extends Component {
     constructor() {
         super()
-
-        const currentDate = new Date()
-
         this.state = {
             itemDetails: [{}],
             images: [],
@@ -20,23 +17,17 @@ export class GearDetails extends Component {
         this.sendRequest = this.sendRequest.bind(this)
     }
 
-
-
-
     componentDidMount() {
-        this.props.getUserInfo();
         axios.get(`/get/details/${this.props.match.params.id}`)
             .then((response) => {
                 this.setState({
                     itemDetails: response.data,
                     images: response.data[0].image_url
                 })
-                
             })
     }
 
     sendMessage() {
-
         function addZero(i) {
             if (i < 10) {
                 i = "0" + i;}
@@ -82,10 +73,9 @@ export class GearDetails extends Component {
 
       }
   }
-
-    render() {
+  render() {
        var getAllImages = this.state.images.map( (e,i,arr) => {
-            return <img key={i} src={e} />
+            return <img key={i} src={e} alt='imgs'/>
         })
         console.log(this.state.testForMessage)
         console.log(this.props.user.userid)
@@ -93,6 +83,7 @@ export class GearDetails extends Component {
         console.log(this.state.images)
         return (
             <div> <Header title='GEAR DETAILS'/>
+            {/* <button onClick={()=>{this.getLocation()}}> get Location</button> */}
             <div className='product-details-wrapper'>
             
                 <div className='details-wrapper'>

@@ -10,15 +10,22 @@
 }
 
 .thingswedo {
-    margin: auto;
+    box-shadow: none;
+    height: 15px;
+    resize: none;
+    display: flex;
     border: none;
     background: transparent;
-    line-height: 17px;
     font-size: .85em;
     width: 100%;
 }
 .user-info div {
     margin-bottom: 15px;
+}
+.user-info h1 {
+    padding-bottom: 4px;
+    box-shadow: 1px 4px 5px -4px black;
+    font-size: 1.25em !important;
 }
 .thingstodo {
     margin: auto;
@@ -45,19 +52,29 @@
     color: gray;
     font-weight: 500;
 }
-.nameprofile input {
+.nameprofile textarea {
+    box-shadow: none;
+    width: 30%;
+    resize: none;
+    display:inline-flex;
+    justify-content: space-between;
     background: transparent;
     border: none;
-    font-size: 1em;
+    font-size: 1.5em;
 }
-.aboutme input {
+.aboutme textarea {
+    resize: none;
+    margin-top: 7px;
+    box-shadow: none;
     background: transparent;
     border: none;
+    width: 100%;
 }
 
 .aboutme {
     margin-bottom: 10px;
-    font-size: .75em;
+    font-size: .5em;
+    width: 100%;
 }
 .profilepic img {
     margin-bottom: 15px;

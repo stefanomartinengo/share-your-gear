@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import './viewBag.css'
 import Header from './../../Header'
-import backpack from './../../assets/backpack.png'
 import deletex from './../../assets/x vector.png'
 export class ViewBag extends Component {
   constructor() {
@@ -48,14 +47,14 @@ export class ViewBag extends Component {
     var mapGear = this.state.inventory.map((e, i, arr) => {
       console.log(e)
       if (e.rented === false) {
-        return <p key={i} className='not-rented'>  <img src={e.image_url[0]} />
+        return <p key={i} className='not-rented'>  <img alt='' src={e.image_url[0]} />
           <div className='center'>
             <div className='bagitemname'>{e.item_name}</div>
             <div className='descriptionbag'>{e.item_description}</div>
           </div>
-          <button onClick={() => this.deleteGear(e.itemid)}> <img src={deletex}/>  </button></p>
+          <button onClick={() => this.deleteGear(e.itemid)}> <img src={deletex} alt=''/>  </button></p>
       } else {
-        return <p key={i} className='rented'>  <img src={e.image_url[0]} />
+        return <p key={i} className='rented'>  <img alt='' src={e.image_url[0]} />
           
           <div className='rentcontainer'>
           
@@ -68,7 +67,7 @@ export class ViewBag extends Component {
           <div className='buffer'></div>
           </div>
 
-          <button onClick={() => this.deleteGear(e.itemid)}> <img src={deletex} />  </button></p>
+          <button onClick={() => this.deleteGear(e.itemid)}> <img src={deletex} alt='remove'/>  </button></p>
       }
     }
 

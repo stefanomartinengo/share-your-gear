@@ -6,7 +6,6 @@ import Header from './../../Header'
 import './Inbox.css'
 import InboxChild from './InboxChild'
 import OutboxChild from './OutboxChild'
-import { getItBack } from './InboxChild'
 import inbox from './../../assets/inbox.png'
 import outbox from './../../assets/outbox.png'
 
@@ -114,7 +113,6 @@ export class Inbox extends Component {
                 this.setState({
                     results: response.data
                 })
-                console.log(response.data)
             })
     }
 
@@ -163,16 +161,11 @@ export class Inbox extends Component {
         //             deleteMessage={this.deleteMessage}/>
         //     }
         // })
-        console.log(mapInbox)
-        console.log(this.state.results)
-        console.log(this.props.user)
-        console.log(this.state.sentMessages)
-        console.log(this.state)
         return (
             <div>
                 <Header title='Inbox' />
-                <img className="messageimg"src={inbox} onClick={() => this.toggleInbox()} /> 
-                <img className="messageimg" src={outbox} onClick={() => this.toggleOutbox()}/> 
+                <img alt='' className="messageimg"src={inbox} onClick={() => this.toggleInbox()} /> 
+                <img alt='' className="messageimg" src={outbox} onClick={() => this.toggleOutbox()}/> 
         
                 {this.props.user.auth_id ?
                     <div className='inbox-container'>
