@@ -8,7 +8,7 @@ const express = require('express')
   , session = require('express-session')
   , app = express()
   , controller = require('./controller/Controller.js')
-  , PORT = process.env.PORT || 8080;
+  , PORT = process.env.PORT || 80;
 
   app.use( express.static( `${__dirname}/../build` ) );
 
