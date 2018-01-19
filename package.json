@@ -28,8 +28,7 @@
     "react-tap-event-plugin": "^3.0.2",
     "redux": "^3.7.2",
     "redux-promise-middleware": "^4.4.1",
-    "redux-thunk": "^2.2.0",
-    "turf": "^3.0.14"
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
