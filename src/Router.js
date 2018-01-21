@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './components/Login/Login'
 import Search from './components/Search/Search';
 import Profile from './components/Profile/Profile';
@@ -16,7 +16,7 @@ import AddMeetup from './components/Meetups/AddMeetup';
 export default function Router() {
 
     return (
-
+        <BrowserRouter>
         <Switch>
             <Route path='/' component={Login} exact />
             <Route path='/search' component={Search} />
@@ -30,6 +30,6 @@ export default function Router() {
             <Route path='/inbox' component={Inbox} />
             <Route path='/meetup/add' component={AddMeetup} />
         </Switch>
-
+        </BrowserRouter>
     )
 }
