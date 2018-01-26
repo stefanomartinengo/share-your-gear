@@ -10,7 +10,7 @@ const express = require('express')
   , controller = require('./controller/Controller.js')
   , PORT = 8080
 
-  app.use( express.static( `${__dirname}/../build` ) );
+  app.use( express.static( `${__dirname}/../build` ));
 
 app.use(bodyParser.json());
 app.use(cors());
