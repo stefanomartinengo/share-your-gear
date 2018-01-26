@@ -2,6 +2,7 @@
   "name": "simulation-3",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://www.snagmysac.com/",
   "dependencies": {
     "@turf/circle": "^5.1.5",
     "@turf/turf": "^5.1.6",
