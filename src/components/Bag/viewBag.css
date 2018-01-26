@@ -9,7 +9,9 @@ body {
     width: 100%;
     background: #fcfafd;
 }
-
+.imggg {
+    float: right;
+}
 .bag {
     width: 100%;
     display: flex;
@@ -76,11 +78,10 @@ body {
 }
 
 .center div {
-    width: 65%;
+    width: 75%;
     margin: auto;
 }
 .bag img {
-
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -104,8 +105,13 @@ body {
 }
 
 .not-rented {
+    justify-content: space-around;
+    border-radius: 5px;
+    padding: 2px 0px 0px 2px;
+    padding-right: 1px;
+    margin-bottom: 3px;
     display: flex;
-    width: 100%;
+    width: 95%;
     background: #ededed
 }
 

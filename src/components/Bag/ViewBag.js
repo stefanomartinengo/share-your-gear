@@ -59,10 +59,7 @@ export class ViewBag extends Component {
                 <div className="bagitemname">{e.item_name}</div>
                 <div className="descriptionbag">{e.item_description}</div>
               </div>
-              <button onClick={() => this.deleteGear(e.itemid)}>
-                {" "}
-                <img src={deletex} alt="" />{" "}
-              </button>
+                <img className="imggg" src={deletex} alt="" onClick={() => this.deleteGear(e.itemid)}/>{" "}
             </Link>
           </div>
         );
