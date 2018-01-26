@@ -108,7 +108,6 @@ app.get('/view/name/id:', controller.getBorrowerName)
 app.post('/add/bag', controller.addGear)
 app.delete('/delete/gear', controller.deleteGear)
 
-
 // MESSAGE// ------------------------------------------------------------
 
 app.get('/get/inbox/:id', controller.getInbox)
@@ -123,9 +122,6 @@ app.delete(`/remove/request`, controller.removeRequest)
 
 app.post('/adventure/add', controller.addAdventure)
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 // Only if you are using Browser history instead of hash
 // const path = require('path')
 // app.get('*', (req, res)=>{
