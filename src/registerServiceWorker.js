@@ -99,10 +99,10 @@ function checkValidServiceWorker(swUrl) {
     });
 }
 
-export function register() {
+export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration => {
-      registration.register();
+      registration.unregister();
     });
   }
 }
