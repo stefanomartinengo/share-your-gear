@@ -123,7 +123,9 @@ app.delete(`/remove/request`, controller.removeRequest)
 
 app.post('/adventure/add', controller.addAdventure)
 
-
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 // Only if you are using Browser history instead of hash
 // const path = require('path')
 // app.get('*', (req, res)=>{
