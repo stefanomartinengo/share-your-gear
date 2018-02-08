@@ -16,7 +16,6 @@ import AddMeetup from './components/Meetups/AddMeetup';
 export default function Router() {
 
     return (
-
         <Switch>
             <Route path='/' component={Login} exact />
             <Route path='/search' component={Search} />
@@ -30,6 +29,5 @@ export default function Router() {
             <Route path='/inbox' component={Inbox} />
             <Route path='/meetup/add' component={AddMeetup} />
         </Switch>
-
     )
 }

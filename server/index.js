@@ -8,9 +8,10 @@ const express = require('express')
   , session = require('express-session')
   , app = express()
   , controller = require('./controller/Controller.js')
-  , PORT = process.env.PORT || 80;
+  , PORT = 8080
+  , axios = require('axios')
 
-  app.use( express.static( `${__dirname}/../build` ) );
+  app.use( express.static( `${__dirname}/../build` ));
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
+
 
 
 app.use(passport.initialize());
@@ -108,7 +110,6 @@ app.get('/view/name/id:', controller.getBorrowerName)
 app.post('/add/bag', controller.addGear)
 app.delete('/delete/gear', controller.deleteGear)
 
-
 // MESSAGE// ------------------------------------------------------------
 
 app.get('/get/inbox/:id', controller.getInbox)
@@ -122,7 +123,6 @@ app.delete(`/remove/request`, controller.removeRequest)
 // ADVENTURES
 
 app.post('/adventure/add', controller.addAdventure)
-
 
 // Only if you are using Browser history instead of hash
 // const path = require('path')

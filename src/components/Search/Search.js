@@ -35,6 +35,7 @@ export class Search extends Component {
     }
 
   searchItems() {
+    !this.refs.city.value || !this.refs.zip.value ? alert('please fill out all fields') :
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
       .then((res) => {
         this.setState({ items: res.data, 
