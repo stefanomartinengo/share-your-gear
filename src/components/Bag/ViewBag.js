@@ -30,7 +30,7 @@ export class ViewBag extends Component {
   }
 
   deleteGear(id) {
-    console.log(id);
+    console.log('itemid', id);
     axios
       .delete(
         `/delete/gear`,
@@ -52,20 +52,23 @@ export class ViewBag extends Component {
       console.log(e);
       if (e.rented === false) {
         return (
-          <div className="not-rented">
+          <div key = {e.itemid} className="not-rented">
             <Link className="not-rented" key={i} to={`/details/${e.itemid}`}>
               <img alt="" src={e.image_url[0]} />
               <div className="center">
                 <div className="bagitemname">{e.item_name}</div>
                 <div className="descriptionbag">{e.item_description}</div>
               </div>
-                <img className="imggg" src={deletex} alt="" onClick={() => this.deleteGear(e.itemid)}/>{" "}
+              <Link to={'/bag/view'}>
+                <img  className="imggg" src={deletex} alt="remove" 
+                      onClick={() => this.deleteGear(e.itemid)}/>{" "}
+                </Link>
             </Link>
           </div>
         );
       } else {
         return (
-          <div key={i} className="rented">
+          <div key={e.itemid} className="rented">
             <Link to={`/details/${e.itemid}`}>
               {" "}
               <img alt="" src={e.image_url[0]} />
@@ -81,10 +84,9 @@ export class ViewBag extends Component {
                 </div>
                 <div className="buffer" />
               </div>
-              <button onClick={() => this.deleteGear(e.itemid)}>
-                {" "}
-                <img src={deletex} alt="remove" />{" "}
-              </button>
+                <Link to={'/bag/view'} className = 'rented'>
+                <img  className="imggg" src={deletex} alt="remove" 
+                      onClick={() => this.deleteGear(e.itemid)}/> </Link>{" "}
             </Link>
           </div>
         );
