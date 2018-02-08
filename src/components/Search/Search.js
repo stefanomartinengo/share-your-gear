@@ -21,7 +21,7 @@ export class Search extends Component {
       currentLocation: {lat: 0, lng: 0}
     }
   }
- 
+  
   componentWillMount() {
     this.props.searchGeoCenter();
     this.props.getUserInfo()
@@ -32,7 +32,11 @@ export class Search extends Component {
             this.setState({ items: res.data })
           })
       })
-    }
+  }
+
+  componentDidMount() {
+    setTimeout( ()=> !this.props.center.coords ? alert('GPS location not found') : null, 7000)
+  }
 
   searchItems() {
     !this.refs.city.value || !this.refs.zip.value ? alert('please fill out all fields') :
@@ -81,7 +85,6 @@ export class Search extends Component {
         </Link>
 
         <div className='form'>
-
           <select ref='select' >
             <option value="Climbing">Climbing</option>
             <option value="Cycling">Cycling</option>
@@ -100,14 +103,16 @@ export class Search extends Component {
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
+          { this.props.center.coords ? 
           <div className='radius'>
-            Radius
+            <p>Radius</p>
           <select ref='radius' >
             <option value="5">5 mi</option>
             <option value="10">10 mi</option>
             <option value="25">25 mi</option>
           </select>
           </div>
+          : null }
         </div>
 
         <div className='list-container'>
@@ -129,6 +134,7 @@ export class Search extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return state
 }
 
