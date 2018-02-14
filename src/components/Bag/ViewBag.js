@@ -30,7 +30,6 @@ export class ViewBag extends Component {
   }
 
   deleteGear(id) {
-    console.log('itemid', id);
     axios
       .delete(
         `/delete/gear`,
@@ -50,56 +49,77 @@ export class ViewBag extends Component {
   render() {
     var mapGear = this.state.inventory.map((e, i, arr) => {
       console.log(e);
-      if (e.rented === false) {
+      if (!e.rented) {
         return (
-          <div key = {e.itemid} className="not-rented">
+          <section key={e.itemid} className="not-rented">
+          
             <Link className="not-rented" key={i} to={`/details/${e.itemid}`}>
-              <img alt="" src={e.image_url[0]} />
-              <div className="center">
-                <div className="bagitemname">{e.item_name}</div>
-                <div className="descriptionbag">{e.item_description}</div>
+              <div>
+                <img alt="" className = 'item_image' src={e.image_url[0]} />
               </div>
-              <Link to={'/bag/view'}>
-                <img  className="imggg" src={deletex} alt="remove" 
-                      onClick={() => this.deleteGear(e.itemid)}/>{" "}
-                </Link>
+              <div className="center">
+                <div className="item_name">
+                  {e.item_name}
+                </div>
+                <div className="item_description">
+                  {e.item_description}
+                </div>
+              </div>
             </Link>
-          </div>
+            <Link to={"/bag/view"}>
+              <img
+                className="item_image"
+                src={deletex}
+                alt=""
+                onClick={() => this.deleteGear(e.itemid)}
+              />{" "}
+            </Link>
+          </section>
         );
       } else {
         return (
-          <div key={e.itemid} className="rented">
-            <Link to={`/details/${e.itemid}`}>
-              {" "}
-              <img alt="" src={e.image_url[0]} />
-              <div className="rentcontainer">
-                <div className="rentedtext">
-                  {" "}
-                  <p>RENTED</p>{" "}
-                </div>
-
-                <div className="center">
-                  <div className="bagitemname">{e.item_name}</div>
-                  <div className="descriptionbag">{e.item_description}</div>
-                </div>
-                <div className="buffer" />
+          <section key={e.itemid} className="rented">
+          
+            <Link className="rented" key={i} to={`/details/${e.itemid}`}>
+              <div>
+                <img alt="" className = 'item_image' src={e.image_url[0]} />
               </div>
-                <Link to={'/bag/view'} className = 'rented'>
-                <img  className="imggg" src={deletex} alt="remove" 
-                      onClick={() => this.deleteGear(e.itemid)}/> </Link>{" "}
+              <div className='cen'>
+                  Rented
+                </div>
+              <div className="center">
+                <div className="item_name">
+                  {e.item_name}
+                </div>
+                
+                <div className="item_description">
+                  {e.item_description}
+                </div>
+              </div>
+              <div>
+                
+              </div>
             </Link>
-          </div>
+            <Link to={"/bag/view"}>
+              <img
+                className="item_image"
+                src={deletex}
+                alt=""
+                onClick={() => this.deleteGear(e.itemid)}
+              />{" "}
+            </Link>
+          </section>
         );
       }
     });
     console.log(this.state.inventory);
     return (
-      <div className="bag-container">
+      <div>
         <Header title="VIEW YOUR SAC" />
         {!this.props.user.userid ? (
           <h1>
             {" "}
-            Please <Link to="/">sign in </Link> to view your sac{" "}
+            Please <Link to="/"> sign in </Link> to view your sac{" "}
           </h1>
         ) : null}
         <div className="bag">{mapGear}</div>
