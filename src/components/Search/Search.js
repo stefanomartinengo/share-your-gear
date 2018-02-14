@@ -39,7 +39,11 @@ export class Search extends Component {
   }
 
   searchItems() {
-    !this.refs.city.value || !this.refs.zip.value ? alert('please fill out all fields') :
+    // !this.refs.zip.value ? alert('please fill out all fields') :
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + this.refs.zip.value + '&key=AIzaSyDmaSW_P8wv7cqs0dKmbGBsGGzSiEZRrN4')
+    .then( (res)=> {
+      console.log(res.data.results[0].geometry.location)
+      this.setState({ currentLocation: res.data.results[0].geometry.location})})
     axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
       .then((res) => {
         this.setState({ items: res.data, 
@@ -64,7 +68,7 @@ export class Search extends Component {
 
   render() {
     var mapGear = this.state.items.map((e, i, arr) => {
-      var center = turf.point([this.props.center.coords.longitude, this.props.center.coords.latitude]);
+      var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat]);
       var points = turf.points([ [e.lng, e.lat] ])
       var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
       var radius = turf.circle(center, this.refs.radius.value, options);
@@ -77,6 +81,7 @@ export class Search extends Component {
       </div>
         }
     })
+    console.log(this.state)
     return (
       <div className='search'>
         <Header title='SEARCH GEAR' />
@@ -95,15 +100,11 @@ export class Search extends Component {
           </select>
 
           <input
-            ref='city'
-            placeholder='City' />
-
-          <input
             ref='zip'
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
-          { this.props.center.coords ? 
+          {/* { this.props.center.coords ?  */}
           <div className='radius'>
             <p>Radius</p>
           <select ref='radius' >
@@ -112,7 +113,7 @@ export class Search extends Component {
             <option value="25">25 mi</option>
           </select>
           </div>
-          : null }
+          {/* : null } */}
         </div>
 
         <div className='list-container'>

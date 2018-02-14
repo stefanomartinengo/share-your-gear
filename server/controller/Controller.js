@@ -4,7 +4,7 @@ module.exports = {
     getGear: (req, res, next) => {
         const dbInstance = req.app.get('db');
 
-        dbInstance.search([ req.query.category, req.query.city, req.query.zipcode, req.query.userid])
+        dbInstance.search([ req.query.category, req.query.userid])
         .then(  (response) => res.status(200).send(response))
         .catch( (err) => res.status(500).send(err))
     },
