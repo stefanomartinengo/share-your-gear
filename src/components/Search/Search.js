@@ -3,11 +3,11 @@ import './Search.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux'
-import { getUserInfo, searchGeoCenter, historySearch } from './../../ducks/reducer'
+import { getUserInfo, historySearch } from './../../ducks/reducer'
 import Header from './../../Header'
 import backpack from './../../assets/backpack.png'
 import * as turf from '@turf/turf'
-import * as geocoder from 'geocoder'
+// import * as geocoder from 'geocoder'
 
 export class Search extends Component {
   constructor() {
@@ -23,7 +23,7 @@ export class Search extends Component {
   }
   
   componentWillMount() {
-    this.props.searchGeoCenter();
+    // this.props.searchGeoCenter();
     this.props.getUserInfo()
       .then(() => {
         var array = this.props.location.search.split(/[\?&]+/)
@@ -35,7 +35,7 @@ export class Search extends Component {
   }
 
   componentDidMount() {
-    setTimeout( ()=> !this.props.center.coords ? alert('GPS location not found') : null, 7000)
+    // setTimeout( ()=> !this.props.center.coords ? alert('GPS location not found') : null, 7000)
   }
 
   searchItems() {
@@ -49,8 +49,7 @@ export class Search extends Component {
         this.setState({ items: res.data, 
                         toggle: true,
                         getMoreToggle: false })
-        this.props.historySearch(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
-        this.refs.city.value = ''
+        this.props.historySearch(this.refs.select.value, this.refs.zip.value)
         this.refs.zip.value = ''
       })
       
@@ -67,19 +66,18 @@ export class Search extends Component {
   }
 
   render() {
-    var mapGear = this.state.items.map((e, i, arr) => {
-      var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat]);
-      var points = turf.points([ [e.lng, e.lat] ])
-      var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
-      var radius = turf.circle(center, this.refs.radius.value, options);
-        if(turf.pointsWithinPolygon(points, radius).features[0]) {
-      return <div key={i} className='list-gear'>
+      var mapGear = this.state.items.map((e, i, arr) => {
+        var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat])
+        var points = turf.points([ [e.lng, e.lat] ])
+        var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
+        var radius = turf.circle(center, this.refs.radius.value, options);
+          if(turf.pointsWithinPolygon(points, radius).features[0]) {
+            return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>
           <img className='listimage' alt='' src={e.image_url[0]} />
           <div className='itemname'>{e.item_name}</div>
         </Link>
-      </div>
-        }
+      </div>} return null
     })
     console.log(this.state)
     return (
@@ -139,5 +137,5 @@ function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, { getUserInfo, searchGeoCenter, historySearch })(Search)
+export default connect(mapStateToProps, { getUserInfo, historySearch })(Search)
 
