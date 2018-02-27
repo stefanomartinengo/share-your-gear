@@ -11,6 +11,7 @@ import ViewBag from './components/Bag/ViewBag';
 import AddToBag from './components/Bag/AddToBag';
 import Inbox from './components/Messages/Inbox';
 import AddMeetup from './components/Meetups/AddMeetup';
+import {About} from './About'
 
 
 export default function Router() {
@@ -28,6 +29,7 @@ export default function Router() {
             <Route path='/bag/add' component={AddToBag} />
             <Route path='/inbox' component={Inbox} />
             <Route path='/meetup/add' component={AddMeetup} />
+            <Route path='/about' component={About} />
         </Switch>
     )
 }
