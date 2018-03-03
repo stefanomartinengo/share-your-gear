@@ -39,7 +39,7 @@ export class Search extends Component {
   }
 
   searchItems() {
-    // !this.refs.zip.value ? alert('please fill out all fields') :
+    !this.refs.zip.value ? alert('please fill out all fields') :
     axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + this.refs.zip.value + '&key=AIzaSyDmaSW_P8wv7cqs0dKmbGBsGGzSiEZRrN4')
     .then( (res)=> {
       console.log(res.data.results[0].geometry.location)
@@ -52,7 +52,6 @@ export class Search extends Component {
         this.props.historySearch(this.refs.select.value, this.refs.zip.value)
         this.refs.zip.value = ''
       })
-      
   }
 
   getMore() {

@@ -5,8 +5,7 @@ const initialState = {
     searched: false,
     city: '',
     category: '',
-    zipcode: 0,
-    // center: {}
+    zipcode: 0
 }
 
 const GET_USER_INFO = 'GET_USER_INFO';
