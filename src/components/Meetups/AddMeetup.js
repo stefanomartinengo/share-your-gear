@@ -182,7 +182,7 @@ export class addMeetup extends Component {
                 
         <DatePicker
             formatDate={this.formatDate}
-            onChange={this.handleDate} 
+            // onChange={this.handleDate} 
             value ={this.state.startDate}
             onChange={this.handleChangeMinDate}
             autoOk={this.state.autoOk}
@@ -192,7 +192,7 @@ export class addMeetup extends Component {
           />
         <DatePicker 
             formatDate={this.formatDate}
-            onChange={this.handleDate} 
+            // onChange={this.handleDate} 
             value ={this.state.endDate}
             onChange={this.handleChangeMaxDate}
             autoOk={this.state.autoOk}

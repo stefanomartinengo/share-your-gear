@@ -9,25 +9,27 @@ body {
     width: 100%;
     background: #fcfafd;
 }
-.imggg {
+
+.item_image {
     float: right;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 .bag {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.descriptionbag {
+.item_description {
     font-size: .75em;
     margin-top: 7px;
     line-height: 15px;
 }
 
-.bagitemname {
+.item_name {
     letter-spacing: 3px;
 }
 
@@ -53,22 +55,19 @@ body {
     width: 90px;
     margin: auto 0;
 }
-.rented {
-    height: 100px;
-    width:100%;
+.rented_subcontainer {
+    display: flex;
+    justify-content: space-between;
+    width:90%;
     background: #e8ffea;
 }
 
 .rentcontainer {
-    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.rentcontainer img {
-    float: left;
-}
 .center {
     padding-right: 5px;
     margin: auto;
@@ -81,29 +80,30 @@ body {
     width: 75%;
     margin: auto;
 }
-.bag img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
 
-.bag p button {
-    outline: none;
-    cursor: pointer;
-    border: none;
-    font-size: 1.25em;
-    padding: 5px;
-    border-radius: 5px;
-    background: transparent;
-}
-
-.bag img:active {
+/* .bag img:active {
     transition: ease-in-out 1s;
     padding: 10px;
     height: 200px;
     width: 200px;
-}
+} */
 
+.cen {
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.rented {
+    justify-content: space-around;
+    border-radius: 5px;
+    padding: 2px 0px 0px 2px;
+    padding-right: 1px;
+    margin-bottom: 3px;
+    display: flex;
+    width: 95%;
+    background: #7BBF6A		;
+}
 .not-rented {
     justify-content: space-around;
     border-radius: 5px;
@@ -115,11 +115,9 @@ body {
     background: #ededed
 }
 
-
-
 /* RESPONSIVE */
 
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
     .center div {
         width: 60%;
     }
@@ -169,4 +167,4 @@ body {
             height: 35px;
             border-radius: 50%;
         }
-}
+} */

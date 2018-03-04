@@ -3,11 +3,11 @@ import './Search.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux'
-import { getUserInfo, searchGeoCenter, historySearch } from './../../ducks/reducer'
+import { getUserInfo, historySearch } from './../../ducks/reducer'
 import Header from './../../Header'
 import backpack from './../../assets/backpack.png'
 import * as turf from '@turf/turf'
-import * as geocoder from 'geocoder'
+// import * as geocoder from 'geocoder'
 
 export class Search extends Component {
   constructor() {
@@ -21,9 +21,9 @@ export class Search extends Component {
       currentLocation: {lat: 0, lng: 0}
     }
   }
- 
+  
   componentWillMount() {
-    this.props.searchGeoCenter();
+    // this.props.searchGeoCenter();
     this.props.getUserInfo()
       .then(() => {
         var array = this.props.location.search.split(/[\?&]+/)
@@ -32,20 +32,26 @@ export class Search extends Component {
             this.setState({ items: res.data })
           })
       })
-    }
+  }
+
+  componentDidMount() {
+    // setTimeout( ()=> !this.props.center.coords ? alert('GPS location not found') : null, 7000)
+  }
 
   searchItems() {
-    !this.refs.city.value || !this.refs.zip.value ? alert('please fill out all fields') :
-    axios.get('/search/gear/?category=' + this.refs.select.value + '&city=' + this.refs.city.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
+    !this.refs.zip.value ? alert('please fill out all fields') :
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + this.refs.zip.value + '&key=AIzaSyDmaSW_P8wv7cqs0dKmbGBsGGzSiEZRrN4')
+    .then( (res)=> {
+      console.log(res.data.results[0].geometry.location)
+      this.setState({ currentLocation: res.data.results[0].geometry.location})})
+    axios.get('/search/gear/?category=' + this.refs.select.value + '&zipcode=' + this.refs.zip.value + '&userid=' + this.props.user.userid)
       .then((res) => {
         this.setState({ items: res.data, 
                         toggle: true,
                         getMoreToggle: false })
-        this.props.historySearch(this.refs.city.value, this.refs.select.value, this.refs.zip.value)
-        this.refs.city.value = ''
+        this.props.historySearch(this.refs.select.value, this.refs.zip.value)
         this.refs.zip.value = ''
       })
-      
   }
 
   getMore() {
@@ -59,20 +65,20 @@ export class Search extends Component {
   }
 
   render() {
-    var mapGear = this.state.items.map((e, i, arr) => {
-      var center = turf.point([this.props.center.coords.longitude, this.props.center.coords.latitude]);
-      var points = turf.points([ [e.lng, e.lat] ])
-      var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
-      var radius = turf.circle(center, this.refs.radius.value, options);
-        if(turf.pointsWithinPolygon(points, radius).features[0]) {
-      return <div key={i} className='list-gear'>
+      var mapGear = this.state.items.map((e, i, arr) => {
+        var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat])
+        var points = turf.points([ [e.lng, e.lat] ])
+        var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
+        var radius = turf.circle(center, this.refs.radius.value, options);
+          if(turf.pointsWithinPolygon(points, radius).features[0]) {
+            return <div key={i} className='list-gear'>
         <Link to={`/details/${e.itemid}`}>
           <img className='listimage' alt='' src={e.image_url[0]} />
           <div className='itemname'>{e.item_name}</div>
         </Link>
-      </div>
-        }
+      </div>} return null
     })
+    console.log(this.state)
     return (
       <div className='search'>
         <Header title='SEARCH GEAR' />
@@ -81,7 +87,6 @@ export class Search extends Component {
         </Link>
 
         <div className='form'>
-
           <select ref='select' >
             <option value="Climbing">Climbing</option>
             <option value="Cycling">Cycling</option>
@@ -92,22 +97,20 @@ export class Search extends Component {
           </select>
 
           <input
-            ref='city'
-            placeholder='City' />
-
-          <input
             ref='zip'
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
+          {/* { this.props.center.coords ?  */}
           <div className='radius'>
-            Radius
+            <p>Radius</p>
           <select ref='radius' >
             <option value="5">5 mi</option>
             <option value="10">10 mi</option>
             <option value="25">25 mi</option>
           </select>
           </div>
+          {/* : null } */}
         </div>
 
         <div className='list-container'>
@@ -129,8 +132,9 @@ export class Search extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return state
 }
 
-export default connect(mapStateToProps, { getUserInfo, searchGeoCenter, historySearch })(Search)
+export default connect(mapStateToProps, { getUserInfo, historySearch })(Search)
 

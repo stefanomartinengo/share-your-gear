@@ -5,13 +5,12 @@ const initialState = {
     searched: false,
     city: '',
     category: '',
-    zipcode: 0,
-    center: {}
+    zipcode: 0
 }
 
 const GET_USER_INFO = 'GET_USER_INFO';
 const SEARCH_RESULTS = 'SEARCH_RESULTS';
-const SEARCH_GEO_CENTER = 'SEARCH_GEO_CENTER';
+// const SEARCH_GEO_CENTER = 'SEARCH_GEO_CENTER';
 
 
 export function getUserInfo() {
@@ -21,16 +20,16 @@ export function getUserInfo() {
     }
 }
 
-export function searchGeoCenter() {
-    return dispatch => {
-    var center = navigator.geolocation.getCurrentPosition( (position) => {
-    dispatch({
-        type: SEARCH_GEO_CENTER,
-        payload: position
-    })}, error => {
-    alert(error)
-    })
-}}
+// export function searchGeoCenter() {
+//     return dispatch => {
+//     var center = navigator.geolocation.getCurrentPosition( (position) => {
+//     dispatch({
+//         type: SEARCH_GEO_CENTER,
+//         payload: position
+//     })}, error => {
+//     alert(error)
+//     })
+// }}
 
 export function historySearch(city, category, zipcode) {
     console.log(city, category, zipcode)
@@ -68,8 +67,8 @@ export default function reducer(state = initialState, action) {
                 }
             )
 
-            case SEARCH_GEO_CENTER:
-            return Object.assign({}, state, {center: action.payload})
+            // case SEARCH_GEO_CENTER:
+            // return Object.assign({}, state, {center: action.payload})
             
             default:
             return state;
