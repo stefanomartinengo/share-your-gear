@@ -65,7 +65,7 @@ export class Search extends Component {
   }
 
   render() {
-      var mapGear = this.state.items.map((e, i, arr) => {
+        var mapGear = this.state.items.map((e, i, arr) => {
         var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat])
         var points = turf.points([ [e.lng, e.lat] ])
         var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
@@ -78,7 +78,6 @@ export class Search extends Component {
         </Link>
       </div>} return null
     })
-    console.log(this.state)
     return (
       <div className='search'>
         <Header title='SEARCH GEAR' />
@@ -101,7 +100,6 @@ export class Search extends Component {
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
-          {/* { this.props.center.coords ?  */}
           <div className='radius'>
             <p>Radius</p>
           <select ref='radius' >
@@ -110,7 +108,6 @@ export class Search extends Component {
             <option value="25">25 mi</option>
           </select>
           </div>
-          {/* : null } */}
         </div>
 
         <div className='list-container'>
