@@ -102,7 +102,7 @@ export class Search extends Component {
           <button onClick={() => this.searchItems()}> Search </button>
           <div className='radius'>
             <p>Radius</p>
-          <select ref='radius' >
+          <select ref='radius' className = 'radius_select'>
             <option value="5">5 mi</option>
             <option value="10">10 mi</option>
             <option value="25">25 mi</option>
