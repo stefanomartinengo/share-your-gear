@@ -54,7 +54,7 @@ if (this.refs.message.value.length > 0) {
     this.refs.message.value = "";
 } else {
     alert("Please include message");
-}
+    }
 }
 
 sendRequest() {
@@ -94,11 +94,11 @@ if (this.props.user.userid === this.state.itemDetails[0].owner_id) {
         <button> Back </button>
     </Link>
     );
-}
+    }
 }
 render() {
 var getAllImages = this.state.images.map((e, i, arr) => {
-    return <img key={i} src={e} alt="imgs" />;
+    return <img key={i} src={e} alt="imgs" />
 });
 return this.props.user.userid !== this.state.itemDetails[0].owner_id ? (
     <div>
