@@ -61,7 +61,8 @@ passport.serializeUser(function (id, done) {
 
 passport.deserializeUser(function (id, done) {
   app.get('db').find_session_user([id]).then(user => {
-    done(null, user[0]) //puts information into req.user of user that is already logged in by this point
+    done(null, user[0]) //puts information into req.user of user that is already 
+    // logged in by this point
   })
   // done(null, id); //second param is put on req.user
 })
