@@ -40,7 +40,6 @@ export default class Header extends Component {
 
   render() {
     EnhancedButton.defaultProps.disableTouchRipple = true;
-    //gets rid of ugly on touch black highlight
     return (
       <div className='main-header'>
 
