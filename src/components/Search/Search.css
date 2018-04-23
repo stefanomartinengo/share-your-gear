@@ -6,7 +6,7 @@
 }
 
 .search img {
-    max-width: 20%;
+    max-width: 17%;
     height: 35%;
 }
 
@@ -68,6 +68,9 @@ select {
     padding: 20px;
 }
 
+.search-list h1 {
+    margin-top: 18px;
+}
 
 .list-gear {
     font-size: 1.2em;
