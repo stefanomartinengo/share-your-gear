@@ -6,8 +6,8 @@
 }
 
 .search img {
-    width: 30%;
-    height: 50%;
+    max-width: 20%;
+    height: 35%;
 }
 
 input {
@@ -70,24 +70,37 @@ select {
 
 
 .list-gear {
+    font-size: 1.2em;
+    font-family: 'futura-light';
+    position: relative;
     background: rgba(255, 255, 255, 0.927);
-    padding: 5px;
     margin: 5px;
     border-radius: 5px;
     box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
 }
+.list-gear div {
+    display: inline-block;
+}
 
 .list-gear a {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+}
+.list-gear p {
+    color: #C2C1C2;
+    margin-top: 3px;
+    margin-left: 8px;
+    float: left;
+    display: inline;
+    font-size: .75em;
+}
+.item-name {
+    float: left;
+    margin-top: 5px;
+    margin-left: 7px;
 }
 
-.itemname {
-    width: 40%;
-}
 .list-gear:hover {
-    font-weight: 800;
+    font-weight: 500;
 }
 
 a {
@@ -96,21 +109,13 @@ a {
 }
 
 .list-gear img {
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
 }
 
 .listimage {
-    border-radius: 50%;
-    width: 85px !important;
-    height: 85px !important;
-}
-
-.list-gear img:hover {
-    transition: ease-in-out;
-    transition-duration: .5s;
-    width: 100px !important;
-    height: 100px !important;
+    width: 95px !important;
+    height: 95px !important;
 }
 
 @media (min-width: 1500px) {
@@ -118,12 +123,12 @@ a {
         width: 25%;
     }
 }
+
 @media (min-width: 1300px) {
     .search img {
         width: 28%;
     }
 }
-
 
 @media (max-width: 900px) {
     .search img {
@@ -139,12 +144,12 @@ a {
         margin-top: 10px;
     }
 }
+
 @media (max-width: 600px) {
     .search img {
         width: 25%;
         height: 14%;
     }
-
     .form {
         margin: 10px auto;
         width: 55%;

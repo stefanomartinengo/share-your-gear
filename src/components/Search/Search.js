@@ -62,17 +62,24 @@ export class Search extends Component {
 
   render() {
         var mapGear = this.state.items.map((e, i, arr) => {
-        var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat])
-        var points = turf.points([ [e.lng, e.lat] ])
-        var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
-        var radius = turf.circle(center, this.refs.radius.value, options);
+          var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat])
+          var points = turf.points([ [e.lng, e.lat] ])
+          var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
+          var radius = turf.circle(center, this.refs.radius.value, options);
           if(turf.pointsWithinPolygon(points, radius).features[0]) {
             return <div key={i} className='list-gear'>
-        <Link to={`/details/${e.itemid}`}>
-          <img className='listimage' alt='' src={e.image_url[0]} />
-          <div className='itemname'>{e.item_name}</div>
-        </Link>
-      </div>} return null
+            <Link to={`/details/${e.itemid}`}>
+              <img className='listimage' alt='' src={e.image_url[0]} />
+              <div>
+                <div className='item-name'>{e.item_name}</div>
+                <br/>
+   
+                <p> {e.city}, {e.zipcode} </p>
+
+              </div>
+            </Link>
+        </div>
+          } return null
     })
     return (
       <div className='search'>

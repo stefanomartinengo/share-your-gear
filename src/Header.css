@@ -30,10 +30,16 @@
    margin-bottom: 25px !important;
 }
 
+.dropdownimg {
+    min-width: 50px;
+}
 MenuItem {
     opacity: .5;
 }
 
+.main-header img {
+    min-width: 50px;
+}
 @media (max-width: 500px) {
     .main-header{
         width: 100%;
