@@ -39,6 +39,7 @@ export default class Header extends Component {
   }
 
   render() {
+    console.log(this.props)
     EnhancedButton.defaultProps.disableTouchRipple = true;
     return (
       <div className='main-header'>

@@ -8,9 +8,8 @@
     color:  black;
     font-weight: 550;
     letter-spacing: 4px;
+    border-bottom: 1px solid black;
     height: 70px;
-    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2), 0 6px 6px 0 rgba(0,0,0,0.2);
-    margin-bottom: 25px;
     box-sizing: border-box;
 }
 

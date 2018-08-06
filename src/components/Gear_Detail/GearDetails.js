@@ -143,7 +143,7 @@ return this.props.user.userid !== this.state.itemDetails[0].owner_id ? (
 ) : (
     <div>
     {" "}
-    <Header title="GEAR DETAILS" />
+    <Header  title="GEAR DETAILS" />
     <div className="product-details-wrapper">
         <div className="details-wrapper">
         <div>

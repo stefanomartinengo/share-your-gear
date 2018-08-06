@@ -90,6 +90,11 @@ app.get('/auth/me', (req, res) => {
 
 //CONTROLLER AND END POINTS
 
+app.post('/search/sql', (req, res) => {
+  req.app.get('db').gear_in_radius([req.body.lng, req.body.lat, req.body.category, req.body.radius])
+  .then( response => res.send(response))
+})
+
 app.get('/search/gear/', controller.getGear)
 app.get('/get/more/', controller.expandSearch)
 app.get('/ownerrequests/:id', controller.getRequests)
@@ -120,7 +125,6 @@ app.get('/sent/messages/:id', controller.getSentMessages)
 app.delete(`/remove/request`, controller.removeRequest)
 
 // ADVENTURES
-
 app.post('/adventure/add', controller.addAdventure)
 
 // Only if you are using Browser history instead of hash

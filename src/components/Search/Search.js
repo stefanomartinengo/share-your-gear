@@ -7,7 +7,15 @@ import { getUserInfo, historySearch } from './../../ducks/reducer'
 import Header from './../../Header'
 import backpack from './../../assets/backpack.png'
 import * as turf from '@turf/turf'
+import BookingCalendar from 'react-booking-calendar';
+import 'react-dates/lib/css/_datepicker.css';
+import 'react-dates/initialize';
+import { DateRangePicker } from 'react-dates';
+
 // import * as geocoder from 'geocoder'
+
+const bookings = [
+  new Date(2018, 7, 24)]
 
 export class Search extends Component {
   constructor() {
@@ -20,6 +28,7 @@ export class Search extends Component {
       start: {},
       currentLocation: {lat: 0, lng: 0}
     }
+    this.isDayBlocked = this.isDayBlocked.bind(this)
   }
   
   componentWillMount() {
@@ -32,6 +41,16 @@ export class Search extends Component {
             this.setState({ items: res.data })
           })
       })
+      navigator.geolocation.getCurrentPosition( (position) => {
+        this.setState({currentLocation: position.coords})
+      })
+  }
+
+  newSearchItems() {
+    var coords = {category: this.refs.select.value, radius: '100', lng: this.state.currentLocation.longitude, lat: this.state.currentLocation.latitude}
+    console.log(coords, 'coords')
+    axios.post(`/search/sql`, coords)
+    .then( res => this.setState({items: res.data}))
   }
 
   searchItems() {
@@ -49,7 +68,10 @@ export class Search extends Component {
         this.refs.zip.value = ''
       })
   }
-
+  isDayBlocked(day) {
+    console.log(day, 'day');
+    return true;
+  }
   getMore() {
     axios.get('/get/more/?category=' + this.refs.select.value + '&userid=' + this.props.user.userid)
       .then((res) => {
@@ -61,32 +83,48 @@ export class Search extends Component {
   }
 
   render() {
-        var mapGear = this.state.items.map((e, i, arr) => {
-          var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat])
-          var points = turf.points([ [e.lng, e.lat] ])
-          var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
-          var radius = turf.circle(center, this.refs.radius.value, options);
-          if(turf.pointsWithinPolygon(points, radius).features[0]) {
-            return <div key={i} className='list-gear'>
-            <Link to={`/details/${e.itemid}`}>
-              <img className='listimage' alt='' src={e.image_url[0]} />
-              <div>
-                <div className='item-name'>{e.item_name}</div>
-                <br/>
-   
-                <p> {e.city}, {e.zipcode} </p>
-
-              </div>
+    console.log(this.state, 'state');
+    var mapGear = this.state.items.map( (e,i) => {
+      return ( <div key={i} className='list-gear'>
+      <Link to={`/details/${e.itemid}`}>
+      <img className='listimage' alt=''src={e.image_url[0]}/>
+      <div>
+            <p>{e.item_name}</p>
+            <p>{Math.round(e.item_distance * 100) / 100} mi</p>
+            <br/>
+            <p>{e.city} {e.zipcode}</p>
+            </div>
             </Link>
-        </div>
-          } return null
+           </div>
+      )
     })
+    //     var mapGear = this.state.items.map((e, i, arr) => {
+    //       var center = turf.point([this.state.currentLocation.lng, this.state.currentLocation.lat])
+    //       var points = turf.points([ [e.lng, e.lat] ])
+    //       var options = {steps: +this.refs.radius.value, units: 'miles', options: {foo: 'bar'}};
+    //       var radius = turf.circle(center, this.refs.radius.value, options);
+    //       if(turf.pointsWithinPolygon(points, radius).features[0]) {
+    //         return <div key={i} className='list-gear'>
+    //         <Link to={`/details/${e.itemid}`}>
+    //           <img className='listimage' alt='' src={e.image_url[0]} />
+    //           <div>
+    //             <div className='item-name'>{e.item_name}</div>
+    //             <br/>
+   
+    //             <p> {e.city}, {e.zipcode} </p>
+
+    //           </div>
+    //         </Link>
+    //     </div>
+    //       } return null
+    // })
     return (
       <div className='search'>
-        <Header title='SEARCH GEAR' />
-        <Link to='/profile'>
+        <Header test = {{name: "stefano"}} title='SEARCH GEAR' />
+        {/* <Link to='/profile'>
           <img alt='' src={backpack} />
-        </Link>
+        </Link> */}
+
 
         <div className='form'>
           <select ref='select' >
@@ -103,6 +141,7 @@ export class Search extends Component {
             placeholder='zip code' />
 
           <button onClick={() => this.searchItems()}> Search </button>
+      <button onClick = {()=> this.newSearchItems()}> SQL </button>
           <div className='radius'>
             <p>Radius</p>
           <select ref='radius' className = 'radius_select'>
@@ -112,7 +151,18 @@ export class Search extends Component {
           </select>
           </div>
         </div>
-
+        {/* <BookingCalendar clickable bookings={bookings} /> */}
+        {/* <DateRangePicker
+        startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+        startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+        endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+        endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+        onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+        focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+        onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+        isDayBlocked={(day)=>this.isDayBlocked(day)}
+        /> */}
+        
         <div className='list-container'>
           {this.state.items.length > 0 ?
             <div className='search-list'>
