@@ -3,7 +3,7 @@
 module.exports = {
     getGear: (req, res, next) => {
         const dbInstance = req.app.get('db');
-
+        console.log('debugging: getGear:', req.body, 'req.body')
         dbInstance.search([ req.query.category, req.query.userid])
         .then(  (response) => res.status(200).send(response))
         .catch( (err) => res.status(500).send(err))
