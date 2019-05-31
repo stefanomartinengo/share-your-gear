@@ -14,9 +14,10 @@ const SEARCH_RESULTS = 'SEARCH_RESULTS';
 
 
 export function getUserInfo() {
+    const get_user = axios.get('/auth/me');
     return {
         type: GET_USER_INFO,
-        payload: axios.get('/auth/me')
+        payload: get_user
     }
 }
 
