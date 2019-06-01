@@ -60,7 +60,7 @@ class Profile extends Component {
     }
   }
   render() {
-    var can_do = this.state.can_do.map((e, i, arr) => {
+    var can_do = !this.state.can_do ? [] : this.state.can_do.map((e, i, arr) => {
       return (
         <textarea
           disabled={this.state.pageToggle ? false : true}
