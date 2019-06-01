@@ -70,7 +70,7 @@ class Profile extends Component {
         />
       );
     });
-    var wannado = this.state.wannado.map((e, i, arr) => {
+    var wannado = !this.state.wannado ? [] : this.state.wannado.map((e, i, arr) => {
       return (
         <textarea
           disabled={this.state.pageToggle ? false : true}
